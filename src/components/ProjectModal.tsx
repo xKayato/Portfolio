@@ -30,12 +30,12 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-4xl">
         <DialogHeader>
           <DialogTitle>{project.title}</DialogTitle>
         </DialogHeader>
         <div className="py-4">
-          <Carousel className="w-full max-w-xl mx-auto">
+          <Carousel className="w-full max-w-3xl mx-auto">
             <CarouselContent>
               {project.images.map((image, index) => (
                 <CarouselItem key={index}>
