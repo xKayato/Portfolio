@@ -4,6 +4,13 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 type Project = typeof projects[0];
 
@@ -12,26 +19,48 @@ const Portfolio = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    projects.forEach(p => {
-      Object.values(p.tags).flat().forEach(t => tags.add(t));
+  const mainCategories = useMemo(() => ["Informatique", "Réseaux", "Cybersécurité", "Télécommunication", "Communication"], []);
+
+  const groupedTags = useMemo(() => {
+    const groups: Record<string, Set<string>> = {};
+    mainCategories.forEach(cat => {
+      groups[cat] = new Set();
     });
-    return Array.from(tags).sort();
-  }, []);
+
+    projects.forEach(project => {
+      const allProjectTags = Object.values(project.tags).flat();
+      const projectMainCategories = project.tags.categories.filter(cat => mainCategories.includes(cat));
+
+      projectMainCategories.forEach(mainCat => {
+        allProjectTags.forEach(tag => {
+          if (!mainCategories.includes(tag)) {
+            groups[mainCat].add(tag);
+          }
+        });
+      });
+    });
+
+    Object.keys(groups).forEach(key => {
+      if (groups[key].size === 0) {
+        delete groups[key];
+      }
+    });
+
+    return groups;
+  }, [projects, mainCategories]);
 
   const handleTagClick = (tag: string) => {
-    setSelectedTags(prev => 
+    setSelectedTags(prev =>
       prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
     );
   };
 
   const filteredProjects = useMemo(() => {
     return projects
-      .filter(p => 
+      .filter(p =>
         selectedTags.length === 0 || Object.values(p.tags).flat().some(t => selectedTags.includes(t))
       )
-      .filter(p => 
+      .filter(p =>
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -59,14 +88,26 @@ const Portfolio = () => {
           >
             Tous
           </Button>
-          {allTags.map(tag => (
-            <Button 
-              key={tag}
-              variant={selectedTags.includes(tag) ? "default" : "outline"}
-              onClick={() => handleTagClick(tag)}
-            >
-              {tag}
-            </Button>
+          {Object.entries(groupedTags).map(([category, tags]) => (
+            <DropdownMenu key={category}>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="flex items-center">
+                  {category}
+                  <ChevronDown className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {Array.from(tags).sort().map(tag => (
+                  <DropdownMenuCheckboxItem
+                    key={tag}
+                    checked={selectedTags.includes(tag)}
+                    onCheckedChange={() => handleTagClick(tag)}
+                  >
+                    {tag}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           ))}
         </div>
 
