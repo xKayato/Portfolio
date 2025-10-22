@@ -101,40 +101,40 @@ export const skills = [
 
 export const projects = [
   {
-    title: "Projet 1: Firewall Personnalisé",
-    description: "Développement d'un firewall applicatif en Python pour filtrer le trafic réseau sur un serveur Linux.",
+    title: "Création d'un site web CV",
+    description: "Création d'un site web CV en utilisant React, Typescript et TailwindCSS pour présenter mon parcours et mes compétences.",
     tags: {
-      categories: ["Développement Backend", "Cybersécurité"],
-      notions: ["NetfilterQueue", "Filtrage de paquets"],
-      logiciels: ["Python", "Linux"]
-    },
-    images: ["/placeholder.svg", "/placeholder.svg"],
-    link: "https://github.com",
-    detailedDescription: "Ce projet consistait à développer un firewall applicatif en Python utilisant la bibliothèque NetfilterQueue sur un système Linux. L'objectif était de créer des règles de filtrage personnalisées pour inspecter et bloquer le trafic malveillant au niveau de la couche application, offrant une sécurité plus fine qu'un firewall réseau standard."
-  },
-  {
-    title: "Projet 2: Application Web de Monitoring",
-    description: "Création d'un dashboard web avec React pour visualiser en temps réel l'état d'une infrastructure réseau.",
-    tags: {
-      categories: ["Développement Frontend", "Réseaux"],
-      notions: ["SNMP", "Visualisation de données"],
-      logiciels: ["React", "Node.js", "JavaScript"]
+      categories: ["Développement Frontend"],
+      notions: ["React", "TypeScript", "TailwindCSS"],
+      logiciels: ["VS Code", "Git"]
     },
     images: ["/placeholder.svg"],
     link: "https://github.com",
-    detailedDescription: "Le but de ce projet était de concevoir un dashboard de monitoring réseau. Le backend, développé en Node.js, collecte des données via SNMP sur les équipements réseau. Le frontend, en React, affiche ces informations (charge CPU, utilisation de la bande passante, etc.) sous forme de graphiques dynamiques pour une supervision en temps réel."
+    detailedDescription: "Ce projet a été réalisé dans le but de créer un CV en ligne interactif et moderne. J'ai utilisé React pour la structure des composants, TypeScript pour assurer la robustesse du code et TailwindCSS pour un design rapide et responsive. Le site présente mon parcours, mes compétences et mes projets de manière organisée et visuellement agréable."
   },
   {
-    title: "Projet 3: Maquette d'Infrastructure d'Entreprise",
-    description: "Conception et déploiement d'une infrastructure réseau et système complète pour une PME simulée.",
+    title: "Configuration d'un réseau d'entreprise",
+    description: "Configuration d'un réseau d'entreprise avec des VLANs, du routage inter-VLAN et des règles de sécurité.",
     tags: {
-      categories: ["Infrastructure", "Systèmes & Réseaux"],
-      notions: ["Active Directory", "DNS", "DHCP", "Virtualisation"],
-      logiciels: ["Cisco IOS", "Windows Server", "VMware"]
+      categories: ["Infrastructure", "Réseaux"],
+      notions: ["VLAN", "Routage", "ACL", "DHCP"],
+      logiciels: ["Cisco Packet Tracer", "GNS3"]
     },
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: ["/placeholder.svg"],
     link: "#",
-    detailedDescription: "Ce projet académique consistait à simuler la création de l'infrastructure complète d'une PME. Cela incluait la configuration de routeurs et switchs Cisco, le déploiement de serveurs Windows (Active Directory, DNS, DHCP) sur un environnement virtualisé VMware, et la mise en place de politiques de sécurité réseau."
+    detailedDescription: "Ce projet académique consistait à concevoir et simuler un réseau d'entreprise sécurisé et segmenté. J'ai configuré plusieurs VLANs pour séparer les départements, mis en place le routage inter-VLAN sur un routeur Cisco, et appliqué des listes de contrôle d'accès (ACL) pour filtrer le trafic entre les différents segments."
+  },
+  {
+    title: "Déploiement d'un serveur web sécurisé",
+    description: "Installation et configuration d'un serveur web Apache sur Linux avec un certificat SSL/TLS.",
+    tags: {
+      categories: ["Systèmes & Serveurs", "Cybersécurité"],
+      notions: ["Apache", "SSL/TLS", "DNS", "Firewall"],
+      logiciels: ["Linux (Debian)", "OpenSSL", "UFW"]
+    },
+    images: ["/placeholder.svg"],
+    link: "#",
+    detailedDescription: "L'objectif de ce projet était de déployer un serveur web sécurisé de A à Z. J'ai installé et configuré le serveur Apache sur une machine virtuelle Debian, généré et configuré un certificat SSL/TLS avec OpenSSL pour activer le HTTPS, et mis en place des règles de pare-feu avec UFW pour n'autoriser que le trafic web essentiel."
   },
 ];
 
