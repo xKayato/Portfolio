@@ -71,7 +71,7 @@ export const skills = [
   },
   {
     category: "Cybersécurité",
-    mainCategory: "Cybersécu",
+    mainCategory: "CybersCybersécuritéécu",
     icon: Shield,
     description: "Protection des systèmes d'information contre les menaces et analyse des vulnérabilités.",
     subcategories: [
