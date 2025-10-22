@@ -3,14 +3,34 @@ import { skills } from "@/data/content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const Skills = () => {
   const [searchQuerySkills, setSearchQuerySkills] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const allCategories = useMemo(() => ["Tous", ...skills.map(s => s.category)], []);
+
+  const handleCategoryClick = (category: string) => {
+    if (category === "Tous") {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+    }
+  };
 
   const filteredSkills = useMemo(() => {
-    if (!searchQuerySkills) return skills;
+    let skillsToFilter = skills;
+
+    if (selectedCategory) {
+      skillsToFilter = skills.filter(skill => skill.category === selectedCategory);
+    }
+
+    if (!searchQuerySkills) {
+      return skillsToFilter;
+    }
     
-    return skills
+    return skillsToFilter
       .map(category => {
         const filteredSubcategories = category.subcategories
           .map(subcategory => ({
@@ -27,12 +47,25 @@ const Skills = () => {
         };
       })
       .filter(category => category.subcategories.length > 0);
-  }, [searchQuerySkills]);
+  }, [searchQuerySkills, selectedCategory]);
 
   return (
     <div className="container py-12 md:py-20">
       <h1 className="text-3xl font-bold mb-2">Mes Compétences</h1>
       <p className="text-muted-foreground mb-8">Voici les technologies et les domaines que je maîtrise.</p>
+      
+      <div className="flex flex-wrap gap-2 mb-8">
+        {allCategories.map(category => (
+          <Button 
+            key={category}
+            variant={(!selectedCategory && category === 'Tous') || selectedCategory === category ? 'default' : 'outline'}
+            onClick={() => handleCategoryClick(category)}
+          >
+            {category}
+          </Button>
+        ))}
+      </div>
+
       <Input 
         placeholder="Rechercher une compétence..."
         value={searchQuerySkills}
@@ -59,6 +92,9 @@ const Skills = () => {
           </Card>
         ))}
       </div>
+      {filteredSkills.length === 0 && (
+        <p className="text-center text-muted-foreground mt-8">Aucune compétence ne correspond à votre recherche.</p>
+      )}
     </div>
   );
 };
