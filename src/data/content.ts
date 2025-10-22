@@ -16,7 +16,7 @@ export const personalInfo = {
 };
 
 export const about = {
-  introduction: `Actuellement en troisième année de BUT Réseaux et Télécommunications à l'IUT de Nice Côte d'Azur (antenne de Sophia Antipolis), je suis passionné par les nouvelles technologies, la sécurité des systèmes d'information et le développement logiciel. Je suis à la recherche d'opportunités pour appliquer mes compétences et en développer de nouvelles.`,
+  introduction: `Bienvenue sur la page À propos de moi, où vous pourrez en apprendre davantage sur mon parcours et mon évolution académique. Vous y trouverez mon cursus scolaire ainsi que mon CV, illustrant mon expérience et les compétences que j’ai développées au fil des années. Cette section vous permettra de mieux comprendre mon profil et mon ambition professionnelle.`,
   imageUrl: "/placeholder.svg",
 };
 
