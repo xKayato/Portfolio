@@ -44,7 +44,7 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
                     <ImageZoom 
                       src={image} 
                       alt={`${project.title} - image ${index + 1}`} 
-                      className="w-full aspect-video object-cover rounded-lg max-h-[400px]" 
+                      className="w-full aspect-video object-cover rounded-lg max-h-[300px]" 
                     />
                   </div>
                 </CarouselItem>
