@@ -333,11 +333,5 @@ export const passions = [
         description: "Je suis fan d'informatique et surtout de matiériel informatique pour ordinateur depuis plusieurs années. J'ai eu l'occasion de monter des pc de toutes pièces à l'aide de mon père. J'adore suivre l'actualité des plus grandes marques de hardware avec leurs nouvelles sorties. (ex: Intel, AMD, Nvidia).",
         icon: Gamepad2,
         imageUrl: "/unsplash_FO7JIlwjOtU_informatique.webp"
-    },
-    {
-        title: "Randonnée",
-        description: "Explorer les montagnes de l'arrière-pays niçois est ma façon de me ressourcer et de me déconnecter. La randonnée m'apprend la persévérance et l'importance de la préparation, tout en m'offrant des paysages magnifiques.",
-        icon: Mountain,
-        imageUrl: "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
 ];
