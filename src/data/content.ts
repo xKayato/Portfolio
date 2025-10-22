@@ -23,6 +23,7 @@ export const about = {
 export const skills = [
   {
     category: "Développement",
+    mainCategory: "Informatique",
     icon: Code,
     description: "Création d'applications web et de scripts pour l'automatisation des tâches.",
     subcategories: [
@@ -38,6 +39,7 @@ export const skills = [
   },
   {
     category: "Réseaux",
+    mainCategory: "Réseau",
     icon: Network,
     description: "Conception, déploiement et maintenance d'infrastructures réseau sécurisées et performantes.",
     subcategories: [
@@ -53,6 +55,7 @@ export const skills = [
   },
   {
     category: "Systèmes & Serveurs",
+    mainCategory: "Informatique",
     icon: Server,
     description: "Administration de serveurs Linux et Windows, et gestion d'environnements virtualisés.",
     subcategories: [
@@ -68,6 +71,7 @@ export const skills = [
   },
   {
     category: "Cybersécurité",
+    mainCategory: "Cybersécu",
     icon: Shield,
     description: "Protection des systèmes d'information contre les menaces et analyse des vulnérabilités.",
     subcategories: [
@@ -83,6 +87,7 @@ export const skills = [
   },
   {
     category: "Autres Compétences",
+    mainCategory: "Communication",
     icon: BrainCircuit,
     description: "Compétences transversales essentielles pour mener à bien des projets techniques.",
     subcategories: [

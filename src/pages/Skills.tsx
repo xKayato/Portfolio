@@ -7,23 +7,26 @@ import { Button } from "@/components/ui/button";
 
 const Skills = () => {
   const [searchQuerySkills, setSearchQuerySkills] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedMainCategory, setSelectedMainCategory] = useState<string | null>(null);
 
-  const allCategories = useMemo(() => ["Tous", ...skills.map(s => s.category)], []);
+  const mainCategories = useMemo(() => {
+    const categories = new Set(skills.map(s => s.mainCategory));
+    return ["Tous", ...Array.from(categories)];
+  }, []);
 
   const handleCategoryClick = (category: string) => {
     if (category === "Tous") {
-      setSelectedCategory(null);
+      setSelectedMainCategory(null);
     } else {
-      setSelectedCategory(category);
+      setSelectedMainCategory(category);
     }
   };
 
   const filteredSkills = useMemo(() => {
     let skillsToFilter = skills;
 
-    if (selectedCategory) {
-      skillsToFilter = skills.filter(skill => skill.category === selectedCategory);
+    if (selectedMainCategory) {
+      skillsToFilter = skills.filter(skill => skill.mainCategory === selectedMainCategory);
     }
 
     if (!searchQuerySkills) {
@@ -47,7 +50,7 @@ const Skills = () => {
         };
       })
       .filter(category => category.subcategories.length > 0);
-  }, [searchQuerySkills, selectedCategory]);
+  }, [searchQuerySkills, selectedMainCategory]);
 
   return (
     <div className="container py-12 md:py-20">
@@ -55,10 +58,10 @@ const Skills = () => {
       <p className="text-muted-foreground mb-8">Voici les technologies et les domaines que je maîtrise.</p>
       
       <div className="flex flex-wrap gap-2 mb-8">
-        {allCategories.map(category => (
+        {mainCategories.map(category => (
           <Button 
             key={category}
-            variant={(!selectedCategory && category === 'Tous') || selectedCategory === category ? 'default' : 'outline'}
+            variant={(!selectedMainCategory && category === 'Tous') || selectedMainCategory === category ? 'default' : 'outline'}
             onClick={() => handleCategoryClick(category)}
           >
             {category}
