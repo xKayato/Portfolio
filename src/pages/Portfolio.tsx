@@ -70,7 +70,7 @@ const Portfolio = () => {
     <>
       <div className="container py-12 md:py-20">
         <h1 className="text-3xl font-bold mb-2">Mes Projets</h1>
-        <p className="text-muted-foreground mb-8">Voici une sélection de projets sur lesquels j'ai travaillé.</p>
+        <p className="text-muted-foreground mb-8">Bienvenue sur mon portfolio, un espace où vous pourrez découvrir mes compétences et réalisations dans multiple catégories tel qu'Informatique, Réseaux, Cybersécurité et plus encore. Explorez chaque section pour en apprendre davantage sur mes projets et mon expertise dans ces domaines.</p>
         
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <Input 
