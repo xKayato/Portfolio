@@ -25,31 +25,72 @@ export const skills = [
     category: "Développement",
     icon: Code,
     description: "Création d'applications web et de scripts pour l'automatisation des tâches.",
-    items: ["Python", "JavaScript", "TypeScript", "React", "Node.js", "SQL"],
+    subcategories: [
+      {
+        title: "Langages",
+        items: ["Python", "JavaScript", "TypeScript", "SQL"],
+      },
+      {
+        title: "Frameworks & Librairies",
+        items: ["React", "Node.js"],
+      },
+    ],
   },
   {
     category: "Réseaux",
     icon: Network,
     description: "Conception, déploiement et maintenance d'infrastructures réseau sécurisées et performantes.",
-    items: ["Configuration Cisco", "TCP/IP", "Routing & Switching", "Wi-Fi", "VPN"],
+    subcategories: [
+        {
+            title: "Protocoles & Concepts",
+            items: ["TCP/IP", "Routing & Switching", "VPN"],
+        },
+        {
+            title: "Équipements & Technologies",
+            items: ["Configuration Cisco", "Wi-Fi"],
+        }
+    ]
   },
   {
     category: "Systèmes & Serveurs",
     icon: Server,
     description: "Administration de serveurs Linux et Windows, et gestion d'environnements virtualisés.",
-    items: ["Linux (Debian, CentOS)", "Windows Server", "Docker", "Virtualisation (VMware)"],
+    subcategories: [
+        {
+            title: "Systèmes d'exploitation",
+            items: ["Linux (Debian, CentOS)", "Windows Server"],
+        },
+        {
+            title: "Virtualisation & Conteneurisation",
+            items: ["Docker", "Virtualisation (VMware)"],
+        }
+    ]
   },
   {
     category: "Cybersécurité",
     icon: Shield,
     description: "Protection des systèmes d'information contre les menaces et analyse des vulnérabilités.",
-    items: ["Analyse de vulnérabilités", "Firewalls", "Pentesting (notions)", "Sécurisation des SI"],
+    subcategories: [
+        {
+            title: "Domaines",
+            items: ["Analyse de vulnérabilités", "Pentesting (notions)", "Sécurisation des SI"],
+        },
+        {
+            title: "Outils & Technologies",
+            items: ["Firewalls"],
+        }
+    ]
   },
   {
     category: "Autres Compétences",
     icon: BrainCircuit,
     description: "Compétences transversales essentielles pour mener à bien des projets techniques.",
-    items: ["Gestion de projet", "Veille technologique", "Anglais technique", "Travail d'équipe"],
+    subcategories: [
+        {
+            title: "Professionnelles",
+            items: ["Gestion de projet", "Veille technologique", "Anglais technique", "Travail d'équipe"],
+        }
+    ]
   },
 ];
 

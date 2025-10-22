@@ -10,10 +10,23 @@ const Skills = () => {
   const filteredSkills = useMemo(() => {
     if (!searchQuerySkills) return skills;
     
-    return skills.map(category => ({
-      ...category,
-      items: category.items.filter(item => item.toLowerCase().includes(searchQuerySkills.toLowerCase()))
-    })).filter(category => category.items.length > 0);
+    return skills
+      .map(category => {
+        const filteredSubcategories = category.subcategories
+          .map(subcategory => ({
+            ...subcategory,
+            items: subcategory.items.filter(item =>
+              item.toLowerCase().includes(searchQuerySkills.toLowerCase())
+            ),
+          }))
+          .filter(subcategory => subcategory.items.length > 0);
+
+        return {
+          ...category,
+          subcategories: filteredSubcategories,
+        };
+      })
+      .filter(category => category.subcategories.length > 0);
   }, [searchQuerySkills]);
 
   return (
@@ -32,8 +45,15 @@ const Skills = () => {
             <CardHeader><CardTitle className="flex items-center gap-3"><skillCategory.icon className="h-6 w-6" />{skillCategory.category}</CardTitle></CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4 text-sm">{skillCategory.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {skillCategory.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
+              <div className="space-y-4">
+                {skillCategory.subcategories.map((subcategory) => (
+                  <div key={subcategory.title}>
+                    <h4 className="font-semibold mb-2 text-sm">{subcategory.title}</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {subcategory.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
+                    </div>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
