@@ -138,16 +138,7 @@ export const education = [
         date: "2021 - 2024",
         title: "BUT Réseaux et Télécommunications",
         institution: "IUT Nice Côte d'Azur - Sophia Antipolis",
-        description: "Spécialisation en Cybersécurité et Développement.
-        Actuellement en troisième année à l'IUT Nice Côte d'Azur à Sophia Antipolis en Réseaux et Télécommunications (R&T).
-
-En première année, on apprend à manipuler des équipements réseaux, à configurer des routeurs, des switchs, des serveurs, etc. Tout en apprenant les bases de la programmation, nous avons également appris à utiliser efficacement Linux et à manipuler des machines virtuelles.
-
-Pendant ma deuxième année j'ai pu renforcer mes connaissances apprises lors de ma première année dans les réseaux en y ajoutant de la sécurité, comme la configuration d'un Firewall (ASA). On a apprit le Java et la conception d'applications mobile (Android Studio Java). On a aussi apprit le Pentest à travers plusieurs TP d'intrusion dans des machines.
-
-Durant cette deuxième année, j'ai pu obtenir la certification du CCNA1 et du CCNA2.
-
-En troisième année, je me suis spécialisé en cybersécurité et j'ai effectué une alternance chez la "Régie Eau d'Azur" en tant que développeur informatique industriel.",
+        description: "Spécialisation en Cybersécurité et Développement.",
         imageUrl: "/placeholder.svg"
     },
     {
