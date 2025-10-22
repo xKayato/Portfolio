@@ -323,8 +323,8 @@ export const experience = [
 
 export const passions = [
     {
-        title: "Jeux Vidéo",
-        description: "Passionné par les jeux de stratégie et les jeux en équipe, je trouve que c'est un excellent moyen de développer des compétences en communication, en prise de décision rapide et en résolution de problèmes complexes sous pression. C'est aussi un formidable univers d'innovations technologiques.",
+        title: "Jeux Vidéo / E-sport",
+        description: "Fan de jeux vidéo depuis mon plus jeune âge. Les jeux vidéo sont pour moi un moyen de me sentir mieux. Également fan d'E-sport (sport électronique) où je supporte mes équipes favorites chaque jour sur différents types de jeux. J'ai également créé un site internet dédié à ma passion pour l'E-sport dans la catégorie Portfolio.  ",
         icon: Gamepad2,
         imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
