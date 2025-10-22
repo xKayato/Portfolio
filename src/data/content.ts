@@ -1,14 +1,16 @@
-import { Github, Linkedin, Mail, Smartphone, Code, Network, Shield, Server, BrainCircuit, Gamepad2, Music, Mountain } from 'lucide-react';
+import { Github, Linkedin, Mail, Smartphone, Code, Network, Shield, Server, BrainCircuit, Gamepad2, Music, Mountain, GraduationCap } from 'lucide-react';
 
 export const personalInfo = {
   name: "Votre Nom",
   title: "Étudiant en BUT Réseaux et Télécommunications",
   location: "Sophia Antipolis, Nice",
   email: "votre.email@example.com",
+  universityEmail: "votre.email.etu@univ-cotedazur.fr",
   phone: "+33 6 12 34 56 78",
   socials: [
     { name: "Github", url: "https://github.com", icon: Github },
     { name: "LinkedIn", url: "https://linkedin.com", icon: Linkedin },
+    { name: "Email Universitaire", url: "mailto:votre.email.etu@univ-cotedazur.fr", icon: GraduationCap },
   ],
   cvUrl: "/path/to/your/cv.pdf",
 };
