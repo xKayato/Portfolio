@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { MadeWithDyad } from "./made-with-dyad";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { to: "/about", label: "À Propos" },
@@ -11,7 +12,7 @@ const navLinks = [
 
 export const Header = () => {
   return (
-    <header className="bg-card border-b border-border p-4">
+    <header className="bg-card border-b border-border p-4 sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <NavLink to="/" className="text-xl font-bold text-primary">
           {personalInfo.name}
@@ -35,6 +36,7 @@ export const Header = () => {
                 <social.icon size={20} />
               </a>
             ))}
+            <ThemeToggle />
         </div>
       </div>
     </header>

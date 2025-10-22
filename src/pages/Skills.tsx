@@ -57,6 +57,13 @@ const Skills = () => {
       <h1 className="text-3xl font-bold mb-2">Mes Compétences</h1>
       <p className="text-muted-foreground mb-8">  Bienvenue sur la page Compétences, un espace dédié à la présentation de mes savoir-faire et domaines d'expertise. Vous y découvrirez mes compétences en Informatique, Réseaux, Cybersécurité et bien plus encore. Parcourez cette section pour en apprendre davantage sur mes atouts professionnels et mes domaines de maîtrise.</p>
       
+      <Input 
+        placeholder="Rechercher une compétence..."
+        value={searchQuerySkills}
+        onChange={(e) => setSearchQuerySkills(e.target.value)}
+        className="max-w-sm mb-4"
+      />
+
       <div className="flex flex-wrap gap-2 mb-8">
         {mainCategories.map(category => (
           <Button 
@@ -69,12 +76,6 @@ const Skills = () => {
         ))}
       </div>
 
-      <Input 
-        placeholder="Rechercher une compétence..."
-        value={searchQuerySkills}
-        onChange={(e) => setSearchQuerySkills(e.target.value)}
-        className="max-w-sm mb-8"
-      />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredSkills.map((skillCategory) => (
           <Card key={skillCategory.category}>
