@@ -10,37 +10,43 @@ export const personalInfo = {
     { name: "Github", url: "https://github.com", icon: Github },
     { name: "LinkedIn", url: "https://linkedin.com", icon: Linkedin },
   ],
-  cvUrl: "/path/to/your/cv.pdf", // Mettez le chemin vers votre CV
+  cvUrl: "/path/to/your/cv.pdf",
 };
 
 export const about = {
   introduction: `Actuellement en troisième année de BUT Réseaux et Télécommunications à l'IUT de Nice Côte d'Azur (antenne de Sophia Antipolis), je suis passionné par les nouvelles technologies, la sécurité des systèmes d'information et le développement logiciel. Je suis à la recherche d'opportunités pour appliquer mes compétences et en développer de nouvelles.`,
+  imageUrl: "/placeholder.svg",
 };
 
 export const skills = [
   {
     category: "Développement",
     icon: Code,
+    description: "Création d'applications web et de scripts pour l'automatisation des tâches.",
     items: ["Python", "JavaScript", "TypeScript", "React", "Node.js", "SQL"],
   },
   {
     category: "Réseaux",
     icon: Network,
+    description: "Conception, déploiement et maintenance d'infrastructures réseau sécurisées et performantes.",
     items: ["Configuration Cisco", "TCP/IP", "Routing & Switching", "Wi-Fi", "VPN"],
   },
   {
     category: "Systèmes & Serveurs",
     icon: Server,
+    description: "Administration de serveurs Linux et Windows, et gestion d'environnements virtualisés.",
     items: ["Linux (Debian, CentOS)", "Windows Server", "Docker", "Virtualisation (VMware)"],
   },
   {
     category: "Cybersécurité",
     icon: Shield,
+    description: "Protection des systèmes d'information contre les menaces et analyse des vulnérabilités.",
     items: ["Analyse de vulnérabilités", "Firewalls", "Pentesting (notions)", "Sécurisation des SI"],
   },
   {
     category: "Autres Compétences",
     icon: BrainCircuit,
+    description: "Compétences transversales essentielles pour mener à bien des projets techniques.",
     items: ["Gestion de projet", "Veille technologique", "Anglais technique", "Travail d'équipe"],
   },
 ];
@@ -77,7 +83,8 @@ export const education = [
         date: "2021 - 2024",
         title: "BUT Réseaux et Télécommunications",
         institution: "IUT Nice Côte d'Azur - Sophia Antipolis",
-        description: "Spécialisation en Cybersécurité et Développement."
+        description: "Spécialisation en Cybersécurité et Développement.",
+        imageUrl: "/placeholder.svg"
     },
     {
         date: "2021",
@@ -92,24 +99,28 @@ export const experience = [
         date: "Été 2023",
         title: "Stage Technicien Réseau",
         company: "Entreprise Fictive, Sophia Antipolis",
-        description: "Maintenance du parc informatique, support utilisateur, et participation à la mise en place d'un nouveau VLAN."
+        description: "Maintenance du parc informatique, support utilisateur, et participation à la mise en place d'un nouveau VLAN.",
+        imageUrl: "/placeholder.svg"
     }
 ];
 
 export const passions = [
     {
         title: "Jeux Vidéo",
-        description: "Stratégie et jeux en équipe, qui développent la communication et la résolution de problèmes.",
-        icon: Gamepad2
+        description: "Passionné par les jeux de stratégie et les jeux en équipe, je trouve que c'est un excellent moyen de développer des compétences en communication, en prise de décision rapide et en résolution de problèmes complexes sous pression. C'est aussi un formidable univers d'innovations technologiques.",
+        icon: Gamepad2,
+        imageUrl: "/placeholder.svg"
     },
     {
         title: "Musique",
-        description: "Pratique de la guitare, ce qui m'apporte rigueur et créativité.",
-        icon: Music
+        description: "La pratique de la guitare m'apporte un équilibre. Elle demande de la rigueur, de la patience et de la discipline, des qualités que je transpose dans mes projets techniques. C'est aussi une source inépuisable de créativité.",
+        icon: Music,
+        imageUrl: "/placeholder.svg"
     },
     {
         title: "Randonnée",
-        description: "J'aime explorer les montagnes de l'arrière-pays niçois pour me ressourcer.",
-        icon: Mountain
+        description: "Explorer les montagnes de l'arrière-pays niçois est ma façon de me ressourcer et de me déconnecter. La randonnée m'apprend la persévérance et l'importance de la préparation, tout en m'offrant des paysages magnifiques.",
+        icon: Mountain,
+        imageUrl: "/placeholder.svg"
     }
 ];

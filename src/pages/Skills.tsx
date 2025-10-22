@@ -43,6 +43,7 @@ const Skills = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
+              <p className="text-muted-foreground mb-4 text-sm">{skillCategory.description}</p>
               <div className="flex flex-wrap gap-2">
                 {skillCategory.items.map((item) => (
                   <Badge key={item} variant="outline">{item}</Badge>

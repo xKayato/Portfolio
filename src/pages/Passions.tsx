@@ -11,6 +11,11 @@ const Passions = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {passions.map((passion) => (
           <Card key={passion.title}>
+            {passion.imageUrl && (
+              <div className="aspect-video relative">
+                <img src={passion.imageUrl} alt={passion.title} className="object-cover rounded-t-lg w-full h-full" />
+              </div>
+            )}
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <passion.icon className="h-6 w-6 text-primary" />
