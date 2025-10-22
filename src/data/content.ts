@@ -1,7 +1,7 @@
 import { Github, Linkedin, Mail, Smartphone, Code, Network, Shield, Server, BrainCircuit, Gamepad2, Music, Mountain, GraduationCap } from 'lucide-react';
 
 export const personalInfo = {
-  name: "DELOUP Thomas",
+  name: "Thomas Deloup",
   title: "Étudiant en BUT Réseaux et Télécommunications",
   location: "Sophia Antipolis, Nice",
   email: "votre.email@example.com",
