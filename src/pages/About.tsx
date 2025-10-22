@@ -1,5 +1,7 @@
-import { about, education, experience } from "@/data/content";
+import { about, education, experience, personalInfo } from "@/data/content";
 import { TimelineItem } from "@/components/TimelineItem";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 const About = () => {
   return (
@@ -11,6 +13,13 @@ const About = () => {
             <p className="text-muted-foreground text-lg">
               {about.introduction}
             </p>
+            <div className="mt-6">
+              <a href={personalInfo.cvUrl} target="_blank" rel="noreferrer">
+                <Button variant="outline">
+                  Télécharger mon CV <Download className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </div>
           </div>
           <div className="md:w-1/3">
             <img src={about.imageUrl} alt="Photo de présentation" className="rounded-lg shadow-lg w-full" />

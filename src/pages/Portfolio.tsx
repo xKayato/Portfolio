@@ -14,8 +14,10 @@ const Portfolio = () => {
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
-    projects.forEach(p => p.tags.forEach(t => tags.add(t)));
-    return Array.from(tags);
+    projects.forEach(p => {
+      Object.values(p.tags).flat().forEach(t => tags.add(t));
+    });
+    return Array.from(tags).sort();
   }, []);
 
   const handleTagClick = (tag: string) => {
@@ -27,7 +29,7 @@ const Portfolio = () => {
   const filteredProjects = useMemo(() => {
     return projects
       .filter(p => 
-        selectedTags.length === 0 || p.tags.some(t => selectedTags.includes(t))
+        selectedTags.length === 0 || Object.values(p.tags).flat().some(t => selectedTags.includes(t))
       )
       .filter(p => 
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

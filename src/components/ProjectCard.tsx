@@ -6,7 +6,11 @@ import { ArrowUpRight, Eye } from "lucide-react";
 interface Project {
   title: string;
   description: string;
-  tags: string[];
+  tags: {
+    categories: string[];
+    notions: string[];
+    logiciels: string[];
+  };
   images: string[];
   link?: string;
   detailedDescription: string;
@@ -33,7 +37,7 @@ export const ProjectCard = ({ project, onOpenModal }: ProjectCardProps) => {
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-4">
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
+          {Object.values(tags).flat().map((tag) => (
             <Badge key={tag} variant="secondary">{tag}</Badge>
           ))}
         </div>

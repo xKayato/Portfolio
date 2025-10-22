@@ -55,7 +55,11 @@ export const projects = [
   {
     title: "Projet 1: Firewall Personnalisé",
     description: "Développement d'un firewall applicatif en Python pour filtrer le trafic réseau sur un serveur Linux.",
-    tags: ["Python", "Cybersécurité", "Linux"],
+    tags: {
+      categories: ["Développement Backend", "Cybersécurité"],
+      notions: ["NetfilterQueue", "Filtrage de paquets"],
+      logiciels: ["Python", "Linux"]
+    },
     images: ["/placeholder.svg", "/placeholder.svg"],
     link: "https://github.com",
     detailedDescription: "Ce projet consistait à développer un firewall applicatif en Python utilisant la bibliothèque NetfilterQueue sur un système Linux. L'objectif était de créer des règles de filtrage personnalisées pour inspecter et bloquer le trafic malveillant au niveau de la couche application, offrant une sécurité plus fine qu'un firewall réseau standard."
@@ -63,7 +67,11 @@ export const projects = [
   {
     title: "Projet 2: Application Web de Monitoring",
     description: "Création d'un dashboard web avec React pour visualiser en temps réel l'état d'une infrastructure réseau.",
-    tags: ["React", "Node.js", "Réseaux", "JavaScript"],
+    tags: {
+      categories: ["Développement Frontend", "Réseaux"],
+      notions: ["SNMP", "Visualisation de données"],
+      logiciels: ["React", "Node.js", "JavaScript"]
+    },
     images: ["/placeholder.svg"],
     link: "https://github.com",
     detailedDescription: "Le but de ce projet était de concevoir un dashboard de monitoring réseau. Le backend, développé en Node.js, collecte des données via SNMP sur les équipements réseau. Le frontend, en React, affiche ces informations (charge CPU, utilisation de la bande passante, etc.) sous forme de graphiques dynamiques pour une supervision en temps réel."
@@ -71,7 +79,11 @@ export const projects = [
   {
     title: "Projet 3: Maquette d'Infrastructure d'Entreprise",
     description: "Conception et déploiement d'une infrastructure réseau et système complète pour une PME simulée.",
-    tags: ["Cisco", "Windows Server", "VMware", "Réseaux"],
+    tags: {
+      categories: ["Infrastructure", "Systèmes & Réseaux"],
+      notions: ["Active Directory", "DNS", "DHCP", "Virtualisation"],
+      logiciels: ["Cisco IOS", "Windows Server", "VMware"]
+    },
     images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
     link: "#",
     detailedDescription: "Ce projet académique consistait à simuler la création de l'infrastructure complète d'une PME. Cela incluait la configuration de routeurs et switchs Cisco, le déploiement de serveurs Windows (Active Directory, DNS, DHCP) sur un environnement virtualisé VMware, et la mise en place de politiques de sécurité réseau."
