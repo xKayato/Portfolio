@@ -12,7 +12,7 @@ export const personalInfo = {
     { name: "LinkedIn", url: "https://linkedin.com", icon: Linkedin },
     { name: "Email Universitaire", url: "mailto:votre.email.etu@univ-cotedazur.fr", icon: GraduationCap },
   ],
-  cvUrl: "/path/to/your/cv.pdf",
+  cvUrl: "#", // Placeholder: Veuillez remplacer par le chemin réel de votre CV
 };
 
 export const about = {
@@ -296,27 +296,27 @@ export const projects = [
 
 export const education = [
     {
-        date: "2021 - 2024",
+        date: "2023 - 2026",
         title: "BUT Réseaux et Télécommunications",
         institution: "IUT Nice Côte d'Azur - Sophia Antipolis",
-        description: "Spécialisation en Cybersécurité et Développement.",
+        description: "Actuellement en troisième année, spécialisation en Cybersécurité. En première année : manipulation d'équipements réseaux (routeurs, switchs, serveurs), bases de la programmation, utilisation de Linux et machines virtuelles. En deuxième année : renforcement des connaissances réseaux avec sécurité (Firewall ASA), Java et conception d'applications mobile (Android Studio), introduction au Pentest. Obtention des certifications CCNA1 et CCNA2.",
         imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-        date: "2021",
-        title: "Baccalauréat Scientifique",
-        institution: "Lycée Exemple, Ville",
-        description: "Option Sciences de l'Ingénieur.",
+        date: "2020 - 2023",
+        title: "Baccalauréat Général",
+        institution: "Lycée Auguste Renoir, Cagnes Sur Mer",
+        description: "Filière générale avec les options Mathématiques, NSI (Numérique et Sciences Informatiques) et Anglais Monde Contemporain. Choix motivé par l'orientation future vers l'informatique. Obtention du BAC avec mention assez bien (13 en Mathématiques, 20 en NSI).",
         imageUrl: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
 ];
 
 export const experience = [
     {
-        date: "Été 2023",
-        title: "Stage Technicien Réseau",
-        company: "Entreprise Fictive, Sophia Antipolis",
-        description: "Maintenance du parc informatique, support utilisateur, et participation à la mise en place d'un nouveau VLAN.",
+        date: "3ème année BUT R&T",
+        title: "Alternant Développeur Informatique Industriel",
+        company: "Régie Eau d'Azur",
+        description: "Alternance effectuée en troisième année, spécialisation en cybersécurité. Rôle de développeur informatique industriel.",
         imageUrl: "https://images.unsplash.com/photo-1665686306574-1ace09918530?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
 ];
