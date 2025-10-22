@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 const Index = () => {
   return (
     <div className="container flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12">
-      <div className="max-w-3xl">
+      <div className="max-w-5xl">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           {personalInfo.name}
         </h1>
