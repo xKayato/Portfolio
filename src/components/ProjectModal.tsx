@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ImageZoom } from "./ImageZoom";
 
 interface Project {
   title: string;
@@ -30,17 +31,21 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-4xl">
+      <DialogContent className="sm:max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{project.title}</DialogTitle>
         </DialogHeader>
         <div className="py-4">
-          <Carousel className="w-full max-w-3xl mx-auto">
+          <Carousel className="w-full max-w-4xl mx-auto mb-6">
             <CarouselContent>
               {project.images.map((image, index) => (
                 <CarouselItem key={index}>
                   <div className="p-1">
-                    <img src={image} alt={`${project.title} - image ${index + 1}`} className="w-full aspect-video object-cover rounded-lg" />
+                    <ImageZoom 
+                      src={image} 
+                      alt={`${project.title} - image ${index + 1}`} 
+                      className="w-full aspect-video object-cover rounded-lg max-h-[400px]" 
+                    />
                   </div>
                 </CarouselItem>
               ))}
@@ -48,7 +53,7 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
-          <DialogDescription className="mt-4 text-base text-muted-foreground">
+          <DialogDescription className="mt-4 text-base text-muted-foreground whitespace-pre-line">
             {project.detailedDescription}
           </DialogDescription>
         </div>
