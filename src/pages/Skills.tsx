@@ -78,7 +78,15 @@ const Skills = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredSkills.map((skillCategory) => (
           <Card key={skillCategory.category}>
-            <CardHeader><CardTitle className="flex items-center gap-3"><skillCategory.icon className="h-6 w-6" />{skillCategory.category}</CardTitle></CardHeader>
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <CardTitle className="flex items-center gap-3">
+                  <skillCategory.icon className="h-6 w-6" />
+                  {skillCategory.category}
+                </CardTitle>
+                <Badge variant="secondary">{skillCategory.mainCategory}</Badge>
+              </div>
+            </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4 text-sm">{skillCategory.description}</p>
               <div className="space-y-4">
