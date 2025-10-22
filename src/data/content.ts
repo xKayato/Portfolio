@@ -101,7 +101,7 @@ export const skills = [
 
 export const projects = [
   {
-    title: "Création d'un site web CV",
+    title: "Déploiement d'un site web CV",
     description: "Création d'un site web CV en utilisant React, Typescript et TailwindCSS pour présenter mon parcours et mes compétences.",
     tags: {
       categories: ["Développement Frontend"],
@@ -109,7 +109,7 @@ export const projects = [
       logiciels: ["VS Code", "Git"]
     },
     images: ["/placeholder.svg"],
-    link: "https://github.com",
+    link: "#",
     detailedDescription: "Ce projet a été réalisé dans le but de créer un CV en ligne interactif et moderne. J'ai utilisé React pour la structure des composants, TypeScript pour assurer la robustesse du code et TailwindCSS pour un design rapide et responsive. Le site présente mon parcours, mes compétences et mes projets de manière organisée et visuellement agréable."
   },
   {
@@ -136,6 +136,42 @@ export const projects = [
     link: "#",
     detailedDescription: "L'objectif de ce projet était de déployer un serveur web sécurisé de A à Z. J'ai installé et configuré le serveur Apache sur une machine virtuelle Debian, généré et configuré un certificat SSL/TLS avec OpenSSL pour activer le HTTPS, et mis en place des règles de pare-feu avec UFW pour n'autoriser que le trafic web essentiel."
   },
+  {
+    title: "Mise en place d'un Active Directory",
+    description: "Installation et configuration d'un environnement Active Directory sous Windows Server pour la gestion centralisée des utilisateurs et des ressources.",
+    tags: {
+      categories: ["Systèmes & Serveurs", "Infrastructure"],
+      notions: ["Active Directory", "GPO", "DNS", "DHCP"],
+      logiciels: ["Windows Server", "VMware"]
+    },
+    images: ["/placeholder.svg"],
+    link: "#",
+    detailedDescription: "Ce projet visait à mettre en place une infrastructure de gestion d'identités avec Active Directory. J'ai installé le rôle AD DS sur un Windows Server, créé une forêt et un domaine, et configuré des unités d'organisation (OU) pour structurer les utilisateurs et les ordinateurs. J'ai également mis en place des stratégies de groupe (GPO) pour appliquer des paramètres de sécurité et de configuration de manière centralisée."
+  },
+  {
+    title: "Analyse de trames réseau avec Wireshark",
+    description: "Capture et analyse de trames réseau pour diagnostiquer des problèmes de communication et comprendre le fonctionnement des protocoles.",
+    tags: {
+      categories: ["Réseaux", "Cybersécurité"],
+      notions: ["TCP/IP", "HTTP", "DNS", "Analyse de paquets"],
+      logiciels: ["Wireshark"]
+    },
+    images: ["/placeholder.svg"],
+    link: "#",
+    detailedDescription: "Dans ce projet, j'ai utilisé Wireshark pour capturer le trafic réseau sur une interface locale. J'ai analysé les différentes couches du modèle OSI/TCP-IP, identifié les échanges entre un client et un serveur web (HTTP), et résolu des problèmes de connectivité en examinant les paquets échangés. Cette analyse m'a permis de mieux comprendre le fonctionnement interne des protocoles réseau."
+  },
+  {
+    title: "Scripting Python pour l'automatisation",
+    description: "Développement de scripts Python pour automatiser des tâches d'administration système et de traitement de données.",
+    tags: {
+      categories: ["Développement", "Automatisation"],
+      notions: ["Python", "Manipulation de fichiers", "API REST"],
+      logiciels: ["VS Code", "Git", "Python"]
+    },
+    images: ["/placeholder.svg"],
+    link: "#",
+    detailedDescription: "Ce projet consistait à créer une série de scripts Python pour automatiser des tâches répétitives. J'ai développé un script pour sauvegarder automatiquement des fichiers de configuration, un autre pour interroger une API REST et extraire des données, et un troisième pour parser des fichiers logs et générer des rapports. Cela m'a permis de gagner en efficacité et de réduire les risques d'erreurs manuelles."
+  }
 ];
 
 export const education = [
