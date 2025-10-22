@@ -324,14 +324,14 @@ export const experience = [
 export const passions = [
     {
         title: "Jeux Vidéo / Esport",
-        description: "Fan de jeux vidéo depuis mon plus jeune âge. Les jeux vidéo sont pour moi un moyen de me sentir mieux. Également fan d'E-sport (sport électronique) où je supporte mes équipes favorites chaque jour sur différents types de jeux. J'ai également créé un site internet dédié à ma passion pour l'E-sport dans la catégorie Portfolio.  ",
-        icon: Screen,
+        description: "Fan de jeux vidéo depuis mon plus jeune âge. Les jeux vidéo sont pour moi un moyen de me sentir mieux. Également fan d'E-sport (sport électronique) où je supporte mes équipes favorites chaque jour sur différents types de jeux. J'ai également créé un site internet dédié à ma passion pour l'E-sport dans la catégorie Portfolio.",
+        icon: Gamepad2,
         imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
         title: "Informatique",
         description: "Je suis fan d'informatique et surtout de matiériel informatique pour ordinateur depuis plusieurs années. J'ai eu l'occasion de monter des pc de toutes pièces à l'aide de mon père. J'adore suivre l'actualité des plus grandes marques de hardware avec leurs nouvelles sorties. (ex: Intel, AMD, Nvidia).",
-        icon: Music,
+        icon: Screen,
         imageUrl: "https://images.unsplash.com/photo-1462965326201-d02e4f455804?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
