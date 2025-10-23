@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import { ImageZoom } from "./ImageZoom";
 import { Button } from "./ui/button";
+import { ArrowUpRight } from "lucide-react";
 
 interface Project {
   title: string;
@@ -24,6 +25,10 @@ interface Project {
     notions: string[];
     logiciels: string[];
   };
+  deliverables?: {
+    label: string;
+    url: string;
+  };
 }
 
 interface ProjectModalProps {
@@ -34,10 +39,10 @@ interface ProjectModalProps {
 
 const TagSection = ({ title, tags }: { title: string; tags: string[] }) => (
   <div className="mb-6">
-    <h3 className="text-2xl font-bold mb-2 text-foreground">{title}</h3>
+    <h3 className="text-xl font-bold mb-2 text-foreground">{title}</h3>
     <ul className="space-y-1">
       {tags.map((tag) => (
-        <li key={tag} className="text-muted-foreground text-lg">
+        <li key={tag} className="text-muted-foreground text-base">
           {tag}
         </li>
       ))}
@@ -48,22 +53,22 @@ const TagSection = ({ title, tags }: { title: string; tags: string[] }) => (
 export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProps) => {
   if (!project) return null;
 
-  const { title, detailedDescription, images, tags, link } = project;
+  const { title, detailedDescription, images, link, tags, deliverables } = project;
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-7xl max-h-[95vh] overflow-y-auto p-0">
-        <div className="grid grid-cols-1 lg:grid-cols-4 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-5 h-full">
           
-          {/* Left Column: Content (3/4 width) */}
-          <div className="lg:col-span-3 p-6 md:p-8 lg:pr-0">
+          {/* Left Column: Content (4/5 width) */}
+          <div className="lg:col-span-4 p-6 md:p-8 lg:pr-12">
             <DialogHeader className="mb-6">
               <DialogTitle className="text-4xl font-extrabold text-foreground">{title}</DialogTitle>
             </DialogHeader>
 
             {/* Carousel */}
             {images.length > 0 && (
-              <Carousel className="w-full max-w-4xl mx-auto mb-6">
+              <Carousel className="w-full max-w-5xl mx-auto mb-6">
                 <CarouselContent>
                   {images.map((image, index) => (
                     <CarouselItem key={index}>
@@ -77,8 +82,8 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
               </Carousel>
             )}
 
@@ -87,27 +92,27 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
               {detailedDescription}
             </div>
 
-            {/* Livrables/Link Button (if applicable) */}
-            {link && link !== "#" && (
-              <div className="mt-8">
+            {/* Action Buttons */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              {link && link !== "#" && (
                 <a href={link} target="_blank" rel="noreferrer">
                   <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                    Voir le projet
+                    Voir le projet <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
-              </div>
-            )}
-            {/* Placeholder for Livrables button if needed, based on the screenshot */}
-            {title.includes("pentest") && (
-                <div className="mt-8">
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                        Livrables
+              )}
+              
+              {deliverables && (
+                <a href={deliverables.url} target="_blank" rel="noreferrer">
+                    <Button variant="outline">
+                        {deliverables.label}
                     </Button>
-                </div>
-            )}
+                </a>
+              )}
+            </div>
           </div>
 
-          {/* Right Column: Tags (1/4 width, Centered vertically) */}
+          {/* Right Column: Tags (1/5 width, Centered vertically) */}
           <div className="lg:col-span-1 bg-secondary p-6 md:p-8 border-l border-border flex flex-col justify-center">
             <div className="lg:max-h-[95vh] lg:overflow-y-auto">
                 <TagSection title="Catégories" tags={tags.categories} />
