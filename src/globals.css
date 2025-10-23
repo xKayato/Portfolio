@@ -113,7 +113,7 @@
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(4px, 4px); /* Augmentation du mouvement à 4px */
+    transform: translate(6px, 6px); /* Augmentation du mouvement à 6px */
   }
   100% {
     transform: translate(0, 0);

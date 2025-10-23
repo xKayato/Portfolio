@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-const NUM_STARS = 100;
+const NUM_STARS = 200; // Augmenté de 100 à 200
 
 const StarBackground = () => {
   const stars = React.useMemo(() => {
