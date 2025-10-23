@@ -25,7 +25,9 @@ export const ProjectCard = ({ project, onOpenModal }: ProjectCardProps) => {
   const { title, description, tags, images, link } = project;
 
   return (
-    <Card className="flex flex-col h-full">
+    <Card 
+      className="flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:border-primary/50 dark:hover:border-primary"
+    >
       <CardHeader>
         <div className="aspect-video relative mb-4">
             <img src={images[0]} alt={title} className="object-cover rounded-md w-full h-full" />

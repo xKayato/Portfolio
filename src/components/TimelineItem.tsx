@@ -42,7 +42,11 @@ export const TimelineItem = ({ date, title, subtitle, description, imageUrl, ali
         )}>
             <div className="text-xl font-bold text-foreground mb-1">{title} ({subtitle})</div>
             <time className="text-sm text-primary font-medium mb-4">{date}</time>
-            <div className="text-muted-foreground text-justify whitespace-pre-line">{description}</div>
+            
+            {/* Bloc de description style terminal/code */}
+            <div className="p-4 bg-secondary rounded-lg border border-border text-sm text-secondary-foreground whitespace-pre-line font-mono shadow-inner">
+                {description}
+            </div>
         </div>
       </div>
     </div>
