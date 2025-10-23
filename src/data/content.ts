@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Smartphone, Code, Network, Shield, Server, BrainCircuit, Gamepad2, Music, Mountain, GraduationCap } from 'lucide-react';
+import { Github, Linkedin, Mail, Smartphone, Code, Network, Shield, Server, BrainCircuit, Gamepad2, Music, Mountain, GraduationCap, Zap, MessageSquare, Cpu } from 'lucide-react';
 
 export const personalInfo = {
   name: "Thomas Deloup",
@@ -22,78 +22,86 @@ export const about = {
 
 export const skills = [
   {
-    category: "Développement",
+    category: "Développement & Systèmes",
     mainCategory: "Informatique",
     icon: Code,
-    description: "Création d'applications web et de scripts pour l'automatisation des tâches.",
+    description: "Maîtrise des langages de programmation, du développement d'applications mobiles et de l'administration système.",
     subcategories: [
       {
         title: "Langages",
-        items: ["Python", "JavaScript", "TypeScript", "SQL", "PHP", "Java", "XML"],
+        items: ["Python", "Java", "C", "PHP", "SQL", "Bash", "JavaScript", "TypeScript"],
       },
       {
-        title: "Frameworks & Librairies",
-        items: ["React", "Node.js", "GStreamer"],
+        title: "Développement",
+        items: ["Développer une application mobile (Java / XML)", "React", "Node.js", "GStreamer"],
+      },
+      {
+        title: "Systèmes & Conteneurisation",
+        items: ["Administration système (Linux)", "Conteneurisation (Docker)", "Windows Server", "Virtualisation (VMware)"],
       },
     ],
   },
   {
-    category: "Réseaux",
-    mainCategory: "Réseau",
+    category: "Réseaux & Infrastructure",
+    mainCategory: "Réseaux",
     icon: Network,
-    description: "Conception, déploiement et maintenance d'infrastructures réseau sécurisées et performantes.",
+    description: "Conception, administration et sécurisation des infrastructures réseau (LAN/WAN).",
     subcategories: [
         {
-            title: "Protocoles & Concepts",
+            title: "Administration & Configuration",
+            items: ["Conception et simulation de réseau (Cisco Packet Tracer)", "Administration d'un réseau local (Cisco)", "Sécurisation d'un réseau local (Cisco)", "Utilisation de GNS3"],
+        },
+        {
+            title: "Protocoles Avancés",
             items: ["TCP/IP", "Routing & Switching", "VPN", "OSPF", "HSRP", "BGP", "MPLS", "VLAN", "STP", "ACLs"],
         },
-        {
-            title: "Équipements & Technologies",
-            items: ["Configuration Cisco", "Wi-Fi", "Cisco IOS"],
-        }
     ]
   },
   {
-    category: "Systèmes & Serveurs",
-    mainCategory: "Informatique",
-    icon: Server,
-    description: "Administration de serveurs Linux et Windows, et gestion d'environnements virtualisés.",
-    subcategories: [
-        {
-            title: "Systèmes d'exploitation",
-            items: ["Linux (Debian, CentOS)", "Windows Server"],
-        },
-        {
-            title: "Virtualisation & Conteneurisation",
-            items: ["Docker", "Virtualisation (VMware)"],
-        }
-    ]
-  },
-  {
-    category: "Cybersécurité",
+    category: "Cybersécurité & Pentesting",
     mainCategory: "Cybersécurité",
     icon: Shield,
-    description: "Protection des systèmes d'information contre les menaces et analyse des vulnérabilités.",
+    description: "Identification des vulnérabilités, tests d'intrusion et sécurisation des systèmes d'information.",
     subcategories: [
         {
-            title: "Domaines",
-            items: ["Analyse de vulnérabilités", "Pentesting", "Sécurisation des SI"],
+            title: "Analyse & Outils",
+            items: ["Recherche de failles (Nmap, Nessus, Metasploit)", "Attaque web (Burp Suite, SQLMap, Injections)", "Attaque serveur (Reverse Shell, Cron, Pivot)"],
         },
         {
-            title: "Outils & Technologies",
-            items: ["Firewalls", "Nmap", "SQLMap", "BurpSuite", "Metasploit", "Nessus"],
+            title: "Défense",
+            items: ["Sécurisation des SI", "Firewalls"],
         }
     ]
   },
   {
-    category: "Autres Compétences",
-    mainCategory: "Communication",
-    icon: BrainCircuit,
-    description: "Compétences transversales essentielles pour mener à bien des projets techniques.",
+    category: "Télécommunication",
+    mainCategory: "Télécommunication",
+    icon: Zap,
+    description: "Connaissances des technologies de transmission et des réseaux sans fil.",
     subcategories: [
         {
-            title: "Professionnelles",
-            items: ["Gestion de projet", "Veille technologique", "Anglais technique", "Travail d'équipe", "Rédaction professionnelle"],
+            title: "Transmission",
+            items: ["Fibre Optique", "Cable coaxial", "Modulation / Démodulation", "Compression"],
+        },
+        {
+            title: "Technologies IoT",
+            items: ["IoT / IoM", "LoRaWAN"],
+        }
+    ]
+  },
+  {
+    category: "Communication & Gestion",
+    mainCategory: "Communication",
+    icon: MessageSquare,
+    description: "Compétences transversales essentielles pour la gestion de projet et la communication professionnelle.",
+    subcategories: [
+        {
+            title: "Rédaction & Présentation",
+            items: ["Écriture de rapport", "Expression orale", "Conception de diaporama", "Rédaction professionnelle"],
+        },
+        {
+            title: "Gestion de Projet",
+            items: ["Gestion de projet", "Travail d'équipe"],
         }
     ]
   },
@@ -321,7 +329,7 @@ export const experience = [
         title: "Alternant Développeur Informatique Industriel",
         company: "Régie Eau d'Azur",
         description: "Alternance effectuée en troisième année, spécialisation en cybersécurité. Rôle de développeur informatique industriel.",
-        imageUrl: "/regieeaudazur.webp"
+        imageUrl: "/regie_eau_azur.webp"
     }
 ];
 
@@ -335,7 +343,7 @@ export const passions = [
     {
         title: "Informatique",
         description: "Je suis fan d'informatique et surtout de matiériel informatique pour ordinateur depuis plusieurs années. J'ai eu l'occasion de monter des pc de toutes pièces à l'aide de mon père. J'adore suivre l'actualité des plus grandes marques de hardware avec leurs nouvelles sorties. (ex: Intel, AMD, Nvidia).",
-        icon: Gamepad2,
+        icon: Cpu,
         imageUrl: "/unsplash_FO7JIlwjOtU_informatique.webp"
     }
 ];
