@@ -34,14 +34,14 @@ export const CursorFollower = () => {
   // Style pour positionner le cercle au centre du curseur et ajouter une transition plus douce
   const style = {
     transform: `translate(calc(${mousePosition.x}px - 50%), calc(${mousePosition.y}px - 50%))`,
-    transition: 'transform 0.15s ease-out', // Transition plus lente pour un effet de glissement
+    transition: 'transform 0.2s ease-out', // Légèrement plus lent pour plus de glissement
   };
 
   return (
     <div 
       className={cn(
-        "fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none z-[9999]", // Plus large (w-96 h-96)
-        "bg-primary/20 blur-3xl opacity-30" // Moins opaque et très flou
+        "fixed top-0 left-0 w-[30rem] h-[30rem] rounded-full pointer-events-none z-[9999]", // Très large (480px)
+        "bg-primary/15 blur-[100px] opacity-20" // Moins opaque et flou très intense (blur-[100px] est une valeur custom si 3xl n'est pas assez)
       )}
       style={style}
     />
