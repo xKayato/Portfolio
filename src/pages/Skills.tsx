@@ -1,10 +1,11 @@
 import { useState, useMemo } from "react";
 import { skills } from "@/data/content";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { CardContent, CardHeader, CardTitle } from "@/components/PixelCard";
 import { Input } from "@/components/ui/input";
 import { Code, Network, Shield, Server, Zap, MessageSquare } from "lucide-react";
 import { PixelButton } from "@/components/PixelButton";
+import { PixelCard } from "@/components/PixelCard";
+import { PixelBadge } from "@/components/PixelBadge";
 
 // Mapping des catégories principales aux icônes pour les cartes individuelles
 const categoryIcons: { [key: string]: React.ElementType } = {
@@ -82,7 +83,7 @@ const Skills = () => {
           const IconComponent = categoryIcons[skill.mainCategory] || Code;
           
           return (
-            <Card key={skill.category} className="flex flex-col h-full">
+            <PixelCard key={skill.category} className="flex flex-col h-full">
               <CardHeader className="pb-4">
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-xl font-semibold flex items-center gap-3">
@@ -94,10 +95,10 @@ const Skills = () => {
               <CardContent className="flex-grow">
                 <p className="text-muted-foreground mb-4 text-sm text-justify">{skill.description}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {skill.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
+                  {skill.items.map((item) => <PixelBadge key={item} variant="outline">{item}</PixelBadge>)}
                 </div>
               </CardContent>
-            </Card>
+            </PixelCard>
           );
         })}
       </div>

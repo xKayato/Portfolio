@@ -1,7 +1,8 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { CardContent, CardFooter, CardHeader, CardTitle } from "@/components/PixelCard";
 import { ArrowUpRight, Eye } from "lucide-react";
 import { PixelButton } from "./PixelButton";
+import { PixelCard } from "./PixelCard";
+import { PixelBadge } from "./PixelBadge";
 
 interface Project {
   title: string;
@@ -25,10 +26,10 @@ export const ProjectCard = ({ project, onOpenModal }: ProjectCardProps) => {
   const { title, description, tags, images, link } = project;
 
   return (
-    <Card className="flex flex-col h-full">
+    <PixelCard className="flex flex-col h-full">
       <CardHeader>
-        <div className="aspect-video relative mb-4">
-            <img src={images[0]} alt={title} className="object-cover rounded-md w-full h-full" />
+        <div className="aspect-video relative mb-4 border-2 border-foreground">
+            <img src={images[0]} alt={title} className="object-cover w-full h-full" />
         </div>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
@@ -38,7 +39,7 @@ export const ProjectCard = ({ project, onOpenModal }: ProjectCardProps) => {
       <CardFooter className="flex flex-col items-start gap-4">
         <div className="flex flex-wrap gap-2">
           {Object.values(tags).flat().map((tag) => (
-            <Badge key={tag} variant="secondary">{tag}</Badge>
+            <PixelBadge key={tag} variant="secondary">{tag}</PixelBadge>
           ))}
         </div>
         <div className="w-full flex flex-col sm:flex-row gap-2 mt-2">
@@ -54,6 +55,6 @@ export const ProjectCard = ({ project, onOpenModal }: ProjectCardProps) => {
           </PixelButton>
         </div>
       </CardFooter>
-    </Card>
+    </PixelCard>
   );
 };
