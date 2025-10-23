@@ -21,9 +21,10 @@ const StarBackground = () => {
           top: `${y}%`,
           left: `${x}%`,
           opacity: opacity,
-          animationDuration: `${duration}s`,
-          animationDelay: `${delay}s`,
-        },
+          // Utilisation de variables CSS pour l'animation
+          '--animation-duration': `${duration}s`,
+          '--animation-delay': `${delay}s`,
+        } as React.CSSProperties, // Cast pour inclure les variables CSS
       };
     });
   }, []);
@@ -35,9 +36,13 @@ const StarBackground = () => {
           key={star.key}
           className={cn(
             "absolute bg-white rounded-full",
-            "animate-star-drift" // Animation de dérive
+            // Application de l'animation définie dans tailwind.config.ts
+            "animate-[star-drift_var(--animation-duration)_ease-in-out_infinite_alternate]" 
           )}
-          style={star.style}
+          style={{
+            ...star.style,
+            animationDelay: star.style['--animation-delay'],
+          }}
         />
       ))}
     </div>

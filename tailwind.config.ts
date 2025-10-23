@@ -96,10 +96,21 @@ export default {
             height: "0",
           },
         },
+        // Définition de l'animation star-drift
+        "star-drift": {
+          "0%, 100%": {
+            transform: "translate(0, 0)",
+          },
+          "50%": {
+            transform: "translate(4px, 4px)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        // Application de l'animation star-drift
+        "star-drift": "star-drift var(--animation-duration) ease-in-out infinite alternate",
       },
     },
   },
