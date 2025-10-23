@@ -52,11 +52,11 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-6xl max-h-[95vh] overflow-y-auto p-0">
-        <div className="grid grid-cols-1 lg:grid-cols-3 h-full">
+      <DialogContent className="sm:max-w-7xl max-h-[95vh] overflow-y-auto p-0">
+        <div className="grid grid-cols-1 lg:grid-cols-4 h-full">
           
-          {/* Left Column: Content (Title, Description, Carousel) */}
-          <div className="lg:col-span-2 p-6 md:p-8 lg:pr-0">
+          {/* Left Column: Content (3/4 width) */}
+          <div className="lg:col-span-3 p-6 md:p-8 lg:pr-0">
             <DialogHeader className="mb-6">
               <DialogTitle className="text-4xl font-extrabold text-foreground">{title}</DialogTitle>
             </DialogHeader>
@@ -107,11 +107,13 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
             )}
           </div>
 
-          {/* Right Column: Tags (Sidebar style) */}
-          <div className="lg:col-span-1 bg-secondary p-6 md:p-8 border-l border-border lg:max-h-[95vh] lg:overflow-y-auto">
-            <TagSection title="Catégories" tags={tags.categories} />
-            <TagSection title="Notions" tags={tags.notions} />
-            <TagSection title="Logiciels" tags={tags.logiciels} />
+          {/* Right Column: Tags (1/4 width, Centered vertically) */}
+          <div className="lg:col-span-1 bg-secondary p-6 md:p-8 border-l border-border flex flex-col justify-center">
+            <div className="lg:max-h-[95vh] lg:overflow-y-auto">
+                <TagSection title="Catégories" tags={tags.categories} />
+                <TagSection title="Notions" tags={tags.notions} />
+                <TagSection title="Logiciels" tags={tags.logiciels} />
+            </div>
           </div>
         </div>
       </DialogContent>
