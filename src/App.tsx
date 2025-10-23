@@ -12,18 +12,20 @@ import Portfolio from "./pages/Portfolio";
 import Passions from "./pages/Passions";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "./components/ThemeProvider";
-import { CursorFollower } from "./components/CursorFollower"; // Import du nouveau composant
+import { CursorFollower } from "./components/CursorFollower";
+import ScrollToTop from "./components/ScrollToTop"; // Import du nouveau composant
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system" attribute="class">
-      <CursorFollower /> {/* Ajout du CursorFollower ici */}
+      <CursorFollower />
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop /> {/* Ajout ici pour s'assurer qu'il est dans le contexte du routeur */}
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
