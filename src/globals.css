@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 220 80% 40%; /* Bleu technique */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -32,18 +32,18 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0rem; /* Mis à jour pour 0rem */
+    --radius: 0.5rem; /* Rétabli à 0.5rem */
 
     /* Footer Light Mode */
     --footer-default: 210 40% 96.1%; /* secondary light */
     --footer-dark: 214.3 31.8% 91.4%; /* border light */
     --footer-foreground: 222.2 47.4% 11.2%; /* primary dark */
-    --footer-accent: 222.2 47.4% 11.2%; /* primary dark */
+    --footer-accent: 220 80% 40%; /* primary blue */
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
+    --background: 224 71% 4%; /* Fond très sombre */
+    --foreground: 210 40% 98%; /* Texte blanc */
 
     --card: 224 71% 9%;
     --card-foreground: 210 40% 98%;
@@ -51,8 +51,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 200 100% 70%; /* Bleu vif pour l'accent */
+    --primary-foreground: 224 71% 4%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -68,15 +68,15 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 200 100% 70%; /* Utiliser l'accent bleu pour le ring */
 
-    --radius: 0rem; /* Mis à jour pour 0rem */
+    --radius: 0.5rem; /* Rétabli à 0.5rem */
 
-    /* Footer Dark Mode (Keep blue theme) */
-    --footer-default: 220 80% 40%;
-    --footer-dark: 220 80% 30%;
-    --footer-foreground: 0 0% 100%;
-    --footer-accent: 200 100% 70%;
+    /* Footer Dark Mode */
+    --footer-default: 224 71% 9%; /* card dark */
+    --footer-dark: 224 71% 4%; /* background dark */
+    --footer-foreground: 210 40% 98%; /* foreground white */
+    --footer-accent: 200 100% 70%; /* primary blue */
   }
 }
 
@@ -90,18 +90,18 @@
   }
 
   body {
-    /* Appliquer la police 8-bit par défaut */
-    @apply bg-background text-foreground font-8bit;
+    /* Utiliser une police sans-serif par défaut pour la lisibilité */
+    @apply bg-background text-foreground font-sans;
   }
   
   /* Rendre le texte plus lisible pour les paragraphes en utilisant une police par défaut */
   p, a, li, span, div {
-    /* Utiliser une police plus lisible pour le corps du texte, mais garder la police 8bit pour les titres */
     font-family: sans-serif; 
   }
   
-  /* Appliquer la police 8bit aux titres */
+  /* Appliquer la police 8bit uniquement aux titres si vous le souhaitez, sinon utiliser sans-serif */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-8bit;
+    /* Je retire l'application forcée de font-8bit ici pour un look plus pro/moderne */
+    @apply font-sans font-bold;
   }
 }

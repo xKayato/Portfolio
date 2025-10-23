@@ -14,7 +14,7 @@ import {
 import { ImageZoom } from "./ImageZoom";
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
-import { PixelButton } from "./PixelButton";
+import { TechButton } from "./TechButton";
 
 interface Project {
   title: string;
@@ -103,17 +103,17 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
             <div className="mt-8 flex flex-wrap gap-4">
               {link && link !== "#" && (
                 <a href={link} target="_blank" rel="noreferrer">
-                  <PixelButton>
+                  <TechButton>
                     Voir le projet <ArrowUpRight className="ml-2 h-4 w-4" />
-                  </PixelButton>
+                  </TechButton>
                 </a>
               )}
               
               {deliverables && (
                 <a href={deliverables.url} target="_blank" rel="noreferrer">
-                    <PixelButton variant="outline">
+                    <TechButton variant="outline">
                         {deliverables.label}
-                    </PixelButton>
+                    </TechButton>
                 </a>
               )}
             </div>

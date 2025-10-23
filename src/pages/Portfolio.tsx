@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { PixelButton } from "@/components/PixelButton";
+import { TechButton } from "@/components/TechButton";
 
 type Project = typeof projects[0];
 
@@ -82,19 +82,19 @@ const Portfolio = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-8">
-          <PixelButton 
+          <TechButton 
             variant={selectedTags.length === 0 ? "default" : "outline"}
             onClick={() => setSelectedTags([])}
           >
             Tous
-          </PixelButton>
+          </TechButton>
           {Object.entries(groupedTags).map(([category, tags]) => (
             <DropdownMenu key={category}>
               <DropdownMenuTrigger asChild>
-                <PixelButton variant="outline" className="flex items-center">
+                <TechButton variant="outline" className="flex items-center">
                   {category}
                   <ChevronDown className="ml-2 h-4 w-4" />
-                </PixelButton>
+                </TechButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
                 {Array.from(tags).sort().map(tag => (

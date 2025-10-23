@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { ArrowRight } from "lucide-react";
-import { PixelButton } from "@/components/PixelButton";
+import { TechButton } from "@/components/TechButton";
 
 const Index = () => {
   return (
@@ -18,14 +18,14 @@ const Index = () => {
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Link to="/portfolio">
-            <PixelButton>
+            <TechButton>
               Voir mes projets <ArrowRight className="ml-2 h-4 w-4" />
-            </PixelButton>
+            </TechButton>
           </Link>
           <Link to="/about">
-            <PixelButton variant="outline">
+            <TechButton variant="outline">
               En savoir plus
-            </PixelButton>
+            </TechButton>
           </Link>
         </div>
       </div>

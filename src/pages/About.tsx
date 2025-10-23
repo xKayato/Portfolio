@@ -1,7 +1,7 @@
 import { about, education, experience, personalInfo } from "@/data/content";
 import { TimelineItem } from "@/components/TimelineItem";
 import { Download } from "lucide-react";
-import { PixelButton } from "@/components/PixelButton";
+import { TechButton } from "@/components/TechButton";
 
 const About = () => {
   // Combine experience and education for alternating alignment
@@ -24,9 +24,9 @@ const About = () => {
             </p>
             <div className="mt-6">
               <a href={personalInfo.cvUrl} target="_blank" rel="noreferrer">
-                <PixelButton variant="outline">
+                <TechButton variant="outline">
                   Télécharger mon CV <Download className="ml-2 h-4 w-4" />
-                </PixelButton>
+                </TechButton>
               </a>
             </div>
           </div>

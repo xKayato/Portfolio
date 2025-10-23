@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Code, Network, Shield, Server, Zap, MessageSquare } from "lucide-react";
-import { PixelButton } from "@/components/PixelButton";
+import { TechButton } from "@/components/TechButton";
 
 // Mapping des catégories principales aux icônes pour les cartes individuelles
 const categoryIcons: { [key: string]: React.ElementType } = {
@@ -67,13 +67,13 @@ const Skills = () => {
 
       <div className="flex flex-wrap gap-2 mb-8">
         {mainCategories.map(category => (
-          <PixelButton 
+          <TechButton 
             key={category}
             variant={(!selectedMainCategory && category === 'Tous') || selectedMainCategory === category ? 'default' : 'outline'}
             onClick={() => handleCategoryClick(category)}
           >
             {category}
-          </PixelButton>
+          </TechButton>
         ))}
       </div>
 

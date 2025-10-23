@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, Eye } from "lucide-react";
-import { PixelButton } from "./PixelButton";
+import { TechButton } from "./TechButton";
 
 interface Project {
   title: string;
@@ -44,14 +44,14 @@ export const ProjectCard = ({ project, onOpenModal }: ProjectCardProps) => {
         <div className="w-full flex flex-col sm:flex-row gap-2 mt-2">
           {link && link !== "#" && (
             <a href={link} target="_blank" rel="noreferrer" className="w-full">
-              <PixelButton variant="outline" className="w-full">
+              <TechButton variant="outline" className="w-full">
                 Voir le projet <ArrowUpRight className="ml-2 h-4 w-4" />
-              </PixelButton>
+              </TechButton>
             </a>
           )}
-          <PixelButton onClick={() => onOpenModal(project)} className="w-full">
+          <TechButton onClick={() => onOpenModal(project)} className="w-full">
             Voir les détails <Eye className="ml-2 h-4 w-4" />
-          </PixelButton>
+          </TechButton>
         </div>
       </CardFooter>
     </Card>
