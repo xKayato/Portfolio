@@ -321,7 +321,7 @@ export const experience = [
         title: "Alternant Développeur Informatique Industriel",
         company: "Régie Eau d'Azur",
         description: "Alternance effectuée en troisième année, spécialisation en cybersécurité. Rôle de développeur informatique industriel.",
-        imageUrl: "/regie_eau_azur.webp"
+        imageUrl: "/regieeauazur.webp"
     }
 ];
 
