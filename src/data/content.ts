@@ -300,14 +300,14 @@ export const education = [
         title: "BUT Réseaux et Télécommunications",
         institution: "IUT Nice Côte d'Azur - Sophia Antipolis",
         description: "Actuellement en troisième année à l'IUT Nice Côte d'Azur à Sophia Antipolis en Réseaux et Télécommunications (R&T).\n\nEn première année, on apprend à manipuler des équipements réseaux, à configurer des routeurs, des switchs, des serveurs, etc. Tout en apprenant les bases de la programmation, nous avons également appris à utiliser efficacement Linux et à manipuler des machines virtuelles.\n\nPendant ma deuxième année j'ai pu renforcer mes connaissances apprises lors de ma première année dans les réseaux en y ajoutant de la sécurité, comme la configuration d'un Firewall (ASA). On a apprit le Java et la conception d'applications mobile (Android Studio Java). On a aussi apprit le Pentest à travers plusieurs TP d'intrusion dans des machines.\n\nDurant cette deuxième année, j'ai pu obtenir la certification du CCNA1 et du CCNA2.\n\nEn troisième année, je me suis spécialisé en cybersécurité et j'ai effectué une alternance chez la \"Régie Eau d'Azur\" en tant que développeur informatique industriel.",
-        imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        imageUrl: "/iut.webp"
     },
     {
         date: "2020 - 2023",
         title: "Baccalauréat Général",
         institution: "Lycée Auguste Renoir, Cagnes Sur Mer",
         description: "J'ai passé mes trois années de lycée à Cagnes-sur-Mer, au Lycée Auguste Renoir. J'ai choisi la filière générale avec les options Mathématiques, NSI (Numérique et Sciences Informatiques) et Anglais Monde Contemporain.\n\nJ'ai choisi ces options car, depuis très jeune, je savais que j'allais m'orienter vers un milieu informatique pour mon futur. J'ai donc choisi Mathématiques et NSI pour cette raison. Pour l'option Anglais Monde Contemporain, je savais qu'il fallait un niveau supérieur en anglais pour ce domaine.\n\nJe possède le BAC avec la mention assez bien, en ayant obtenu :\n\n    13 en Mathématiques\n    20 en NSI\n\nAu lycée, je n'avais pas de difficultés en NSI. Je m'amusais déjà à développer chez moi, à apprendre de nouveaux langages de programmation, et cette matière m'a surtout motivé à aller plus loin. En Mathématiques, ma moyenne a chuté entre la seconde et la première, mais j'ai réussi à maintenir la moyenne en première et terminale.",
-        imageUrl: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        imageUrl: "/renoir.webp"
     }
 ];
 
@@ -317,7 +317,7 @@ export const experience = [
         title: "Alternant Développeur Informatique Industriel",
         company: "Régie Eau d'Azur",
         description: "Alternance effectuée en troisième année, spécialisation en cybersécurité. Rôle de développeur informatique industriel.",
-        imageUrl: "https://images.unsplash.com/photo-1665686306574-1ace09918530?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        imageUrl: "/regie_eau_azur.webp"
     }
 ];
 
