@@ -6,30 +6,23 @@ interface TimelineItemProps {
   subtitle: string;
   description: string;
   imageUrl?: string;
-  align: 'left' | 'right'; // 'left' means content is on the left of the line, 'right' means content is on the right.
+  align: 'left' | 'right'; // 'left' means image is on the left, 'right' means image is on the right.
 }
 
 export const TimelineItem = ({ date, title, subtitle, description, imageUrl, align }: TimelineItemProps) => {
-  // For this new design, the line and date are always on the left side of the content block.
-  // The content block itself (title, description, image) will alternate its internal layout.
   const isImageLeft = align === 'left';
 
   return (
-    <div className="relative py-6 group pl-8 sm:pl-32">
+    <div className="relative py-8 group pl-8">
       {/* Timeline Dot and Line (Always on the left edge of the content area) */}
-      <div className="absolute left-0 top-5 h-full w-px bg-border -translate-x-px group-last:hidden"></div>
-      <div className="absolute left-0 top-5 w-2 h-2 rounded-full bg-primary -translate-x-1/2"></div>
+      <div className="absolute left-0 top-0 h-full w-px bg-border -translate-x-px group-last:h-[50%]"></div>
+      <div className="absolute left-0 top-8 w-3 h-3 rounded-full bg-primary -translate-x-1/2 border-2 border-background"></div>
 
-      {/* Date (Always fixed to the left of the content area) */}
-      <div className="flex-shrink-0 sm:absolute left-0 sm:w-32 sm:text-right pr-4 mb-2 sm:mb-0">
-        <time className="text-sm text-muted-foreground">{date}</time>
-      </div>
-      
       {/* Content Block */}
       <div className={cn(
         "flex flex-col gap-4",
-        "sm:grid sm:grid-cols-2 sm:gap-8",
-        isImageLeft ? "sm:flex-row-reverse" : "sm:flex-row"
+        "md:grid md:grid-cols-2 md:gap-8",
+        isImageLeft ? "md:flex-row" : "md:flex-row-reverse"
       )}>
         
         {/* Image Column (Alternating position) */}
@@ -38,7 +31,7 @@ export const TimelineItem = ({ date, title, subtitle, description, imageUrl, ali
             "w-full",
             isImageLeft ? "order-1" : "order-2"
           )}>
-            <img src={imageUrl} alt={title} className="rounded-lg w-full shadow-md object-cover aspect-video" />
+            <img src={imageUrl} alt={title} className="rounded-lg w-full shadow-md object-cover aspect-[4/3]" />
           </div>
         )}
 
@@ -47,8 +40,8 @@ export const TimelineItem = ({ date, title, subtitle, description, imageUrl, ali
           "flex flex-col",
           isImageLeft ? "order-2" : "order-1"
         )}>
-            <div className="font-caveat font-medium text-2xl text-primary mb-1">{title}</div>
-            <div className="text-lg font-semibold mb-2">{subtitle}</div>
+            <div className="text-xl font-bold text-foreground mb-1">{title} ({subtitle})</div>
+            <time className="text-sm text-primary font-medium mb-4">{date}</time>
             <div className="text-muted-foreground text-justify whitespace-pre-line">{description}</div>
         </div>
       </div>

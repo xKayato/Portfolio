@@ -5,12 +5,12 @@ export const personalInfo = {
   title: "Étudiant en BUT Réseaux et Télécommunications",
   location: "Sophia Antipolis, Nice",
   email: "votre.email@example.com",
-  universityEmail: "votre.email.etu@univ-cotedazur.fr",
+  universityEmail: "thomas.deloup@etu.univ-cotedazur.fr",
   phone: "+33 6 12 34 56 78",
   socials: [
-    { name: "Github", url: "https://github.com", icon: Github },
-    { name: "LinkedIn", url: "https://linkedin.com", icon: Linkedin },
-    { name: "Email Universitaire", url: "mailto:votre.email.etu@univ-cotedazur.fr", icon: GraduationCap },
+    { name: "Github", url: "https://github.com/xKayato/", icon: Github },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/thomasdeloup/", icon: Linkedin },
+    { name: "Email Universitaire", url: "mailto:thomas.deloup@etu.univ-cotedazur.fr", icon: GraduationCap },
   ],
   cvUrl: "#", // Placeholder: Veuillez remplacer par le chemin réel de votre CV
 };

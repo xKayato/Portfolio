@@ -62,6 +62,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Nouvelle couleur pour le footer
+        footer: {
+          DEFAULT: "hsl(220 80% 40%)", // Bleu foncé
+          dark: "hsl(220 80% 30%)", // Bleu encore plus foncé pour le bas
+          foreground: "hsl(0 0% 100%)",
+          accent: "hsl(200 100% 70%)", // Bleu clair pour les liens
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
