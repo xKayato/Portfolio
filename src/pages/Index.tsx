@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { ArrowRight } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
-import { MatrixBackground } from "@/components/MatrixBackground";
 import { TypingEffect } from "@/components/TypingEffect";
 
 const Index = () => {
@@ -12,8 +11,7 @@ const Index = () => {
   return (
     <div className="container relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12">
       
-      {/* Matrix Background */}
-      <MatrixBackground />
+      {/* Matrix Background removed */}
 
       <div className="max-w-5xl relative z-10">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
