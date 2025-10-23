@@ -19,7 +19,7 @@ const About = () => {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="md:w-2/3">
             <h1 className="text-3xl font-bold mb-4">À Propos de moi</h1>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-lg text-justify">
               {about.introduction}
             </p>
             <div className="mt-6">
@@ -39,8 +39,8 @@ const About = () => {
       <section id="experience" className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Parcours & Formation</h2>
         <div className="relative">
-          {/* Central vertical line for mobile view */}
-          <div className="absolute left-0 top-0 h-full w-px bg-border sm:hidden"></div>
+          {/* Central vertical line for mobile view (now hidden as the line is fixed left) */}
+          {/* <div className="absolute left-0 top-0 h-full w-px bg-border sm:hidden"></div> */}
           
           {/* Combined timeline items */}
           {timelineItems.map((item, index) => (
@@ -48,7 +48,7 @@ const About = () => {
               key={item.key} 
               {...item} 
               subtitle={item.type === 'experience' ? item.company : item.institution}
-              align={index % 2 === 0 ? 'right' : 'left'} // Alternating alignment
+              align={index % 2 === 0 ? 'right' : 'left'} // Alternating alignment for content/image
             />
           ))}
         </div>

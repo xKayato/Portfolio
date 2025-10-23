@@ -55,7 +55,7 @@ const Skills = () => {
   return (
     <div className="container py-12 md:py-20">
       <h1 className="text-3xl font-bold mb-2">Mes Compétences</h1>
-      <p className="text-muted-foreground mb-8">  Bienvenue sur la page Compétences, un espace dédié à la présentation de mes savoir-faire et domaines d'expertise. Vous y découvrirez mes compétences en Informatique, Réseaux, Cybersécurité et bien plus encore. Parcourez cette section pour en apprendre davantage sur mes atouts professionnels et mes domaines de maîtrise.</p>
+      <p className="text-muted-foreground mb-8 text-justify">  Bienvenue sur la page Compétences, un espace dédié à la présentation de mes savoir-faire et domaines d'expertise. Vous y découvrirez mes compétences en Informatique, Réseaux, Cybersécurité et bien plus encore. Parcourez cette section pour en apprendre davantage sur mes atouts professionnels et mes domaines de maîtrise.</p>
       
       <Input 
         placeholder="Rechercher une compétence..."
@@ -89,7 +89,7 @@ const Skills = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4 text-sm">{skillCategory.description}</p>
+              <p className="text-muted-foreground mb-4 text-sm text-justify">{skillCategory.description}</p>
               <div className="space-y-4">
                 {skillCategory.subcategories.map((subcategory) => (
                   <div key={subcategory.title}>
