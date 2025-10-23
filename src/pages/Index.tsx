@@ -2,13 +2,25 @@ import { Link } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { ArrowRight } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
+import { MatrixBackground } from "@/components/MatrixBackground";
 
 const Index = () => {
+  const firstName = personalInfo.name.split(' ')[0];
+  const lastName = personalInfo.name.split(' ').slice(1).join(' ');
+
   return (
-    <div className="container flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12">
-      <div className="max-w-5xl">
+    <div className="container relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12">
+      
+      {/* Matrix Background */}
+      <MatrixBackground />
+
+      <div className="max-w-5xl relative z-10">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          {personalInfo.name}
+          <span className="text-primary font-mono bg-primary/10 p-1 rounded-md shadow-lg">
+            {`const ${firstName} = "code";`}
+          </span>
+          <br className="sm:hidden" />
+          <span className="mt-2 block sm:inline-block sm:ml-4">{lastName}</span>
         </h1>
         <h2 className="mt-3 text-xl font-medium text-primary sm:text-2xl">
           {personalInfo.title}
