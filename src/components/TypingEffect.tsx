@@ -4,72 +4,52 @@ import { cn } from '@/lib/utils';
 interface TypingEffectProps {
   text: string;
   speed?: number; // Vitesse en ms par caractère
-  eraseSpeed?: number; // Vitesse en ms par caractère pour l'effacement
-  pauseDuration?: number; // Pause avant effacement/réécriture
   className?: string;
 }
 
 export const TypingEffect: React.FC<TypingEffectProps> = ({ 
   text, 
   speed = 100, 
-  eraseSpeed = 50, 
-  pauseDuration = 4000, // Augmenté à 4000ms (4 secondes)
   className 
 }) => {
   const [displayedText, setDisplayedText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
   const [cursorVisible, setCursorVisible] = useState(true);
 
+  // Logique de frappe unique
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    if (isFinished) return;
 
-    if (!isDeleting) {
-      // Typing phase
-      if (index < text.length) {
-        timer = setTimeout(() => {
-          setDisplayedText(text.substring(0, index + 1));
-          setIndex(index + 1);
-        }, speed);
-      } else {
-        // Pause before deleting
-        timer = setTimeout(() => {
-          setIsDeleting(true);
-        }, pauseDuration);
-      }
+    if (displayedText.length < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(text.substring(0, displayedText.length + 1));
+      }, speed);
+      return () => clearTimeout(timeout);
     } else {
-      // Deleting phase
-      if (index > 0) {
-        timer = setTimeout(() => {
-          setDisplayedText(text.substring(0, index - 1));
-          setIndex(index - 1);
-        }, eraseSpeed);
-      } else {
-        // Finished deleting, start typing again
-        setIsDeleting(false);
-      }
+      setIsFinished(true);
     }
+  }, [displayedText, text, speed, isFinished]);
 
-    return () => clearTimeout(timer);
-  }, [index, isDeleting, text, speed, eraseSpeed, pauseDuration]);
-
-  // Curseur clignotant
+  // Curseur clignotant (s'arrête après la frappe)
   useEffect(() => {
+    if (!isFinished) return;
+
     const cursorInterval = setInterval(() => {
       setCursorVisible(prev => !prev);
     }, 500);
     return () => clearInterval(cursorInterval);
-  }, []);
+  }, [isFinished]);
 
   const cursor = (
     <span 
       className={cn(
-        "inline-block w-1 h-full bg-primary ml-1 align-middle",
-        "transition-opacity duration-500",
-        cursorVisible ? "opacity-100" : "opacity-0",
-        "border-r-2 border-primary animate-[blink-caret_0.75s_step-end_infinite]"
+        "inline-block w-1 h-full ml-1 align-middle",
+        "border-r-2 border-primary animate-[blink-caret_0.75s_step-end_infinite]",
+        // Le curseur est visible uniquement pendant la frappe ou après la fin
+        isFinished && cursorVisible ? "opacity-100" : "opacity-0",
+        !isFinished && "opacity-100" // Toujours visible pendant la frappe
       )}
-      style={{ height: '1em', width: '0.1em' }} // Ajustement pour la hauteur du texte
+      style={{ height: '1em', width: '0.1em' }}
     >
     </span>
   );
