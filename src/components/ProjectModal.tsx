@@ -14,6 +14,7 @@ import {
 import { ImageZoom } from "./ImageZoom";
 import { Button } from "./ui/button";
 import { ArrowUpRight } from "lucide-react";
+import React from "react";
 
 interface Project {
   title: string;
@@ -55,6 +56,11 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
 
   const { title, detailedDescription, images, link, tags, deliverables } = project;
 
+  // Fonction pour arrêter la propagation des événements de clic
+  const handleNavigationClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-7xl max-h-[95vh] overflow-y-auto p-0">
@@ -82,8 +88,9 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
+                {/* Ajout de onClick pour stopper la propagation */}
+                <CarouselPrevious className="left-4" onClick={handleNavigationClick} />
+                <CarouselNext className="right-4" onClick={handleNavigationClick} />
               </Carousel>
             )}
 

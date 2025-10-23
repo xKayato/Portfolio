@@ -5,6 +5,7 @@ import { Menu, X, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { to: "/about", label: "À Propos" },
@@ -21,7 +22,8 @@ export const Header = () => {
   return (
     <header className="bg-card border-b border-border p-4 sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
-        <NavLink to="/" className="text-xl font-bold text-primary">
+        <NavLink to="/" className="flex items-center gap-2 text-xl font-bold text-primary">
+          <Logo className="h-6" />
           {personalInfo.name}
         </NavLink>
         
@@ -64,7 +66,10 @@ export const Header = () => {
               </SheetTrigger>
               <SheetContent side="right">
                 <SheetHeader>
-                  <SheetTitle>{personalInfo.name}</SheetTitle>
+                  <SheetTitle className="flex items-center gap-2">
+                    <Logo className="h-6" />
+                    {personalInfo.name}
+                  </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-4 mt-8">
                   {navLinks.map(link => (
