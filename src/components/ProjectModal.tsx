@@ -12,9 +12,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { ImageZoom } from "./ImageZoom";
-import { Button } from "./ui/button";
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
+import { PixelButton } from "./PixelButton";
 
 interface Project {
   title: string;
@@ -103,17 +103,17 @@ export const ProjectModal = ({ isOpen, onOpenChange, project }: ProjectModalProp
             <div className="mt-8 flex flex-wrap gap-4">
               {link && link !== "#" && (
                 <a href={link} target="_blank" rel="noreferrer">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                  <PixelButton>
                     Voir le projet <ArrowUpRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </PixelButton>
                 </a>
               )}
               
               {deliverables && (
                 <a href={deliverables.url} target="_blank" rel="noreferrer">
-                    <Button variant="outline">
+                    <PixelButton variant="outline">
                         {deliverables.label}
-                    </Button>
+                    </PixelButton>
                 </a>
               )}
             </div>

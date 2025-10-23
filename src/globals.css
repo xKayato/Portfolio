@@ -32,7 +32,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0rem; /* Mis à jour pour 0rem */
 
     /* Footer Light Mode */
     --footer-default: 210 40% 96.1%; /* secondary light */
@@ -70,6 +70,8 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
+    --radius: 0rem; /* Mis à jour pour 0rem */
+
     /* Footer Dark Mode (Keep blue theme) */
     --footer-default: 220 80% 40%;
     --footer-dark: 220 80% 30%;
@@ -88,6 +90,18 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    /* Appliquer la police 8-bit par défaut */
+    @apply bg-background text-foreground font-8bit;
+  }
+  
+  /* Rendre le texte plus lisible pour les paragraphes en utilisant une police par défaut */
+  p, a, li, span, div {
+    /* Utiliser une police plus lisible pour le corps du texte, mais garder la police 8bit pour les titres */
+    font-family: sans-serif; 
+  }
+  
+  /* Appliquer la police 8bit aux titres */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-8bit;
   }
 }

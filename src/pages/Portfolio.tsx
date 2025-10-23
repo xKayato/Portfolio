@@ -3,7 +3,6 @@ import { projects } from "@/data/content";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { PixelButton } from "@/components/PixelButton";
 
 type Project = typeof projects[0];
 
@@ -82,19 +82,19 @@ const Portfolio = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-8">
-          <Button 
+          <PixelButton 
             variant={selectedTags.length === 0 ? "default" : "outline"}
             onClick={() => setSelectedTags([])}
           >
             Tous
-          </Button>
+          </PixelButton>
           {Object.entries(groupedTags).map(([category, tags]) => (
             <DropdownMenu key={category}>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex items-center">
+                <PixelButton variant="outline" className="flex items-center">
                   {category}
                   <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
+                </PixelButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
                 {Array.from(tags).sort().map(tag => (
