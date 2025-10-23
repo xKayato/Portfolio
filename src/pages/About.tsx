@@ -4,6 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 const About = () => {
+  // Combine experience and education for alternating alignment
+  const timelineItems = [
+    ...experience.map((item, index) => ({ ...item, type: 'experience', key: `exp-${index}` })),
+    ...education.map((item, index) => ({ ...item, type: 'education', key: `edu-${index}` })),
+  ];
+
+  // Sort items by date if necessary, but here we keep the order (experience then education)
+  // and just apply alternating alignment based on combined index.
+
   return (
     <div className="container max-w-4xl py-12 md:py-20">
       <section id="about" className="mb-16">
@@ -29,12 +38,18 @@ const About = () => {
 
       <section id="experience" className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Parcours & Formation</h2>
-        <div>
-          {experience.map((item, index) => (
-            <TimelineItem key={index} {...item} subtitle={item.company} />
-          ))}
-          {education.map((item, index) => (
-            <TimelineItem key={index} {...item} subtitle={item.institution} />
+        <div className="relative">
+          {/* Central vertical line for mobile view */}
+          <div className="absolute left-0 top-0 h-full w-px bg-border sm:hidden"></div>
+          
+          {/* Combined timeline items */}
+          {timelineItems.map((item, index) => (
+            <TimelineItem 
+              key={item.key} 
+              {...item} 
+              subtitle={item.type === 'experience' ? item.company : item.institution}
+              align={index % 2 === 0 ? 'right' : 'left'} // Alternating alignment
+            />
           ))}
         </div>
       </section>
