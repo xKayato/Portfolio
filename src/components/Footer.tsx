@@ -58,18 +58,6 @@ export const Footer = () => {
           <ArrowUp className="h-5 w-5" />
         </Button>
       </div>
-      
-      {/* Bottom Bar (Made with Dyad) - Utilisation de bg-card pour la couleur du header */}
-      <div className="bg-card text-center py-2 text-xs text-muted-foreground border-t border-border">
-        <a
-          href="https://www.dyad.sh/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
-          Made with Dyad
-        </a>
-      </div>
     </footer>
   );
 };
