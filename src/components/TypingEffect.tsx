@@ -13,7 +13,7 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({
   text, 
   speed = 100, 
   eraseSpeed = 50, 
-  pauseDuration = 2000, 
+  pauseDuration = 4000, // Augmenté à 4000ms (4 secondes)
   className 
 }) => {
   const [displayedText, setDisplayedText] = useState('');
