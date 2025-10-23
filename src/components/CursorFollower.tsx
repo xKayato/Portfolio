@@ -25,26 +25,23 @@ export const CursorFollower = () => {
     };
   }, []);
 
-  // Détermine la couleur du cercle en fonction du thème
-  // En mode sombre, nous utilisons une couleur vive (primary)
-  // En mode clair, nous le désactivons ou utilisons une couleur très subtile pour ne pas gêner
   const isDark = resolvedTheme === 'dark';
   
   if (!isDark) {
-    // Désactiver l'effet en mode clair pour ne pas perturber le design
     return null;
   }
 
-  // Style pour positionner le cercle au centre du curseur
+  // Style pour positionner le cercle au centre du curseur et ajouter une transition plus douce
   const style = {
-    transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+    transform: `translate(calc(${mousePosition.x}px - 50%), calc(${mousePosition.y}px - 50%))`,
+    transition: 'transform 0.15s ease-out', // Transition plus lente pour un effet de glissement
   };
 
   return (
     <div 
       className={cn(
-        "fixed top-0 left-0 w-64 h-64 rounded-full pointer-events-none transition-transform duration-100 ease-out z-[9999]",
-        "bg-primary/30 blur-3xl opacity-50" // Couleur primaire avec flou intense et faible opacité
+        "fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none z-[9999]", // Plus large (w-96 h-96)
+        "bg-primary/20 blur-3xl opacity-30" // Moins opaque et très flou
       )}
       style={style}
     />
