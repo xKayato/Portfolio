@@ -33,6 +33,12 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    /* Footer Light Mode */
+    --footer-default: 210 40% 96.1%; /* secondary light */
+    --footer-dark: 214.3 31.8% 91.4%; /* border light */
+    --footer-foreground: 222.2 47.4% 11.2%; /* primary dark */
+    --footer-accent: 222.2 47.4% 11.2%; /* primary dark */
   }
 
   .dark {
@@ -63,6 +69,12 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Footer Dark Mode (Keep blue theme) */
+    --footer-default: 220 80% 40%;
+    --footer-dark: 220 80% 30%;
+    --footer-foreground: 0 0% 100%;
+    --footer-accent: 200 100% 70%;
   }
 }
 

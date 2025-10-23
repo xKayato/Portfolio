@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
@@ -15,6 +15,8 @@ const navLinks = [
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const emailSocial = personalInfo.socials.find(s => s.name === 'Email Universitaire');
 
   return (
     <header className="bg-card border-b border-border p-4 sticky top-0 z-10">
@@ -40,11 +42,17 @@ export const Header = () => {
         
         {/* Socials & Theme Toggle */}
         <div className="flex items-center gap-4">
+            {/* Desktop Socials */}
             {personalInfo.socials.filter(s => s.name !== 'Email Universitaire').map(social => (
               <a key={social.name} href={social.url} target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground hidden sm:block">
                 <social.icon size={20} />
               </a>
             ))}
+            {emailSocial && (
+                <a href={emailSocial.url} target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground hidden sm:block">
+                    <Mail size={20} />
+                </a>
+            )}
             <ThemeToggle />
 
             {/* Mobile Menu Trigger */}
