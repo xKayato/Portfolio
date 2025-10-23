@@ -3,8 +3,20 @@ import React from "react";
 
 // Composant simple pour simuler des lignes de code en arrière-plan
 export const MatrixBackground = () => {
-  // Génère un tableau de 50 colonnes pour l'effet visuel
-  const columns = Array.from({ length: 50 }, (_, i) => i);
+  // Augmente le nombre de colonnes pour mieux couvrir l'écran (70 colonnes)
+  const columns = Array.from({ length: 70 }, (_, i) => i);
+
+  // Fonction pour générer une chaîne de caractères aléatoires moins dense
+  const generateCode = () => {
+    // Génère une chaîne de 50 caractères, avec des sauts de ligne pour la dispersion
+    return Array.from({ length: 50 }, () => {
+        // 50% de chance d'être un caractère, 50% de chance d'être un saut de ligne ou un espace
+        if (Math.random() < 0.5) {
+            return Math.random().toString(36)[2] || ' ';
+        }
+        return '\n';
+    }).join('');
+  };
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5 dark:opacity-10">
@@ -15,18 +27,19 @@ export const MatrixBackground = () => {
             key={i}
             className="absolute w-1 text-primary/50 text-xs font-mono whitespace-pre-wrap break-all"
             style={{
-                left: `${i * 2}%`, // Espacement des colonnes
+                // Positionnement des colonnes pour couvrir de 0% à 100% de la largeur
+                left: `${(i / columns.length) * 100}%`, 
                 top: 0,
                 height: '100%',
                 animationName: 'matrix-fall',
                 animationTimingFunction: 'linear',
                 animationIterationCount: 'infinite',
-                animationDuration: `${10 + Math.random() * 10}s`, // Durée aléatoire
-                animationDelay: `${Math.random() * 10}s`, // Délai aléatoire
+                // Durée plus longue pour un mouvement plus lent et dispersé
+                animationDuration: `${15 + Math.random() * 15}s`, 
+                animationDelay: `${Math.random() * 15}s`, // Délai plus long
             }}
           >
-            {/* Génère une longue chaîne de caractères aléatoires */}
-            {Array.from({ length: 100 }, () => Math.random().toString(36)[2] || ' ').join('\n')}
+            {generateCode()}
           </div>
         ))}
       </div>

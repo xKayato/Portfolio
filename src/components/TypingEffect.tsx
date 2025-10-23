@@ -4,35 +4,54 @@ import { cn } from '@/lib/utils';
 interface TypingEffectProps {
   text: string;
   speed?: number; // Vitesse en ms par caractère
+  eraseSpeed?: number; // Vitesse en ms par caractère pour l'effacement
+  pauseDuration?: number; // Pause avant effacement/réécriture
   className?: string;
 }
 
-export const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 100, className }) => {
+export const TypingEffect: React.FC<TypingEffectProps> = ({ 
+  text, 
+  speed = 100, 
+  eraseSpeed = 50, 
+  pauseDuration = 2000, 
+  className 
+}) => {
   const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [index, setIndex] = useState(0);
   const [cursorVisible, setCursorVisible] = useState(true);
 
   useEffect(() => {
-    if (!isTyping) return;
+    let timer: NodeJS.Timeout;
 
-    if (displayedText.length < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(text.substring(0, displayedText.length + 1));
-      }, speed);
-      return () => clearTimeout(timeout);
+    if (!isDeleting) {
+      // Typing phase
+      if (index < text.length) {
+        timer = setTimeout(() => {
+          setDisplayedText(text.substring(0, index + 1));
+          setIndex(index + 1);
+        }, speed);
+      } else {
+        // Pause before deleting
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
     } else {
-      // Fin de la frappe, on commence l'effet de clignotement du curseur
-      setIsTyping(false);
-      
-      // Simuler l'effacement après un délai (pour l'effet de "disparition")
-      const eraseTimeout = setTimeout(() => {
-        setDisplayedText('');
-        setIsTyping(true); // Recommencer la frappe
-      }, 3000); // Attendre 3 secondes avant d'effacer
-
-      return () => clearTimeout(eraseTimeout);
+      // Deleting phase
+      if (index > 0) {
+        timer = setTimeout(() => {
+          setDisplayedText(text.substring(0, index - 1));
+          setIndex(index - 1);
+        }, eraseSpeed);
+      } else {
+        // Finished deleting, start typing again
+        setIsDeleting(false);
+      }
     }
-  }, [displayedText, text, speed, isTyping]);
+
+    return () => clearTimeout(timer);
+  }, [index, isDeleting, text, speed, eraseSpeed, pauseDuration]);
 
   // Curseur clignotant
   useEffect(() => {
