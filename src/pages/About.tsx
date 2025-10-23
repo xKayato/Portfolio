@@ -14,7 +14,7 @@ const About = () => {
   // We will keep the order as defined in content.ts for simplicity and manual control.
 
   return (
-    <div className="container max-w-6xl py-12 md:py-20">
+    <div className="container py-12 md:py-20">
       <section id="about" className="mb-16">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="md:w-2/3">
