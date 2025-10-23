@@ -1,4 +1,5 @@
 import { passions } from "@/data/content";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const Passions = () => {
@@ -28,7 +29,7 @@ const Passions = () => {
                   <img 
                     src={passion.imageUrl} 
                     alt={passion.title} 
-                    className="object-cover w-full shadow-xl aspect-video border-2 border-foreground" // Ajout de la bordure 8-bit
+                    className="object-cover rounded-lg w-full shadow-xl aspect-video" 
                   />
                 )}
               </div>

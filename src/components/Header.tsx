@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X, Mail } from "lucide-react";
+import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
 import { Logo } from "./Logo";
-import { PixelButton } from "./PixelButton";
 
 const navLinks = [
   { to: "/about", label: "À Propos" },
@@ -60,9 +60,9 @@ export const Header = () => {
             {/* Mobile Menu Trigger */}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <PixelButton variant="ghost" size="icon">
+                <Button variant="ghost" size="icon">
                   <Menu className="h-6 w-6" />
-                </PixelButton>
+                </Button>
               </SheetTrigger>
               <SheetContent side="right">
                 <SheetHeader>
