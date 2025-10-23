@@ -107,13 +107,16 @@
   }
 }
 
-/* Animation pour la pluie de code */
-@keyframes matrix-fall {
+/* Animation pour la dérive des étoiles */
+@keyframes star-drift {
   0% {
-    transform: translateY(-100vh);
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(1px, 1px);
   }
   100% {
-    transform: translateY(100vh);
+    transform: translate(0, 0);
   }
 }
 
