@@ -79,20 +79,34 @@ export const skills = [
 
   // --- Télécommunication ---
   {
-    category: "Télécommunication & IoT",
+    category: "Transmission & Signal",
     mainCategory: "Télécommunication",
     icon: Zap,
-    description: "Connaissances des technologies de transmission et des réseaux sans fil (IoT).",
-    items: ["Fibre Optique", "Cable coaxial", "Modulation / Démodulation", "Compression", "IoT / IoM", "LoRaWAN"],
+    description: "Connaissances des technologies de transmission filaires et des concepts de signal.",
+    items: ["Fibre Optique", "Cable coaxial", "Modulation / Démodulation", "Compression"],
+  },
+  {
+    category: "IoT / IoM",
+    mainCategory: "Télécommunication",
+    icon: Zap,
+    description: "Maîtrise des concepts et technologies des objets connectés et des réseaux bas débit.",
+    items: ["IoT / IoM", "LoRaWAN"],
   },
 
   // --- Communication ---
   {
-    category: "Communication & Gestion de Projet",
+    category: "Communication & Rédaction",
     mainCategory: "Communication",
     icon: MessageSquare,
-    description: "Compétences transversales essentielles pour la gestion de projet et la communication professionnelle.",
-    items: ["Écriture de rapport", "Expression orale", "Conception de diaporama", "Rédaction professionnelle", "Gestion de projet", "Travail d'équipe"],
+    description: "Compétences en communication écrite et orale, essentielles pour la documentation et la présentation.",
+    items: ["Écriture de rapport", "Expression orale", "Conception de diaporama", "Rédaction professionnelle"],
+  },
+  {
+    category: "Gestion de Projet",
+    mainCategory: "Communication",
+    icon: MessageSquare,
+    description: "Maîtrise des méthodes de gestion de projet et du travail collaboratif.",
+    items: ["Gestion de projet", "Travail d'équipe"],
   },
 ];
 
