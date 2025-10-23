@@ -8,6 +8,7 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    // Utilisation de window.scrollTo pour s'assurer que le défilement est appliqué à la fenêtre principale
     window.scrollTo(0, 0);
   }, [pathname]);
 
