@@ -12,7 +12,7 @@ export const personalInfo = {
     { name: "LinkedIn", url: "https://www.linkedin.com/in/thomasdeloup/", icon: Linkedin },
     { name: "Email Universitaire", url: "mailto:thomas.deloup@etu.univ-cotedazur.fr", icon: GraduationCap },
   ],
-  cvUrl: "#", // Placeholder: Veuillez remplacer par le chemin réel de votre CV
+  cvUrl: "/CV_DELOUP.pdf", // Lien mis à jour
 };
 
 export const about = {
@@ -332,7 +332,7 @@ export const experience = [
         title: "Alternant Développeur Informatique Industriel",
         company: "Régie Eau d'Azur",
         description: "Alternance effectuée en troisième année, spécialisation en cybersécurité. Rôle de développeur informatique industriel.",
-        imageUrl: "/regieeaudazur.webp" // Chemin mis à jour
+        imageUrl: "/regieeaudazur.webp"
     }
 ];
 

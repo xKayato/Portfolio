@@ -59,8 +59,8 @@ export const Footer = () => {
         </Button>
       </div>
       
-      {/* Bottom Bar (Made with Dyad) */}
-      <div className="bg-footer-dark text-center py-2 text-xs opacity-70">
+      {/* Bottom Bar (Made with Dyad) - Utilisation de bg-card pour la couleur du header */}
+      <div className="bg-card text-center py-2 text-xs text-muted-foreground border-t border-border">
         <a
           href="https://www.dyad.sh/"
           target="_blank"
