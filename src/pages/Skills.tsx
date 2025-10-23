@@ -4,6 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Code, Network, Shield, Server, Zap, MessageSquare } from "lucide-react";
+
+// Mapping des catégories principales aux icônes pour les cartes individuelles
+const categoryIcons: { [key: string]: React.ElementType } = {
+  Informatique: Code,
+  Réseaux: Network,
+  Cybersécurité: Shield,
+  Télécommunication: Zap,
+  Communication: MessageSquare,
+};
 
 const Skills = () => {
   const [searchQuerySkills, setSearchQuerySkills] = useState("");
@@ -33,23 +43,14 @@ const Skills = () => {
       return skillsToFilter;
     }
     
-    return skillsToFilter
-      .map(category => {
-        const filteredSubcategories = category.subcategories
-          .map(subcategory => ({
-            ...subcategory,
-            items: subcategory.items.filter(item =>
-              item.toLowerCase().includes(searchQuerySkills.toLowerCase())
-            ),
-          }))
-          .filter(subcategory => subcategory.items.length > 0);
+    const query = searchQuerySkills.toLowerCase();
 
-        return {
-          ...category,
-          subcategories: filteredSubcategories,
-        };
-      })
-      .filter(category => category.subcategories.length > 0);
+    return skillsToFilter
+      .filter(skill => 
+        skill.category.toLowerCase().includes(query) ||
+        skill.description.toLowerCase().includes(query) ||
+        skill.items.some(item => item.toLowerCase().includes(query))
+      );
   }, [searchQuerySkills, selectedMainCategory]);
 
   return (
@@ -76,33 +77,29 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredSkills.map((skillCategory) => (
-          <Card key={skillCategory.category}>
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <CardTitle className="flex items-center gap-3">
-                  <skillCategory.icon className="h-6 w-6" />
-                  {skillCategory.category}
-                </CardTitle>
-                <Badge variant="secondary">{skillCategory.mainCategory}</Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4 text-sm text-justify">{skillCategory.description}</p>
-              <div className="space-y-4">
-                {skillCategory.subcategories.map((subcategory) => (
-                  <div key={subcategory.title}>
-                    <h4 className="font-semibold mb-2 text-sm">{subcategory.title}</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {subcategory.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredSkills.map((skill) => {
+          const IconComponent = categoryIcons[skill.mainCategory] || Code;
+          
+          return (
+            <Card key={skill.category} className="flex flex-col h-full">
+              <CardHeader className="pb-4">
+                <div className="flex justify-between items-start">
+                  <CardTitle className="text-xl font-semibold flex items-center gap-3">
+                    <IconComponent className="h-6 w-6 text-primary" />
+                    {skill.category}
+                  </CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-muted-foreground mb-4 text-sm text-justify">{skill.description}</p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {skill.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
       {filteredSkills.length === 0 && (
         <p className="text-center text-muted-foreground mt-8">Aucune compétence ne correspond à votre recherche.</p>

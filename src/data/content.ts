@@ -20,90 +20,79 @@ export const about = {
   imageUrl: "/CV_photo.jpg",
 };
 
+// Nouvelle structure de compétences pour permettre une carte par sous-catégorie
 export const skills = [
+  // --- Informatique ---
   {
-    category: "Développement & Systèmes",
+    category: "Développement (Langages)",
     mainCategory: "Informatique",
     icon: Code,
-    description: "Maîtrise des langages de programmation, du développement d'applications mobiles et de l'administration système.",
-    subcategories: [
-      {
-        title: "Langages",
-        items: ["Python", "Java", "C", "PHP", "SQL", "Bash", "JavaScript", "TypeScript"],
-      },
-      {
-        title: "Développement",
-        items: ["Développer une application mobile (Java / XML)", "React", "Node.js", "GStreamer"],
-      },
-      {
-        title: "Systèmes & Conteneurisation",
-        items: ["Administration système (Linux)", "Conteneurisation (Docker)", "Windows Server", "Virtualisation (VMware)"],
-      },
-    ],
+    description: "Maîtrise des langages de programmation essentiels pour le développement d'applications et de scripts.",
+    items: ["Python", "Java", "C", "PHP", "SQL", "Bash", "JavaScript"],
   },
   {
-    category: "Réseaux & Infrastructure",
+    category: "Développement (Frameworks & Outils)",
+    mainCategory: "Informatique",
+    icon: Code,
+    description: "Compétences en développement web et multimédia.",
+    items: ["Développer une application mobile (Java / XML)", "React", "GStreamer"],
+  },
+  {
+    category: "Systèmes & Conteneurisation",
+    mainCategory: "Informatique",
+    icon: Server,
+    description: "Administration système et gestion d'environnements virtualisés et conteneurisés.",
+    items: ["Administration système (Linux)", "Conteneurisation (Docker)", "Windows Server", "Virtualisation (VMware)"],
+  },
+  
+  // --- Réseaux ---
+  {
+    category: "Administration & Configuration Réseau",
     mainCategory: "Réseaux",
     icon: Network,
-    description: "Conception, administration et sécurisation des infrastructures réseau (LAN/WAN).",
-    subcategories: [
-        {
-            title: "Administration & Configuration",
-            items: ["Conception et simulation de réseau (Cisco Packet Tracer)", "Administration d'un réseau local (Cisco)", "Sécurisation d'un réseau local (Cisco)", "Utilisation de GNS3"],
-        },
-        {
-            title: "Protocoles Avancés",
-            items: ["TCP/IP", "Routing & Switching", "VPN", "OSPF", "HSRP", "BGP", "MPLS", "VLAN", "STP", "ACLs"],
-        },
-    ]
+    description: "Conception et administration d'infrastructures réseau locales et étendues.",
+    items: ["Conception et simulation de réseau (Cisco Packet Tracer)", "Administration d'un réseau local (Cisco)", "Sécurisation d'un réseau local (Cisco)", "Utilisation de GNS3"],
   },
   {
-    category: "Cybersécurité & Pentesting",
+    category: "Protocoles Avancés",
+    mainCategory: "Réseaux",
+    icon: Network,
+    description: "Maîtrise des protocoles de routage, de commutation et de sécurité.",
+    items: ["TCP/IP", "Routing & Switching", "VPN", "OSPF", "HSRP", "BGP", "MPLS", "VLAN", "STP", "ACLs"],
+  },
+
+  // --- Cybersécurité ---
+  {
+    category: "Analyse & Outils de Pentest",
     mainCategory: "Cybersécurité",
     icon: Shield,
-    description: "Identification des vulnérabilités, tests d'intrusion et sécurisation des systèmes d'information.",
-    subcategories: [
-        {
-            title: "Analyse & Outils",
-            items: ["Recherche de failles (Nmap, Nessus, Metasploit)", "Attaque web (Burp Suite, SQLMap, Injections)", "Attaque serveur (Reverse Shell, Cron, Pivot)"],
-        },
-        {
-            title: "Défense",
-            items: ["Sécurisation des SI", "Firewalls"],
-        }
-    ]
+    description: "Utilisation d'outils professionnels pour l'identification et l'exploitation des vulnérabilités.",
+    items: ["Recherche de failles (Nmap, Nessus, Metasploit)", "Attaque web (Burp Suite, SQLMap, Injections)", "Attaque serveur (Reverse Shell, Cron, Pivot)"],
   },
   {
-    category: "Télécommunication",
+    category: "Défense & Sécurisation",
+    mainCategory: "Cybersécurité",
+    icon: Shield,
+    description: "Mise en place de mesures de protection pour les systèmes d'information.",
+    items: ["Sécurisation des SI", "Firewalls"],
+  },
+
+  // --- Télécommunication ---
+  {
+    category: "Télécommunication & IoT",
     mainCategory: "Télécommunication",
     icon: Zap,
-    description: "Connaissances des technologies de transmission et des réseaux sans fil.",
-    subcategories: [
-        {
-            title: "Transmission",
-            items: ["Fibre Optique", "Cable coaxial", "Modulation / Démodulation", "Compression"],
-        },
-        {
-            title: "Technologies IoT",
-            items: ["IoT / IoM", "LoRaWAN"],
-        }
-    ]
+    description: "Connaissances des technologies de transmission et des réseaux sans fil (IoT).",
+    items: ["Fibre Optique", "Cable coaxial", "Modulation / Démodulation", "Compression", "IoT / IoM", "LoRaWAN"],
   },
+
+  // --- Communication ---
   {
-    category: "Communication & Gestion",
+    category: "Communication & Gestion de Projet",
     mainCategory: "Communication",
     icon: MessageSquare,
     description: "Compétences transversales essentielles pour la gestion de projet et la communication professionnelle.",
-    subcategories: [
-        {
-            title: "Rédaction & Présentation",
-            items: ["Écriture de rapport", "Expression orale", "Conception de diaporama", "Rédaction professionnelle"],
-        },
-        {
-            title: "Gestion de Projet",
-            items: ["Gestion de projet", "Travail d'équipe"],
-        }
-    ]
+    items: ["Écriture de rapport", "Expression orale", "Conception de diaporama", "Rédaction professionnelle", "Gestion de projet", "Travail d'équipe"],
   },
 ];
 
