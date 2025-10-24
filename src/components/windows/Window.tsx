@@ -38,6 +38,9 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
   }, [initialX, initialY, initialWidth, initialHeight]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault(); // Empêche le comportement par défaut (comme le défilement)
+    e.stopPropagation(); // Empêche la propagation de l'événement
+
     if (isMobile) return;
     focusWindow(id);
     
@@ -163,7 +166,7 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
       )}
       style={windowStyle}
       onMouseDown={handleMouseDown}
-      onClick={() => focusWindow(id)}
+      // Suppression de onClick={() => focusWindow(id)} car onMouseDown gère déjà le focus
     >
       {/* Title Bar */}
       <div 
