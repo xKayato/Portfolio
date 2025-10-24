@@ -35,7 +35,7 @@ export const skills = [
     mainCategory: "Informatique",
     icon: Code,
     description: "Compétences en développement web et multimédia.",
-    items: ["Développer une application mobile (Java / XML)", "React", "GStreamer"],
+    items: ["Développer une application mobile (Java / XML)", "GStreamer"],
   },
   {
     category: "Systèmes & Conteneurisation",
@@ -120,7 +120,7 @@ export const projects = [
       logiciels: []
     },
     images: ["/esport.webp"],
-    link: "#",
+    link: "https://xkayato.github.io/Site-Esport/",
     detailedDescription: "Lors de notre première année de BUT en Réseaux et Télécommunications, nous avons dû développer un site internet sur une passion commune avec un camarade de classe (Cédric Tabary). Partageant un intérêt pour l’e-sport, nous avons choisi de créer un site dédié à cette discipline, présentant nos équipes et nos jeux e-sport préférés. Partant de quasiment zéro, nous avons dû apprendre par nous-mêmes les langages HTML et CSS afin de concevoir un site fonctionnel et esthétique. Étant passionnés par le sujet, nous avons priorisé l’apprentissage technique pour donner vie à notre projet. Nous avons également veillé à rendre le site responsive, afin qu'il soit adapté aussi bien aux ordinateurs qu'aux appareils mobiles."
   },
   {
@@ -132,7 +132,7 @@ export const projects = [
       logiciels: ["Raspberry Pi"]
     },
     images: ["/checklist.webp"],
-    link: "#",
+    link: "https://github.com/Eskimo241/Thales07",
     detailedDescription: "Lors de notre première année de BUT Réseaux et Télécommunications, en groupe de quatre, nous avons dû concevoir un projet de A à Z, de l’idée à la réalisation. Ce projet consistait à développer un site web dynamique de gestion des bonnes pratiques. Ce projet m'a permis d'apprendre à travailler en équipe, à m'organiser efficacement en utilisant des outils professionnels tels que les matrices RACI, les diagrammes de Gantt et l'analyse des risques, et à développer un site web dynamique en PHP et SQL. Le site web devait être hébergé sur un Raspberry Pi, que nous avons dû configurer nous-mêmes afin d’en assurer le bon fonctionnement. Cette expérience m’a également appris à gérer un serveur web et à approfondir mes compétences en administration système et hébergement."
   },
   {
@@ -144,7 +144,7 @@ export const projects = [
       logiciels: ["Android Studio"]
     },
     images: ["/developpement-applications-Android.webp"],
-    link: "#",
+    link: "https://github.com/xKayato/SAE32_Android",
     detailedDescription: "Le projet consistait à développer une application Android reliée à une API Web aussi créée par notre groupe. Nous avons également dû faire un programme Java sur le serveur permettant de gérer la base de données. Notre application, développée avec Android Studio en Java et XML, permet de juger des œuvres quelconques avec une note sur 5. On peut également voir les jugements d'autres personnes et consulter la moyenne des œuvres. L'application intègre un système de comptes et un système de recherche permettant de trouver des œuvres ou des utilisateurs. Les appels réseau sont gérés via des threads pour optimiser la fluidité. Le projet comprend plus de 2000 lignes de code et a été finalisé après deux semaines d’optimisation et de correction de bugs. De plus, nous avons mis en place des mesures de sécurité pour garantir la protection des données."
   },
   {

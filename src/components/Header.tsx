@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { personalInfo } from "@/data/content";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X, Mail } from "lucide-react";
+import { Menu, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
 import { Logo } from "./Logo";
+import { useDisplayMode } from "@/context/DisplayModeContext";
 
 const navLinks = [
   { to: "/about", label: "À Propos" },
@@ -16,6 +17,11 @@ const navLinks = [
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { mode } = useDisplayMode();
+
+  if (mode === 'windows') {
+    return null; // Ne pas afficher le header en mode Windows
+  }
   
   const emailSocial = personalInfo.socials.find(s => s.name === 'Email Universitaire');
 
