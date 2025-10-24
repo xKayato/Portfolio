@@ -1,25 +1,18 @@
 import { Link } from "react-router-dom";
 import { personalInfo } from "@/data/content";
-import { ArrowRight, Monitor } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
 import { TypingEffect } from "@/components/TypingEffect";
-import { useDisplayMode } from "@/context/DisplayModeContext";
-import { useIsWindowsMode } from "@/hooks/use-windows-mode";
 
 const Index = () => {
-  const { setMode } = useDisplayMode();
-  const isWindowsMode = useIsWindowsMode();
   const fullName = personalInfo.name;
   const typingText = fullName;
 
-  // En mode Windows, nous voulons un contenu plus compact et centré
-  const containerClasses = isWindowsMode 
-    ? "flex flex-col items-center justify-center text-center h-full py-4"
-    : "container relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12";
-
   return (
-    <div className={containerClasses}>
+    <div className="container relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12">
       
+      {/* Star Background moved to Layout */}
+
       <div className="max-w-5xl relative z-10">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           <span className="text-foreground">
@@ -32,28 +25,12 @@ const Index = () => {
         <p className="mt-6 text-lg leading-8 text-muted-foreground">
           Étudiant en deuxième année d'un BUT en Réseaux et Télécommunications, j'ai 20 ans, je suis fan d'e-sport et de matériel informatique gaming. Je vous invite à consulter mon site personnel pour en apprendre davantage sur mes passions, mes projets et mes compétences. J'ai effectué un stage chez Régie Eau d'Azur du 7 avril au 20 juin 2025. Cette entreprise assure la gestion de l'eau à la métropole de Nice. Durant cette expérience, je me suis familiarisé avec le déploiement d’équipements utilisant la technologie LoRaWAN pour la transmission de données issues de capteurs.
         </p>
-        
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4">
+        <div className="mt-10 flex items-center justify-center gap-x-6">
           <Link to="/portfolio">
             <TechButton>
               Voir mes projets <ArrowRight className="ml-2 h-4 w-4" />
             </TechButton>
           </Link>
-          
-          {!isWindowsMode && (
-            <TechButton variant="secondary" onClick={() => setMode('windows')}>
-              Mode Windows <Monitor className="ml-2 h-4 w-4" />
-            </TechButton>
-          )}
-          
-          {isWindowsMode && (
-            <TechButton variant="secondary" onClick={() => setMode('classic')}>
-              Quitter le mode Windows <Monitor className="ml-2 h-4 w-4" />
-            </TechButton>
-          )}
-        </div>
-        
-        <div className="mt-4">
           <Link to="/about">
             <TechButton variant="outline">
               En savoir plus

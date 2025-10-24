@@ -1,15 +1,8 @@
 import { personalInfo } from "@/data/content";
 import { ArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
-import { useDisplayMode } from "@/context/DisplayModeContext";
 
 export const Footer = () => {
-  const { mode } = useDisplayMode();
-
-  if (mode === 'windows') {
-    return null; // Ne pas afficher le footer en mode Windows
-  }
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
