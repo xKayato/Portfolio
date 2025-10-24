@@ -1,10 +1,16 @@
 import { passions } from "@/data/content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useIsWindowsMode } from "@/hooks/use-windows-mode";
 
 const Passions = () => {
+  const isWindowsMode = useIsWindowsMode();
+
   return (
-    <div className="container py-12 md:py-20">
+    <div className={cn(
+      "py-12 md:py-20",
+      isWindowsMode ? "p-4 md:p-6" : "container"
+    )}>
       <h1 className="text-3xl font-bold mb-2">Mes Passions</h1>
       <p className="text-muted-foreground mb-12 text-justify">Bienvenue sur la page Mes Passions, un espace dédié à ce qui me motive et m’inspire au quotidien. Vous y découvrirez les domaines qui éveillent ma curiosité, qu’il s’agisse de technologies ou de centres d’intérêt qui enrichissent mon parcours. Explorez cette section pour mieux comprendre ce qui me passionne et alimente ma soif d’apprentissage.</p>
       

@@ -207,8 +207,8 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="flex-grow overflow-y-auto p-4 bg-background">
+      {/* Content Area - Removed p-4 */}
+      <div className="flex-grow overflow-y-auto bg-background">
         {children}
       </div>
 

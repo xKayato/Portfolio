@@ -5,17 +5,18 @@ import { TechButton } from "@/components/TechButton";
 import { TypingEffect } from "@/components/TypingEffect";
 import { useDisplayMode } from "@/context/DisplayModeContext";
 import { useIsWindowsMode } from "@/hooks/use-windows-mode";
-import { useWindowsActions } from "@/hooks/use-windows-actions"; // Import nécessaire
+import { useWindowsActions } from "@/hooks/use-windows-actions";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
   const { setMode } = useDisplayMode();
-  const { isWindowsMode, openWindow } = useWindowsActions(); // Utilisation de useWindowsActions
+  const { isWindowsMode, openWindow } = useWindowsActions();
   const fullName = personalInfo.name;
   const typingText = fullName;
 
   // En mode Windows, nous voulons un contenu plus compact et centré
   const containerClasses = isWindowsMode 
-    ? "flex flex-col items-center justify-center text-center h-full py-4"
+    ? "flex flex-col items-center justify-center text-center h-full py-4 p-4 md:p-6" // Ajout du padding ici
     : "container relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12";
 
   const handleViewProjects = () => {

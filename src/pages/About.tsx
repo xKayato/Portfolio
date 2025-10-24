@@ -2,8 +2,12 @@ import { about, education, experience, personalInfo } from "@/data/content";
 import { TimelineItem } from "@/components/TimelineItem";
 import { Download } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
+import { useIsWindowsMode } from "@/hooks/use-windows-mode";
+import { cn } from "@/lib/utils";
 
 const About = () => {
+  const isWindowsMode = useIsWindowsMode();
+  
   // Combine experience and education for alternating alignment
   const timelineItems = [
     ...experience.map((item, index) => ({ ...item, type: 'experience', key: `exp-${index}`, subtitle: item.company })),
@@ -14,7 +18,10 @@ const About = () => {
   // We will keep the order as defined in content.ts for simplicity and manual control.
 
   return (
-    <div className="container py-12 md:py-20">
+    <div className={cn(
+      "py-12 md:py-20",
+      isWindowsMode ? "p-4 md:p-6" : "container"
+    )}>
       <section id="about" className="mb-16">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="md:w-3/4">

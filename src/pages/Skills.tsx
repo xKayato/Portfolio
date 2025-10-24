@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Code, Network, Shield, Server, Zap, MessageSquare } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
+import { useIsWindowsMode } from "@/hooks/use-windows-mode";
+import { cn } from "@/lib/utils";
 
 // Mapping des catégories principales aux icônes pour les cartes individuelles
 const categoryIcons: { [key: string]: React.ElementType } = {
@@ -18,6 +20,7 @@ const categoryIcons: { [key: string]: React.ElementType } = {
 const Skills = () => {
   const [searchQuerySkills, setSearchQuerySkills] = useState("");
   const [selectedMainCategory, setSelectedMainCategory] = useState<string | null>(null);
+  const isWindowsMode = useIsWindowsMode();
 
   const mainCategories = useMemo(() => {
     const categories = new Set(skills.map(s => s.mainCategory));
@@ -54,7 +57,10 @@ const Skills = () => {
   }, [searchQuerySkills, selectedMainCategory]);
 
   return (
-    <div className="container py-12 md:py-20">
+    <div className={cn(
+      "py-12 md:py-20",
+      isWindowsMode ? "p-4 md:p-6" : "container"
+    )}>
       <h1 className="text-3xl font-bold mb-2">Mes Compétences</h1>
       <p className="text-muted-foreground mb-8 text-justify">  Bienvenue sur la page Compétences, un espace dédié à la présentation de mes savoir-faire et domaines d'expertise. Vous y découvrirez mes compétences en Informatique, Réseaux, Cybersécurité et bien plus encore. Parcourez cette section pour en apprendre davantage sur mes atouts professionnels et mes domaines de maîtrise.</p>
       
