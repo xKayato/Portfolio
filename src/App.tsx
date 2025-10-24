@@ -18,25 +18,27 @@ import ScrollToTop from "./components/ScrollToTop";
 import { DisplayModeProvider, useDisplayMode } from "./context/DisplayModeContext";
 import { WindowsLayout } from "./components/windows/WindowsLayout";
 import { WindowManagerProvider } from "./components/windows/useWindowManager";
-import { LoadingScreen } from "./components/LoadingScreen"; // Importation
+import { LoadingScreen } from "./components/LoadingScreen";
+import { useIsMobile } from "./hooks/use-mobile"; // Importation
 
 const queryClient = new QueryClient();
 
 // Composant qui gère le rendu conditionnel
 const AppContent = () => {
   const { mode } = useDisplayMode();
+  const isMobile = useIsMobile(); // Utilisation du hook pour déterminer si nous sommes sur mobile
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Déclenche le chargement uniquement au premier rendu si nous sommes en mode windows
+  // Déclenche le chargement uniquement si le mode est 'windows'
   useEffect(() => {
-    if (mode === 'windows') {
-      // Si le mode est 'windows' (défaut), nous attendons le chargement
-      // Le composant LoadingScreen gère le délai et appelle setIsLoaded(true)
-    } else {
-      // Si le mode est 'classic', on charge immédiatement
+    // Si le mode est 'classic' (forcé par mobile ou choisi par l'utilisateur), on considère que c'est chargé
+    if (mode === 'classic') {
       setIsLoaded(true);
+    } else if (mode === 'windows' && !isLoaded) {
+      // Si mode 'windows', on attend le chargement (géré par LoadingScreen)
+      // Si isLoaded est déjà true, on ne fait rien.
     }
-  }, [mode]);
+  }, [mode, isLoaded]);
 
   // Les routes sont définies une seule fois, mais le Layout change
   const routes = (
@@ -52,6 +54,7 @@ const AppContent = () => {
 
   if (mode === 'windows') {
     if (!isLoaded) {
+      // Le LoadingScreen appelle setIsLoaded(true) après 3s
       return <LoadingScreen onLoaded={() => setIsLoaded(true)} delay={3000} />;
     }
     
@@ -63,7 +66,7 @@ const AppContent = () => {
     );
   }
 
-  // Mode Classique
+  // Mode Classique (y compris si isMobile est vrai)
   return (
     <Layout>
       <ScrollToTop />
