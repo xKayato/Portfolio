@@ -8,6 +8,7 @@ import { DesktopIcon } from './DesktopIcon';
 import { Window } from './Window';
 import { WindowContentRenderer } from './WindowContentRenderer';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { DeveloperSignature } from './DeveloperSignature';
 
 interface WindowsLayoutProps {
   children: ReactNode;
@@ -81,6 +82,9 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
           <DesktopIcon key={id} windowId={id} />
         ))}
       </div>
+      
+      {/* Signature du développeur */}
+      <DeveloperSignature />
 
       {/* Rendu des fenêtres ouvertes (triées par zIndexOrder) */}
       {windowsToRender.map(w => (
