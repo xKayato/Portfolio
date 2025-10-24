@@ -22,7 +22,8 @@ export const ImageZoom = ({ src, alt, className }: ImageZoomProps) => {
           </div>
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-4xl p-0 border-none bg-transparent shadow-none">
+      {/* Ajout d'un z-index très élevé pour s'assurer qu'il est au-dessus de toutes les fenêtres (max z-index 1000) */}
+      <DialogContent className="sm:max-w-4xl p-0 border-none bg-transparent shadow-none z-[10000]">
         <img src={src} alt={alt} className="w-full h-full object-contain max-h-[90vh] rounded-lg" />
       </DialogContent>
     </Dialog>
