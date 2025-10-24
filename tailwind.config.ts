@@ -112,7 +112,7 @@ export default {
             opacity: "1",
           },
           "100%": {
-            transform: "translate(200px, 200px) rotate(-45deg)", // Trajectoire diagonale
+            transform: "translate(400px, 400px) rotate(-45deg)", // Augmentation de la distance
             opacity: "0",
           },
         },

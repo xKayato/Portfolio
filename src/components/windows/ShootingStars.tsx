@@ -6,12 +6,12 @@ const NUM_STARS = 30; // Nombre d'étoiles filantes
 const ShootingStars = () => {
   const stars = useMemo(() => {
     return Array.from({ length: NUM_STARS }, (_, i) => {
-      const length = Math.random() * 50 + 30; // Longueur du trait entre 30px et 80px
+      const length = Math.random() * 80 + 50; // Longueur du trait entre 50px et 130px
       const thickness = Math.random() * 1 + 1; // Épaisseur entre 1px et 2px
       const opacity = Math.random() * 0.5 + 0.5; // Opacité entre 50% et 100%
       const x = Math.random() * 100; // Position X de départ
       const y = Math.random() * 100; // Position Y de départ
-      const duration = Math.random() * 2 + 1; // Durée de l'animation entre 1s et 3s
+      const duration = Math.random() * 1.5 + 0.5; // Durée de l'animation entre 0.5s et 2s (très rapide)
       const delay = Math.random() * 10; // Délai de l'animation pour un effet asynchrone
 
       return {
