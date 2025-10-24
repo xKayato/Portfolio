@@ -9,8 +9,8 @@ import { Window } from './Window';
 import { WindowContentRenderer } from './WindowContentRenderer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeveloperSignature } from './DeveloperSignature';
-import { useTheme } from 'next-themes'; // Importation pour vérifier le thème
-import ShootingStars from './ShootingStars'; // Importation du nouveau composant
+import { useTheme } from 'next-themes';
+import StarField from './StarField'; // Importation du nouveau composant
 
 interface WindowsLayoutProps {
   children: ReactNode;
@@ -24,7 +24,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   const { windows, openWindow, minimizeWindow } = useWindowManager();
   const navigate = useNavigate();
   const location = useLocation();
-  const { resolvedTheme } = useTheme(); // Utilisation du hook de thème
+  const { resolvedTheme } = useTheme();
 
   const isDark = resolvedTheme === 'dark';
 
@@ -82,8 +82,8 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   return (
     <div className={desktopClasses}>
       
-      {/* Effet d'étoiles filantes (uniquement en mode sombre) */}
-      {isDark && <ShootingStars />}
+      {/* Champ d'étoiles (inclut les étoiles de fond et les étoiles filantes) */}
+      {isDark && <StarField />}
       
       {/* Rendu des icônes de bureau (Gauche) */}
       <div className="absolute top-4 left-4 flex flex-col items-start">
@@ -107,7 +107,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
               initialY={w.initialY}
               initialWidth={w.initialWidth}
               initialHeight={w.initialHeight}
-              scrollPosition={w.scrollPosition} // Passage de la position de défilement
+              scrollPosition={w.scrollPosition}
             >
               <WindowContentRenderer windowState={w} />
             </Window>

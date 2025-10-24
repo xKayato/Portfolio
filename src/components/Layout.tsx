@@ -1,6 +1,6 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import StarBackground from "./StarBackground";
+import StarField from "./windows/StarField"; // Importation de StarField
 import React from "react";
 
 interface LayoutProps {
@@ -10,9 +10,9 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col relative">
-      {/* Star Background (visible en mode sombre, positionné en arrière-plan) */}
+      {/* Star Field (visible en mode sombre, positionné en arrière-plan) */}
       <div className="absolute inset-0 dark:block hidden -z-10">
-        <StarBackground />
+        <StarField />
       </div>
       
       <Header />
