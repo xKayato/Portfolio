@@ -9,6 +9,8 @@ import { Window } from './Window';
 import { WindowContentRenderer } from './WindowContentRenderer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeveloperSignature } from './DeveloperSignature';
+import { useTheme } from 'next-themes'; // Importation pour vérifier le thème
+import ShootingStars from './ShootingStars'; // Importation du nouveau composant
 
 interface WindowsLayoutProps {
   children: ReactNode;
@@ -22,6 +24,9 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   const { windows, openWindow, minimizeWindow } = useWindowManager();
   const navigate = useNavigate();
   const location = useLocation();
+  const { resolvedTheme } = useTheme(); // Utilisation du hook de thème
+
+  const isDark = resolvedTheme === 'dark';
 
   // Gérer la navigation initiale: si l'utilisateur arrive sur /about en mode windows, ouvrir la fenêtre 'about'.
   React.useEffect(() => {
@@ -48,7 +53,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   // Le fond d'écran (Desktop)
   const desktopClasses = cn(
     "h-screen w-screen overflow-hidden",
-    "bg-blue-500 dark:bg-gray-900", // Changement ici: bg-blue-500 pour le mode clair
+    "bg-blue-500 dark:bg-gray-900", // bg-blue-500 pour le mode clair
     "relative font-sans" // Assurer que la police est standard
   );
 
@@ -76,6 +81,10 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
 
   return (
     <div className={desktopClasses}>
+      
+      {/* Effet d'étoiles filantes (uniquement en mode sombre) */}
+      {isDark && <ShootingStars />}
+      
       {/* Rendu des icônes de bureau (Gauche) */}
       <div className="absolute top-4 left-4 flex flex-col items-start">
         {staticDesktopIcons.map(id => (

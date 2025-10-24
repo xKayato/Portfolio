@@ -105,12 +105,25 @@ export default {
             transform: "translate(4px, 4px)",
           },
         },
+        // Nouvelle animation pour les étoiles filantes
+        "shooting-star": {
+          "0%": {
+            transform: "translate(0, 0) rotate(-45deg)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translate(200px, 200px) rotate(-45deg)", // Trajectoire diagonale
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         // Application de l'animation star-drift
         "star-drift": "star-drift var(--animation-duration) ease-in-out infinite alternate",
+        // Application de l'animation shooting-star
+        "shooting-star": "shooting-star var(--star-duration) linear infinite var(--star-delay)",
       },
     },
   },
