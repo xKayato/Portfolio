@@ -13,12 +13,12 @@ interface WindowsLayoutProps {
   children: ReactNode;
 }
 
-// Définition des icônes de bureau
-const desktopIcons: WindowId[] = ['index', 'about', 'skills', 'portfolio', 'passions'];
+// Définition des icônes de bureau (uniquement les statiques)
+const staticDesktopIcons: WindowId[] = ['index', 'about', 'skills', 'portfolio', 'passions'];
 
 export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   const { setMode } = useDisplayMode();
-  const { windows, openWindow, closeWindow, minimizeWindow, focusWindow } = useWindowManager();
+  const { windows, openWindow, minimizeWindow } = useWindowManager();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -58,13 +58,14 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
     "flex items-center px-2 shadow-lg"
   );
 
+  // Les fenêtres ouvertes, triées par focus (la dernière est la plus haute)
   const openWindows = windows.filter(w => w.isOpen);
 
   return (
     <div className={desktopClasses}>
       {/* Rendu des icônes de bureau */}
       <div className="absolute top-4 left-4 flex flex-col items-start">
-        {desktopIcons.map(id => (
+        {staticDesktopIcons.map(id => (
           <DesktopIcon key={id} windowId={id} />
         ))}
       </div>
@@ -82,7 +83,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
               initialWidth={w.initialWidth}
               initialHeight={w.initialHeight}
             >
-              <WindowContentRenderer windowId={w.id} />
+              <WindowContentRenderer windowState={w} />
             </Window>
           )}
         </React.Fragment>
@@ -119,7 +120,8 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
                   if (w.isFocused && !w.isMinimized) {
                     minimizeWindow(w.id);
                   } else {
-                    openWindow(w.id); // openWindow handles focus and unminimize
+                    // Si minimisé ou non focus, ouvrir/focus
+                    openWindow(w.id, w.type === 'dynamic-project' ? w.data : undefined); 
                   }
                 }}
               >

@@ -14,6 +14,10 @@ interface Project {
   images: string[];
   link?: string;
   detailedDescription: string;
+  deliverables?: {
+    label: string;
+    url: string;
+  };
 }
 
 interface ProjectCardProps {

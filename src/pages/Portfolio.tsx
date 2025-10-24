@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
+import { useIsWindowsMode } from "@/hooks/use-windows-mode";
+import { cn } from "@/lib/utils";
+import { useWindowManager } from "@/components/windows/useWindowManager";
 
 type Project = typeof projects[0];
 
@@ -18,6 +21,8 @@ const Portfolio = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const isWindowsMode = useIsWindowsMode();
+  const { openWindow } = useWindowManager();
 
   const mainCategories = useMemo(() => ["Informatique", "Réseaux", "Cybersécurité", "Télécommunication", "Communication"], []);
 
@@ -55,6 +60,16 @@ const Portfolio = () => {
     );
   };
 
+  const handleOpenProject = (project: Project) => {
+    if (isWindowsMode) {
+      // Ouvrir comme une fenêtre Windows
+      openWindow(project.title, project);
+    } else {
+      // Ouvrir comme une modale classique
+      setSelectedProject(project);
+    }
+  };
+
   const filteredProjects = useMemo(() => {
     return projects
       .filter(p =>
@@ -68,63 +83,71 @@ const Portfolio = () => {
 
   return (
     <>
-      <div className="container py-12 md:py-20">
-        <h1 className="text-3xl font-bold mb-2">Mes Projets</h1>
-        <p className="text-muted-foreground mb-8 text-justify">Bienvenue sur mon portfolio, un espace où vous pourrez découvrir mes compétences et réalisations dans multiple catégories tel qu'Informatique, Réseaux, Cybersécurité et plus encore. Explorez chaque section pour en apprendre davantage sur mes projets et mon expertise dans ces domaines.</p>
-        
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <Input 
-            placeholder="Rechercher un projet..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-sm"
-          />
-        </div>
+      <div className={cn(
+        "py-12 md:py-20",
+        isWindowsMode ? "p-0" : "container"
+      )}>
+        <div className={cn(isWindowsMode && "p-4")}>
+          <h1 className="text-3xl font-bold mb-2">Mes Projets</h1>
+          <p className="text-muted-foreground mb-8 text-justify">Bienvenue sur mon portfolio, un espace où vous pourrez découvrir mes compétences et réalisations dans multiple catégories tel qu'Informatique, Réseaux, Cybersécurité et plus encore. Explorez chaque section pour en apprendre davantage sur mes projets et mon expertise dans ces domaines.</p>
+          
+          <div className="flex flex-col md:flex-row gap-4 mb-8">
+            <Input 
+              placeholder="Rechercher un projet..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="max-w-sm"
+            />
+          </div>
 
-        <div className="flex flex-wrap gap-2 mb-8">
-          <TechButton 
-            variant={selectedTags.length === 0 ? "default" : "outline"}
-            onClick={() => setSelectedTags([])}
-          >
-            Tous
-          </TechButton>
-          {Object.entries(groupedTags).map(([category, tags]) => (
-            <DropdownMenu key={category}>
-              <DropdownMenuTrigger asChild>
-                <TechButton variant="outline" className="flex items-center">
-                  {category}
-                  <ChevronDown className="ml-2 h-4 w-4" />
-                </TechButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {Array.from(tags).sort().map(tag => (
-                  <DropdownMenuCheckboxItem
-                    key={tag}
-                    checked={selectedTags.includes(tag)}
-                    onCheckedChange={() => handleTagClick(tag)}
-                  >
-                    {tag}
-                  </DropdownMenuCheckboxItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ))}
-        </div>
+          <div className="flex flex-wrap gap-2 mb-8">
+            <TechButton 
+              variant={selectedTags.length === 0 ? "default" : "outline"}
+              onClick={() => setSelectedTags([])}
+            >
+              Tous
+            </TechButton>
+            {Object.entries(groupedTags).map(([category, tags]) => (
+              <DropdownMenu key={category}>
+                <DropdownMenuTrigger asChild>
+                  <TechButton variant="outline" className="flex items-center">
+                    {category}
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </TechButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {Array.from(tags).sort().map(tag => (
+                    <DropdownMenuCheckboxItem
+                      key={tag}
+                      checked={selectedTags.includes(tag)}
+                      onCheckedChange={() => handleTagClick(tag)}
+                    >
+                      {tag}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ))}
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.title} project={project} onOpenModal={setSelectedProject} />
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} onOpenModal={handleOpenProject} />
+            ))}
+          </div>
+          {filteredProjects.length === 0 && (
+            <p className="text-center text-muted-foreground mt-8">Aucun projet ne correspond à votre recherche.</p>
+          )}
         </div>
-        {filteredProjects.length === 0 && (
-          <p className="text-center text-muted-foreground mt-8">Aucun projet ne correspond à votre recherche.</p>
-        )}
       </div>
-      <ProjectModal 
-        isOpen={!!selectedProject}
-        onOpenChange={(isOpen) => !isOpen && setSelectedProject(null)}
-        project={selectedProject}
-      />
+      {/* La modale classique est conservée pour le mode classique */}
+      {!isWindowsMode && (
+        <ProjectModal 
+          isOpen={!!selectedProject}
+          onOpenChange={(isOpen) => !isOpen && setSelectedProject(null)}
+          project={selectedProject}
+        />
+      )}
     </>
   );
 };
