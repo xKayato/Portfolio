@@ -94,6 +94,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
               initialY={w.initialY}
               initialWidth={w.initialWidth}
               initialHeight={w.initialHeight}
+              scrollPosition={w.scrollPosition} // Passage de la position de défilement
             >
               <WindowContentRenderer windowState={w} />
             </Window>

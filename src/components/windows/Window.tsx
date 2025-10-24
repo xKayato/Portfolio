@@ -13,14 +13,17 @@ interface WindowProps {
   initialY: number;
   initialWidth: number;
   initialHeight: number;
+  // Nouvelle prop pour la position de défilement
+  scrollPosition: number; 
 }
 
 const MIN_WIDTH = 300;
 const MIN_HEIGHT = 200;
 
-export const Window = ({ id, title, children, isFocused, initialX, initialY, initialWidth, initialHeight }: WindowProps) => {
-  const { closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize } = useWindowManager();
+export const Window = ({ id, title, children, isFocused, initialX, initialY, initialWidth, initialHeight, scrollPosition }: WindowProps) => {
+  const { closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize, updateWindowScroll } = useWindowManager();
   const windowRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null); // Référence à la div de contenu défilable
   const isMobile = useIsMobile();
 
   const [position, setPosition] = useState({ x: initialX, y: initialY });
@@ -31,11 +34,27 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
   const [prevPosition, setPrevPosition] = useState({ x: 0, y: 0 });
   const [prevSize, setPrevSize] = useState({ width: 0, height: 0 });
 
-  // Update state when props change (e.g., when window is opened/closed and re-rendered)
+  // 1. Mise à jour de l'état local à partir des props
   useEffect(() => {
     setPosition({ x: initialX, y: initialY });
     setSize({ width: initialWidth, height: initialHeight });
   }, [initialX, initialY, initialWidth, initialHeight]);
+
+  // 2. Restauration de la position de défilement lors du montage/focus
+  useEffect(() => {
+    if (contentRef.current && !isMaximized) {
+      // Appliquer la position de défilement stockée
+      contentRef.current.scrollTop = scrollPosition;
+    }
+  }, [scrollPosition, isMaximized, isFocused]); // Déclencher lors du changement de focus ou de la restauration
+
+  // 3. Sauvegarde de la position de défilement lors du défilement
+  const handleScroll = useCallback(() => {
+    if (contentRef.current) {
+      updateWindowScroll(id, contentRef.current.scrollTop);
+    }
+  }, [id, updateWindowScroll]);
+
 
   const handleMouseDown = (e: React.MouseEvent) => {
     // Empêche le défilement automatique et le comportement par défaut
@@ -207,8 +226,12 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         </div>
       </div>
 
-      {/* Content Area - Removed p-4 */}
-      <div className="flex-grow overflow-y-auto bg-background">
+      {/* Content Area */}
+      <div 
+        ref={contentRef}
+        className="flex-grow overflow-y-auto bg-background"
+        onScroll={handleScroll}
+      >
         {children}
       </div>
 

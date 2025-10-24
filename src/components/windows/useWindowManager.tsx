@@ -35,9 +35,11 @@ export interface WindowState {
   data?: ProjectData;
   // Nouveau champ pour gérer l'ordre de superposition (z-index)
   zIndexOrder: number; 
+  // Nouveau champ pour stocker la position de défilement
+  scrollPosition: number;
 }
 
-export const WINDOW_CONFIGS: Record<string, Omit<WindowState, 'isMinimized' | 'isFocused' | 'isOpen' | 'initialX' | 'initialY' | 'initialWidth' | 'initialHeight' | 'data' | 'zIndexOrder'>> = {
+export const WINDOW_CONFIGS: Record<string, Omit<WindowState, 'isMinimized' | 'isFocused' | 'isOpen' | 'initialX' | 'initialY' | 'initialWidth' | 'initialHeight' | 'data' | 'zIndexOrder' | 'scrollPosition'>> = {
   index: { id: 'index', title: 'Bienvenue', icon: Home, type: 'static' },
   about: { id: 'about', title: 'À Propos de moi', icon: User, type: 'static' },
   skills: { id: 'skills', title: 'Mes Compétences', icon: Code, type: 'static' },
@@ -53,6 +55,7 @@ interface WindowManagerContextType {
   focusWindow: (id: WindowId) => void;
   updateWindowPosition: (id: WindowId, x: number, y: number) => void;
   updateWindowSize: (id: WindowId, width: number, height: number) => void;
+  updateWindowScroll: (id: WindowId, scrollPosition: number) => void; // Nouvelle fonction
 }
 
 const WindowManagerContext = React.createContext<WindowManagerContextType | undefined>(undefined);
@@ -71,6 +74,7 @@ const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(con
   initialHeight: 600,
   type: 'static',
   zIndexOrder: globalZIndexCounter++,
+  scrollPosition: 0, // Initialisation à 0
 }));
 
 // Générateur d'ID unique pour les projets
@@ -146,6 +150,7 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
           type: 'dynamic-project',
           data: data,
           zIndexOrder: globalZIndexCounter,
+          scrollPosition: 0, // Initialisation du scroll
         };
         
         // Mettre toutes les autres fenêtres en non focus
@@ -197,9 +202,9 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
         // Supprimer complètement la fenêtre dynamique
         newWindows = prevWindows.filter(w => w.id !== id);
       } else {
-        // Fenêtre statique: marquer comme fermée
+        // Fenêtre statique: marquer comme fermée et réinitialiser le scroll
         newWindows = prevWindows.map(w => 
-          w.id === id ? { ...w, isOpen: false, isMinimized: false, isFocused: false } : w
+          w.id === id ? { ...w, isOpen: false, isMinimized: false, isFocused: false, scrollPosition: 0 } : w
         );
       }
       
@@ -245,6 +250,12 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
       w.id === id ? { ...w, initialWidth: width, initialHeight: height } : w
     ));
   }, []);
+  
+  const updateWindowScroll = useCallback((id: WindowId, scrollPosition: number) => {
+    setWindows(prevWindows => prevWindows.map(w => 
+      w.id === id ? { ...w, scrollPosition } : w
+    ));
+  }, []);
 
   const contextValue = useMemo(() => ({
     windows,
@@ -254,7 +265,8 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
     focusWindow,
     updateWindowPosition,
     updateWindowSize,
-  }), [windows, openWindow, closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize]);
+    updateWindowScroll,
+  }), [windows, openWindow, closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize, updateWindowScroll]);
 
   return (
     <WindowManagerContext.Provider value={contextValue as WindowManagerContextType}>
