@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { useDisplayMode } from '@/context/DisplayModeContext';
 import { Button } from '../ui/button';
-import { MonitorOff } from 'lucide-react'; // Changement de Power à MonitorOff
+import { MonitorOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { WindowId, WINDOW_CONFIGS, useWindowManager } from './useWindowManager';
 import { DesktopIcon } from './DesktopIcon';
@@ -48,7 +48,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   // Le fond d'écran (Desktop)
   const desktopClasses = cn(
     "h-screen w-screen overflow-hidden",
-    "bg-blue-700 dark:bg-gray-900", 
+    "bg-blue-500 dark:bg-gray-900", // Changement ici: bg-blue-500 pour le mode clair
     "relative font-sans" // Assurer que la police est standard
   );
 
