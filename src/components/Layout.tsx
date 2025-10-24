@@ -1,13 +1,9 @@
+import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import StarBackground from "./StarBackground";
-import React from "react";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Star Background (visible en mode sombre, positionné en arrière-plan) */}
@@ -17,7 +13,7 @@ export const Layout = ({ children }: LayoutProps) => {
       
       <Header />
       <main className="flex-grow relative z-0">
-        {children}
+        <Outlet />
       </main>
       <Footer />
     </div>
