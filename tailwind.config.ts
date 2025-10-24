@@ -111,9 +111,12 @@ export default {
             transform: "translate(0, 0) rotate(-45deg)",
             opacity: "1",
           },
+          "90%": {
+            opacity: "1", // Reste visible jusqu'à la fin
+          },
           "100%": {
-            transform: "translate(400px, 400px) rotate(-45deg)", // Trajectoire diagonale rapide
-            opacity: "0",
+            transform: "translate(400px, 400px) rotate(-45deg)", 
+            opacity: "0", // Disparition rapide à la fin
           },
         },
       },
