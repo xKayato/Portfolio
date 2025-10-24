@@ -104,31 +104,44 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         return { x: newX, y: newY };
       });
     } else if (isResizing && !isMaximized) {
-      setSize(prev => {
-        let newWidth = prev.width;
-        let newHeight = prev.height;
-        // let newX = position.x; // Not used for bottom/right resizing
-        // let newY = position.y; // Not used for bottom/right resizing
+      setSize(prevSize => {
+        setPosition(prevPos => {
+          let newWidth = prevSize.width;
+          let newHeight = prevSize.height;
+          let newX = prevPos.x;
+          let newY = prevPos.y;
 
-        switch (isResizing) {
-          case 'right':
-            newWidth = Math.max(MIN_WIDTH, prev.width + e.movementX);
-            break;
-          case 'bottom':
-            newHeight = Math.max(MIN_HEIGHT, prev.height + e.movementY);
-            break;
-          case 'bottom-right':
-            newWidth = Math.max(MIN_WIDTH, prev.width + e.movementX);
-            newHeight = Math.max(MIN_HEIGHT, prev.height + e.movementY);
-            break;
-          // Note: Implementing top/left resizing is more complex as it requires changing position as well.
-          // For simplicity, we focus on bottom/right handles for now.
-        }
+          const movementX = e.movementX;
+          const movementY = e.movementY;
 
-        return { width: newWidth, height: newHeight };
+          // Redimensionnement horizontal
+          if (isResizing.includes('left')) {
+            newWidth = Math.max(MIN_WIDTH, prevSize.width - movementX);
+            if (newWidth > MIN_WIDTH) {
+              newX = prevPos.x + movementX;
+            }
+          } else if (isResizing.includes('right')) {
+            newWidth = Math.max(MIN_WIDTH, prevSize.width + movementX);
+          }
+
+          // Redimensionnement vertical
+          if (isResizing.includes('top')) {
+            newHeight = Math.max(MIN_HEIGHT, prevSize.height - movementY);
+            if (newHeight > MIN_HEIGHT) {
+              newY = prevPos.y + movementY;
+            }
+          } else if (isResizing.includes('bottom')) {
+            newHeight = Math.max(MIN_HEIGHT, prevSize.height + movementY);
+          }
+          
+          // Mise à jour de la position et de la taille
+          setPosition({ x: newX, y: newY });
+          return { width: newWidth, height: newHeight };
+        });
+        return prevSize; // La taille est mise à jour via setPosition/setSize dans le callback imbriqué
       });
     }
-  }, [isDragging, isResizing, isMaximized, position.x, position.y]);
+  }, [isDragging, isResizing, isMaximized]);
 
   const handleMouseUp = useCallback(() => {
     if (isDragging) {
@@ -137,6 +150,7 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
     }
     if (isResizing) {
       setIsResizing(null);
+      updateWindowPosition(id, position.x, position.y); // Sauvegarder la nouvelle position (si redimensionnement top/left)
       updateWindowSize(id, size.width, size.height);
     }
   }, [isDragging, isResizing, id, position.x, position.y, size.width, size.height, updateWindowPosition, updateWindowSize]);
@@ -240,20 +254,51 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         <>
           {/* Bottom Right Corner */}
           <div 
-            className="absolute bottom-0 right-0 w-3 h-3 cursor-nwse-resize" 
+            className="absolute bottom-0 right-0 w-3 h-3 cursor-nwse-resize z-10" 
             data-resize-handle="bottom-right"
             onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
           />
           {/* Right Edge */}
           <div 
-            className="absolute right-0 top-0 h-full w-1 cursor-ew-resize" 
+            className="absolute right-0 top-0 h-full w-1 cursor-ew-resize z-10" 
             data-resize-handle="right"
             onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
           />
           {/* Bottom Edge */}
           <div 
-            className="absolute bottom-0 left-0 w-full h-1 cursor-ns-resize" 
+            className="absolute bottom-0 left-0 w-full h-1 cursor-ns-resize z-10" 
             data-resize-handle="bottom"
+            onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
+          />
+          
+          {/* Top Left Corner */}
+          <div 
+            className="absolute top-0 left-0 w-3 h-3 cursor-nwse-resize z-10" 
+            data-resize-handle="top-left"
+            onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
+          />
+          {/* Top Right Corner */}
+          <div 
+            className="absolute top-0 right-0 w-3 h-3 cursor-nesw-resize z-10" 
+            data-resize-handle="top-right"
+            onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
+          />
+          {/* Bottom Left Corner */}
+          <div 
+            className="absolute bottom-0 left-0 w-3 h-3 cursor-nesw-resize z-10" 
+            data-resize-handle="bottom-left"
+            onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
+          />
+          {/* Top Edge */}
+          <div 
+            className="absolute top-0 left-0 w-full h-1 cursor-ns-resize z-10" 
+            data-resize-handle="top"
+            onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
+          />
+          {/* Left Edge */}
+          <div 
+            className="absolute left-0 top-0 h-full w-1 cursor-ew-resize z-10" 
+            data-resize-handle="left"
             onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e as unknown as React.MouseEvent); }}
           />
         </>
