@@ -61,6 +61,15 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   // Les fenêtres ouvertes, triées par focus (la dernière est la plus haute)
   const openWindows = windows.filter(w => w.isOpen);
 
+  // Ajout d'un effet pour désactiver le défilement du body/html
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+
   return (
     <div className={desktopClasses}>
       {/* Rendu des icônes de bureau */}

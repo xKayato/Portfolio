@@ -5,10 +5,11 @@ import { TechButton } from "@/components/TechButton";
 import { TypingEffect } from "@/components/TypingEffect";
 import { useDisplayMode } from "@/context/DisplayModeContext";
 import { useIsWindowsMode } from "@/hooks/use-windows-mode";
+import { useWindowsActions } from "@/hooks/use-windows-actions"; // Import nécessaire
 
 const Index = () => {
   const { setMode } = useDisplayMode();
-  const isWindowsMode = useIsWindowsMode();
+  const { isWindowsMode, openWindow } = useWindowsActions(); // Utilisation de useWindowsActions
   const fullName = personalInfo.name;
   const typingText = fullName;
 
@@ -16,6 +17,12 @@ const Index = () => {
   const containerClasses = isWindowsMode 
     ? "flex flex-col items-center justify-center text-center h-full py-4"
     : "container relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-114px)] py-12";
+
+  const handleViewProjects = () => {
+    if (isWindowsMode) {
+      openWindow('portfolio');
+    }
+  };
 
   return (
     <div className={containerClasses}>
@@ -34,7 +41,11 @@ const Index = () => {
         </p>
         
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4">
-          <Link to="/portfolio">
+          {/* Le Link est conservé pour le mode classique, mais on ajoute un onClick pour le mode Windows */}
+          <Link 
+            to="/portfolio" 
+            onClick={isWindowsMode ? (e) => { e.preventDefault(); handleViewProjects(); } : undefined}
+          >
             <TechButton>
               Voir mes projets <ArrowRight className="ml-2 h-4 w-4" />
             </TechButton>
