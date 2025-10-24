@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
-const NUM_DRIFTERS = 200; // Nombre d'étoiles de fond (déjà défini dans StarBackground)
-const NUM_SHOOTERS = 15; // Nombre d'étoiles filantes rapides (augmenté légèrement)
+const NUM_DRIFTERS = 200; // Nombre d'étoiles de fond
 
 const StarField = () => {
   const stars = useMemo(() => {
@@ -22,7 +21,7 @@ const StarField = () => {
           height: `${size}px`,
           top: `${y}%`,
           left: `${x}%`,
-          // L'opacité est maintenant gérée par la variable CSS pour l'animation
+          // L'opacité est gérée par la variable CSS pour le clignotement
           '--initial-opacity': opacity, 
           '--animation-duration': `${duration}s`,
           '--animation-delay': `${delay}s`,
@@ -30,65 +29,25 @@ const StarField = () => {
       };
     });
 
-    const shooters = Array.from({ length: NUM_SHOOTERS }, (_, i) => {
-      const size = Math.random() * 1.5 + 1; // Taille légèrement plus grande pour les rapides
-      const opacity = Math.random() * 0.5 + 0.5; // Opacité entre 50% et 100%
-      const x = Math.random() * 100; // Position X de départ
-      const y = Math.random() * 100; // Position Y de départ
-      const duration = Math.random() * 1 + 0.5; // Durée de l'animation entre 0.5s et 1.5s (très rapide)
-      const delay = Math.random() * 10; // Délai de l'animation pour un effet asynchrone
-
-      return {
-        key: `shoot-${i}`,
-        type: 'shooter',
-        style: {
-          width: `${size}px`,
-          height: `${size}px`,
-          top: `${y}%`,
-          left: `${x}%`,
-          opacity: opacity,
-          '--star-duration': `${duration}s`,
-          '--star-delay': `${delay}s`,
-        } as React.CSSProperties,
-      };
-    });
-
-    return [...drifters, ...shooters];
+    return drifters;
   }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {stars.map(star => {
-        if (star.type === 'drifter') {
-          return (
-            <div
-              key={star.key}
-              className={cn(
-                "absolute bg-white rounded-full",
-                "animate-[star-drift_var(--animation-duration)_ease-in-out_infinite_alternate]" 
-              )}
-              style={{
-                ...star.style,
-                animationDelay: star.style['--animation-delay'],
-                // Appliquer l'opacité initiale directement pour le rendu initial
-                opacity: star.style['--initial-opacity'] as number, 
-              }}
-            />
-          );
-        }
-        
-        // Shooter (Étoile filante rapide sans traînée)
+        // Puisqu'il n'y a plus que des drifters, on peut simplifier le rendu
         return (
           <div
             key={star.key}
             className={cn(
-              "absolute bg-white rounded-full shadow-[0_0_4px_rgba(255,255,255,0.8)]", // Point lumineux
-              "animate-shooting-star" 
+              "absolute bg-white rounded-full",
+              "animate-[star-drift_var(--animation-duration)_ease-in-out_infinite_alternate]" 
             )}
             style={{
               ...star.style,
-              animationDuration: star.style['--star-duration'],
-              animationDelay: star.style['--star-delay'],
+              animationDelay: star.style['--animation-delay'],
+              // Appliquer l'opacité initiale directement pour le rendu initial
+              opacity: star.style['--initial-opacity'] as number, 
             }}
           />
         );
