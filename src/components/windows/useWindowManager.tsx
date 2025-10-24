@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useContext } from 'react';
 import { Home, User, Code, Briefcase, Heart } from 'lucide-react';
 
 export type WindowId = 'index' | 'about' | 'skills' | 'portfolio' | 'passions';
