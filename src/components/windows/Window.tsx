@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { X, Minus, Maximize, Minimize } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { WindowId, useWindowManager } from './useWindowManager';
+import { WindowId, useWindowManager, WINDOW_CONFIGS } from './useWindowManager';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Logo } from '../Logo'; // Importation du Logo
 
 interface WindowProps {
   id: WindowId;
@@ -188,6 +189,10 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
 
   // Z-index management: focused window gets the highest z-index
   const zIndex = isFocused ? 1000 : 999;
+  
+  // Récupérer l'icône de la fenêtre
+  const config = WINDOW_CONFIGS[id] || { icon: X };
+  const Icon = config.icon;
 
   // Style for the window container
   const windowStyle: React.CSSProperties = isMaximized ? {
@@ -228,7 +233,10 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         onDoubleClick={handleMaximize}
         data-title-bar
       >
-        <span>{title}</span>
+        <div className="flex items-center gap-2 truncate">
+            <Icon className="h-4 w-4" />
+            <span>{title}</span>
+        </div>
         
         {/* Control Buttons */}
         <div className="flex space-x-1">

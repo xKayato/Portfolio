@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { useDisplayMode } from '@/context/DisplayModeContext';
 import { Button } from '../ui/button';
-import { Power } from 'lucide-react';
+import { MonitorOff } from 'lucide-react'; // Changement de Power à MonitorOff
 import { cn } from '@/lib/utils';
 import { WindowId, WINDOW_CONFIGS, useWindowManager } from './useWindowManager';
 import { DesktopIcon } from './DesktopIcon';
@@ -115,8 +115,8 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
           className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold flex items-center gap-1 h-8"
           onClick={() => setMode('classic')}
         >
-          <Power className="h-4 w-4" />
-          Quitter
+          <MonitorOff className="h-4 w-4" />
+          Quitter le mode Windows
         </Button>
 
         {/* Zone des applications ouvertes (utilise l'ordre du tableau 'windows' non trié) */}
