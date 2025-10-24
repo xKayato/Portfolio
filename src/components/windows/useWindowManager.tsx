@@ -210,14 +210,24 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
       if (!windowToClose) return prevWindows;
 
       let newWindows: WindowState[];
+      const defaultOffset = STATIC_WINDOW_OFFSETS[id as keyof typeof STATIC_WINDOW_OFFSETS];
 
       if (windowToClose.type === 'dynamic-project') {
         // Supprimer complètement la fenêtre dynamique
         newWindows = prevWindows.filter(w => w.id !== id);
       } else {
-        // Fenêtre statique: marquer comme fermée et réinitialiser le scroll
+        // Fenêtre statique: marquer comme fermée, réinitialiser le scroll ET la position
         newWindows = prevWindows.map(w => 
-          w.id === id ? { ...w, isOpen: false, isMinimized: false, isFocused: false, scrollPosition: 0 } : w
+          w.id === id ? { 
+            ...w, 
+            isOpen: false, 
+            isMinimized: false, 
+            isFocused: false, 
+            scrollPosition: 0,
+            // Réinitialiser la position à la position par défaut
+            initialX: defaultOffset?.x ?? w.initialX,
+            initialY: defaultOffset?.y ?? w.initialY,
+          } : w
         );
       }
       
