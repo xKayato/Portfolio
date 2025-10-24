@@ -79,14 +79,8 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
 
   const focusWindow = useCallback((id: WindowId) => {
     setWindows(prevWindows => {
-      // Augmenter le z-index du focusé
       const focusedWindow = prevWindows.find(w => w.id === id);
       if (!focusedWindow) return prevWindows;
-
-      const maxZIndex = prevWindows.reduce((max, w) => {
-        // On suppose que les fenêtres ouvertes ont un z-index géré par leur ordre dans le tableau
-        return max;
-      }, 1000);
 
       // Déplacer la fenêtre en focus à la fin du tableau pour un z-index plus élevé
       const newWindows = prevWindows.filter(w => w.id !== id);
@@ -100,9 +94,17 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
   }, []);
 
   const openWindow = useCallback((id: WindowId, data?: ProjectData) => {
+    let targetId = id;
+
     setWindows(prevWindows => {
-      const existingWindow = prevWindows.find(w => w.id === id);
+      let existingWindow = prevWindows.find(w => w.id === id);
       
+      if (data) {
+        // Si c'est un projet dynamique, nous devons générer un nouvel ID
+        targetId = generateProjectId(data.title);
+        existingWindow = undefined; // Forcer l'ouverture d'une nouvelle fenêtre pour les projets
+      }
+
       if (existingWindow && existingWindow.isOpen) {
         // Si déjà ouvert, focus et déminimiser
         if (existingWindow.isMinimized) {
@@ -112,7 +114,7 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
             isMinimized: w.id === id ? false : w.isMinimized,
           }));
         }
-        focusWindow(id);
+        // Si déjà ouvert et non minimisé, on le focus via l'appel focusWindow ci-dessous
         return prevWindows;
       }
 
@@ -121,13 +123,13 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
       if (data) {
         // C'est un nouveau projet dynamique
         newWindow = {
-          id: generateProjectId(data.title), // Générer un ID unique
+          id: targetId, // Utiliser l'ID généré
           title: data.title,
           icon: FileText,
           isMinimized: false,
           isFocused: true,
           isOpen: true,
-          initialX: 150 + Math.random() * 50, // Position décalée pour les projets
+          initialX: 150 + Math.random() * 50, 
           initialY: 150 + Math.random() * 50,
           initialWidth: 900,
           initialHeight: 700,
@@ -135,11 +137,11 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
           data: data,
         };
         
-        // Fermer toutes les autres fenêtres et ajouter la nouvelle
+        // Mettre toutes les autres fenêtres en non focus
         const updatedWindows = prevWindows.map(w => ({
             ...w,
             isFocused: false,
-        })).filter(w => w.type === 'static'); // Garder les statiques pour l'état initial
+        }));
 
         return [...updatedWindows, newWindow];
 
@@ -170,7 +172,10 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
         return [...updatedWindows, newWindow];
       }
     });
-    focusWindow(id); // Assurer le focus après l'ajout/mise à jour
+    
+    // Assurer le focus après l'ajout/mise à jour. 
+    // Si c'est un projet dynamique, nous utilisons l'ID généré (targetId).
+    focusWindow(targetId); 
   }, [focusWindow]);
 
   const closeWindow = useCallback((id: WindowId) => {
@@ -178,28 +183,24 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
       const windowToClose = prevWindows.find(w => w.id === id);
       if (!windowToClose) return prevWindows;
 
+      let newWindows: WindowState[];
+
       if (windowToClose.type === 'dynamic-project') {
         // Supprimer complètement la fenêtre dynamique
-        const newWindows = prevWindows.filter(w => w.id !== id);
-        
-        // Tenter de mettre le focus sur la dernière fenêtre ouverte
-        if (newWindows.length > 0) {
-            focusWindow(newWindows[newWindows.length - 1].id);
-        }
-        return newWindows;
+        newWindows = prevWindows.filter(w => w.id !== id);
       } else {
         // Fenêtre statique: marquer comme fermée
-        const newWindows = prevWindows.map(w => 
+        newWindows = prevWindows.map(w => 
           w.id === id ? { ...w, isOpen: false, isMinimized: false, isFocused: false } : w
         );
-        
-        // Tenter de mettre le focus sur la dernière fenêtre ouverte
-        const openStaticWindows = newWindows.filter(w => w.isOpen && w.type === 'static');
-        if (openStaticWindows.length > 0) {
-            focusWindow(openStaticWindows[openStaticWindows.length - 1].id);
-        }
-        return newWindows;
       }
+      
+      // Tenter de mettre le focus sur la dernière fenêtre ouverte restante
+      const openWindows = newWindows.filter(w => w.isOpen);
+      if (openWindows.length > 0) {
+          focusWindow(openWindows[openWindows.length - 1].id);
+      }
+      return newWindows;
     });
   }, [focusWindow]);
 
@@ -210,16 +211,13 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
         );
         
         // Trouver la prochaine fenêtre à mettre en focus
-        const nextFocusedWindow = newWindows.filter(w => w.isOpen && w.id !== id).pop();
+        const nextFocusedWindow = newWindows.filter(w => w.isOpen && !w.isMinimized && w.id !== id).pop();
         if (nextFocusedWindow) {
-            return newWindows.map(w => ({
-                ...w,
-                isFocused: w.id === nextFocusedWindow.id ? true : w.isFocused,
-            }));
+            focusWindow(nextFocusedWindow.id);
         }
         return newWindows;
     });
-  }, []);
+  }, [focusWindow]);
 
   const updateWindowPosition = useCallback((id: WindowId, x: number, y: number) => {
     setWindows(prevWindows => prevWindows.map(w => 

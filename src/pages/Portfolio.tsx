@@ -13,7 +13,7 @@ import { ChevronDown } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
 import { useIsWindowsMode } from "@/hooks/use-windows-mode";
 import { cn } from "@/lib/utils";
-import { useWindowsActions } from "@/hooks/use-windows-actions"; // Import mis à jour
+import { useWindowsActions } from "@/hooks/use-windows-actions";
 
 type Project = typeof projects[0];
 
@@ -22,7 +22,6 @@ const Portfolio = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   
-  // Utilisation du nouveau hook
   const { isWindowsMode, openWindow } = useWindowsActions();
 
   const mainCategories = useMemo(() => ["Informatique", "Réseaux", "Cybersécurité", "Télécommunication", "Communication"], []);
@@ -64,7 +63,6 @@ const Portfolio = () => {
   const handleOpenProject = (project: Project) => {
     if (isWindowsMode) {
       // Ouvrir comme une fenêtre Windows
-      // Note: openWindow est maintenant géré par useWindowsActions
       openWindow(project.title, project);
     } else {
       // Ouvrir comme une modale classique
@@ -117,7 +115,8 @@ const Portfolio = () => {
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </TechButton>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
+                {/* Utilisation de side="bottom" et align="start" pour un meilleur positionnement */}
+                <DropdownMenuContent side="bottom" align="start">
                   {Array.from(tags).sort().map(tag => (
                     <DropdownMenuCheckboxItem
                       key={tag}
