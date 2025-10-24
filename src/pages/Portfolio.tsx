@@ -115,8 +115,7 @@ const Portfolio = () => {
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </TechButton>
                 </DropdownMenuTrigger>
-                {/* Utilisation de side="bottom" et align="start" pour un meilleur positionnement */}
-                <DropdownMenuContent side="bottom" align="start">
+                <DropdownMenuContent align="start">
                   {Array.from(tags).sort().map(tag => (
                     <DropdownMenuCheckboxItem
                       key={tag}

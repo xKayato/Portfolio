@@ -6,6 +6,7 @@ export function useWindowsActions() {
   const isWindowsMode = useIsWindowsMode();
   
   // Utilisation conditionnelle du hook useWindowManager
+  // Ceci est la clé: useWindowManager n'est appelé que si isWindowsMode est vrai.
   const manager = isWindowsMode ? useWindowManager() : null;
 
   const openWindow = useCallback((id: string, data?: ProjectData) => {
