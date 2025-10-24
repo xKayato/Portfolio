@@ -104,6 +104,8 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         return { x: newX, y: newY };
       });
     } else if (isResizing && !isMaximized) {
+      
+      // Utiliser les fonctions de mise à jour d'état pour obtenir les valeurs les plus récentes
       setSize(prevSize => {
         setPosition(prevPos => {
           let newWidth = prevSize.width;
@@ -116,9 +118,14 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
 
           // Redimensionnement horizontal
           if (isResizing.includes('left')) {
-            newWidth = Math.max(MIN_WIDTH, prevSize.width - movementX);
-            if (newWidth > MIN_WIDTH) {
+            const potentialNewWidth = prevSize.width - movementX;
+            if (potentialNewWidth >= MIN_WIDTH) {
+              newWidth = potentialNewWidth;
               newX = prevPos.x + movementX;
+            } else {
+              // Si on atteint la taille minimale, on ajuste la position pour éviter le dépassement
+              newX = prevPos.x + (prevSize.width - MIN_WIDTH);
+              newWidth = MIN_WIDTH;
             }
           } else if (isResizing.includes('right')) {
             newWidth = Math.max(MIN_WIDTH, prevSize.width + movementX);
@@ -126,19 +133,27 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
 
           // Redimensionnement vertical
           if (isResizing.includes('top')) {
-            newHeight = Math.max(MIN_HEIGHT, prevSize.height - movementY);
-            if (newHeight > MIN_HEIGHT) {
+            const potentialNewHeight = prevSize.height - movementY;
+            if (potentialNewHeight >= MIN_HEIGHT) {
+              newHeight = potentialNewHeight;
               newY = prevPos.y + movementY;
+            } else {
+              // Si on atteint la taille minimale, on ajuste la position
+              newY = prevPos.y + (prevSize.height - MIN_HEIGHT);
+              newHeight = MIN_HEIGHT;
             }
           } else if (isResizing.includes('bottom')) {
             newHeight = Math.max(MIN_HEIGHT, prevSize.height + movementY);
           }
           
-          // Mise à jour de la position et de la taille
-          setPosition({ x: newX, y: newY });
-          return { width: newWidth, height: newHeight };
+          // Retourner la nouvelle position et la nouvelle taille
+          // Note: React mettra à jour les deux états dans le même cycle de rendu
+          setSize({ width: newWidth, height: newHeight });
+          return { x: newX, y: newY };
         });
-        return prevSize; // La taille est mise à jour via setPosition/setSize dans le callback imbriqué
+        
+        // Retourner l'ancienne taille ici car la nouvelle taille est définie dans le callback setPosition
+        return prevSize; 
       });
     }
   }, [isDragging, isResizing, isMaximized]);
@@ -150,7 +165,8 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
     }
     if (isResizing) {
       setIsResizing(null);
-      updateWindowPosition(id, position.x, position.y); // Sauvegarder la nouvelle position (si redimensionnement top/left)
+      // Sauvegarder la position et la taille finales
+      updateWindowPosition(id, position.x, position.y); 
       updateWindowSize(id, size.width, size.height);
     }
   }, [isDragging, isResizing, id, position.x, position.y, size.width, size.height, updateWindowPosition, updateWindowSize]);
