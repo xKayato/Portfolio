@@ -38,8 +38,9 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
   }, [initialX, initialY, initialWidth, initialHeight]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault(); // Empêche le comportement par défaut (comme le défilement)
-    e.stopPropagation(); // Empêche la propagation de l'événement
+    // Empêche le défilement automatique et le comportement par défaut
+    e.preventDefault(); 
+    e.stopPropagation(); 
 
     if (isMobile) return;
     focusWindow(id);
@@ -166,7 +167,7 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
       )}
       style={windowStyle}
       onMouseDown={handleMouseDown}
-      // Suppression de onClick={() => focusWindow(id)} car onMouseDown gère déjà le focus
+      tabIndex={-1} // Rendre la div focusable sans être dans l'ordre de tabulation
     >
       {/* Title Bar */}
       <div 

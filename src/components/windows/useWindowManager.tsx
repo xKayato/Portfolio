@@ -33,9 +33,11 @@ export interface WindowState {
   // Propriétés spécifiques aux fenêtres dynamiques
   type: 'static' | 'dynamic-project';
   data?: ProjectData;
+  // Nouveau champ pour gérer l'ordre de superposition (z-index)
+  zIndexOrder: number; 
 }
 
-export const WINDOW_CONFIGS: Record<string, Omit<WindowState, 'isMinimized' | 'isFocused' | 'isOpen' | 'initialX' | 'initialY' | 'initialWidth' | 'initialHeight' | 'data'>> = {
+export const WINDOW_CONFIGS: Record<string, Omit<WindowState, 'isMinimized' | 'isFocused' | 'isOpen' | 'initialX' | 'initialY' | 'initialWidth' | 'initialHeight' | 'data' | 'zIndexOrder'>> = {
   index: { id: 'index', title: 'Bienvenue', icon: Home, type: 'static' },
   about: { id: 'about', title: 'À Propos de moi', icon: User, type: 'static' },
   skills: { id: 'skills', title: 'Mes Compétences', icon: Code, type: 'static' },
@@ -45,7 +47,7 @@ export const WINDOW_CONFIGS: Record<string, Omit<WindowState, 'isMinimized' | 'i
 
 interface WindowManagerContextType {
   windows: WindowState[];
-  openWindow: (id: WindowId, data?: ProjectData) => void; // Mise à jour de la signature
+  openWindow: (id: WindowId, data?: ProjectData) => void;
   closeWindow: (id: WindowId) => void;
   minimizeWindow: (id: WindowId) => void;
   focusWindow: (id: WindowId) => void;
@@ -54,6 +56,9 @@ interface WindowManagerContextType {
 }
 
 const WindowManagerContext = React.createContext<WindowManagerContextType | undefined>(undefined);
+
+// Compteur global pour le z-index
+let globalZIndexCounter = 100;
 
 const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(config => ({
   ...config,
@@ -65,6 +70,7 @@ const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(con
   initialWidth: 800,
   initialHeight: 600,
   type: 'static',
+  zIndexOrder: globalZIndexCounter++,
 }));
 
 // Générateur d'ID unique pour les projets
@@ -79,17 +85,23 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
 
   const focusWindow = useCallback((id: WindowId) => {
     setWindows(prevWindows => {
-      const focusedWindow = prevWindows.find(w => w.id === id);
-      if (!focusedWindow) return prevWindows;
-
-      // Déplacer la fenêtre en focus à la fin du tableau pour un z-index plus élevé
-      const newWindows = prevWindows.filter(w => w.id !== id);
-      newWindows.push({ ...focusedWindow, isFocused: true, isMinimized: false });
-
-      return newWindows.map(w => ({
-        ...w,
-        isFocused: w.id === id,
-      }));
+      // Incrémenter le compteur global pour garantir que la fenêtre en focus a le zIndexOrder le plus élevé
+      globalZIndexCounter++; 
+      
+      return prevWindows.map(w => {
+        if (w.id === id) {
+          return { 
+            ...w, 
+            isFocused: true, 
+            isMinimized: false,
+            zIndexOrder: globalZIndexCounter, // Mettre à jour l'ordre de superposition
+          };
+        }
+        return {
+          ...w,
+          isFocused: false,
+        };
+      });
     });
   }, []);
 
@@ -108,17 +120,15 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
       if (existingWindow && existingWindow.isOpen) {
         // Si déjà ouvert, focus et déminimiser
         if (existingWindow.isMinimized) {
-          return prevWindows.map(w => ({
-            ...w,
-            isFocused: w.id === id,
-            isMinimized: w.id === id ? false : w.isMinimized,
-          }));
+          // On va juste focus la fenêtre existante via l'appel focusWindow ci-dessous
+          return prevWindows;
         }
         // Si déjà ouvert et non minimisé, on le focus via l'appel focusWindow ci-dessous
         return prevWindows;
       }
 
       let newWindow: WindowState;
+      globalZIndexCounter++;
 
       if (data) {
         // C'est un nouveau projet dynamique
@@ -135,6 +145,7 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
           initialHeight: 700,
           type: 'dynamic-project',
           data: data,
+          zIndexOrder: globalZIndexCounter,
         };
         
         // Mettre toutes les autres fenêtres en non focus
@@ -150,31 +161,28 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
         const config = WINDOW_CONFIGS[id];
         if (!config) return prevWindows;
 
-        newWindow = {
-            ...config,
-            isMinimized: false,
-            isFocused: true,
-            isOpen: true,
-            initialX: 50 + Math.random() * 100,
-            initialY: 50 + Math.random() * 100,
-            initialWidth: 800,
-            initialHeight: 600,
-            type: 'static',
-        };
+        // Mettre à jour l'état existant (si statique)
+        const updatedWindows = prevWindows.map(w => {
+            if (w.id === id) {
+                return {
+                    ...w,
+                    isMinimized: false,
+                    isFocused: true,
+                    isOpen: true,
+                    zIndexOrder: globalZIndexCounter,
+                };
+            }
+            return {
+                ...w,
+                isFocused: false,
+            };
+        });
         
-        // Mettre à jour l'état existant ou ajouter la nouvelle fenêtre
-        const updatedWindows = prevWindows.map(w => ({
-            ...w,
-            isFocused: false,
-            ...(w.id === id ? newWindow : {})
-        })).filter(w => w.id !== id); // Retirer l'ancienne version si elle existe
-
-        return [...updatedWindows, newWindow];
+        return updatedWindows;
       }
     });
     
     // Assurer le focus après l'ajout/mise à jour. 
-    // Si c'est un projet dynamique, nous utilisons l'ID généré (targetId).
     focusWindow(targetId); 
   }, [focusWindow]);
 
@@ -195,10 +203,14 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
         );
       }
       
-      // Tenter de mettre le focus sur la dernière fenêtre ouverte restante
-      const openWindows = newWindows.filter(w => w.isOpen);
+      // Tenter de mettre le focus sur la fenêtre ouverte avec le zIndexOrder le plus élevé
+      const openWindows = newWindows.filter(w => w.isOpen && !w.isMinimized);
       if (openWindows.length > 0) {
-          focusWindow(openWindows[openWindows.length - 1].id);
+          // Trouver la fenêtre avec le zIndexOrder max
+          const nextFocusedWindow = openWindows.reduce((prev, current) => 
+            (prev.zIndexOrder > current.zIndexOrder) ? prev : current
+          );
+          focusWindow(nextFocusedWindow.id);
       }
       return newWindows;
     });
@@ -210,9 +222,12 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
             w.id === id ? { ...w, isMinimized: true, isFocused: false } : w
         );
         
-        // Trouver la prochaine fenêtre à mettre en focus
-        const nextFocusedWindow = newWindows.filter(w => w.isOpen && !w.isMinimized && w.id !== id).pop();
-        if (nextFocusedWindow) {
+        // Trouver la prochaine fenêtre à mettre en focus (celle avec le zIndexOrder max)
+        const openWindows = newWindows.filter(w => w.isOpen && !w.isMinimized && w.id !== id);
+        if (openWindows.length > 0) {
+            const nextFocusedWindow = openWindows.reduce((prev, current) => 
+                (prev.zIndexOrder > current.zIndexOrder) ? prev : current
+            );
             focusWindow(nextFocusedWindow.id);
         }
         return newWindows;

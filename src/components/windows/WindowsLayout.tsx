@@ -58,8 +58,11 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
     "flex items-center px-2 shadow-lg"
   );
 
-  // Les fenêtres ouvertes, triées par focus (la dernière est la plus haute)
+  // Les fenêtres ouvertes (pour la barre des tâches, l'ordre est l'ordre du tableau 'windows')
   const openWindows = windows.filter(w => w.isOpen);
+  
+  // Les fenêtres à rendre, triées par zIndexOrder pour la superposition
+  const windowsToRender = [...openWindows].sort((a, b) => a.zIndexOrder - b.zIndexOrder);
 
   // Ajout d'un effet pour désactiver le défilement du body/html
   React.useEffect(() => {
@@ -79,8 +82,8 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
         ))}
       </div>
 
-      {/* Rendu des fenêtres ouvertes */}
-      {openWindows.map(w => (
+      {/* Rendu des fenêtres ouvertes (triées par zIndexOrder) */}
+      {windowsToRender.map(w => (
         <React.Fragment key={w.id}>
           {!w.isMinimized && (
             <Window
@@ -111,7 +114,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
           Quitter
         </Button>
 
-        {/* Zone des applications ouvertes */}
+        {/* Zone des applications ouvertes (utilise l'ordre du tableau 'windows' non trié) */}
         <div className="flex-grow mx-4 flex gap-2 overflow-x-auto">
           {openWindows.map(w => {
             const Icon = w.icon;
