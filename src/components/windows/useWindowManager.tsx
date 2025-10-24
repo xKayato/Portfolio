@@ -63,19 +63,32 @@ const WindowManagerContext = React.createContext<WindowManagerContextType | unde
 // Compteur global pour le z-index
 let globalZIndexCounter = 100;
 
-const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(config => ({
-  ...config,
-  isMinimized: false,
-  isFocused: false,
-  isOpen: false,
-  initialX: 50 + Math.random() * 100,
-  initialY: 50 + Math.random() * 100,
-  initialWidth: 800,
-  initialHeight: 600,
-  type: 'static',
-  zIndexOrder: globalZIndexCounter++,
-  scrollPosition: 0, // Initialisation à 0
-}));
+// Décalages pour les fenêtres statiques
+const STATIC_WINDOW_OFFSETS = {
+    index: { x: 100, y: 50, w: 800, h: 600 },
+    about: { x: 150, y: 100, w: 800, h: 600 },
+    skills: { x: 200, y: 150, w: 900, h: 700 },
+    portfolio: { x: 250, y: 200, w: 900, h: 700 },
+    passions: { x: 300, y: 250, w: 800, h: 600 },
+};
+
+const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(config => {
+    const offset = STATIC_WINDOW_OFFSETS[config.id as keyof typeof STATIC_WINDOW_OFFSETS] || { x: 50, y: 50, w: 800, h: 600 };
+    
+    return {
+        ...config,
+        isMinimized: false,
+        isFocused: false,
+        isOpen: false,
+        initialX: offset.x,
+        initialY: offset.y,
+        initialWidth: offset.w,
+        initialHeight: offset.h,
+        type: 'static',
+        zIndexOrder: globalZIndexCounter++,
+        scrollPosition: 0, // Initialisation à 0
+    };
+});
 
 // Générateur d'ID unique pour les projets
 let projectCount = 0;
