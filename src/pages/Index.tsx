@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 const Index = () => {
   const { setMode } = useDisplayMode();
-  const { isWindowsMode, openWindow } = useWindowsActions();
+  const { isWindowsMode, openWindow, resetWindowPosition } = useWindowsActions();
   const fullName = personalInfo.name;
   const typingText = fullName;
 
@@ -22,6 +22,14 @@ const Index = () => {
   const handleViewProjects = () => {
     if (isWindowsMode) {
       openWindow('portfolio');
+    }
+  };
+  
+  const handleViewAbout = () => {
+    if (isWindowsMode) {
+      // Forcer la réinitialisation de la position avant d'ouvrir
+      resetWindowPosition('about');
+      openWindow('about');
     }
   };
 
@@ -66,7 +74,10 @@ const Index = () => {
         </div>
         
         <div className="mt-4">
-          <Link to="/about">
+          <Link 
+            to="/about"
+            onClick={isWindowsMode ? (e) => { e.preventDefault(); handleViewAbout(); } : undefined}
+          >
             <TechButton variant="outline">
               En savoir plus
             </TechButton>

@@ -17,9 +17,16 @@ export function useWindowsActions() {
       console.warn("Attempted to open window outside of Windows Mode.");
     }
   }, [manager]);
+  
+  const resetWindowPosition = useCallback((id: string) => {
+    if (manager) {
+      manager.resetWindowPosition(id);
+    }
+  }, [manager]);
 
   return {
     isWindowsMode,
     openWindow,
+    resetWindowPosition,
   };
 }

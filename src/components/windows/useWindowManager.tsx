@@ -55,7 +55,8 @@ interface WindowManagerContextType {
   focusWindow: (id: WindowId) => void;
   updateWindowPosition: (id: WindowId, x: number, y: number) => void;
   updateWindowSize: (id: WindowId, width: number, height: number) => void;
-  updateWindowScroll: (id: WindowId, scrollPosition: number) => void; // Nouvelle fonction
+  updateWindowScroll: (id: WindowId, scrollPosition: number) => void;
+  resetWindowPosition: (id: WindowId) => void; // Nouvelle fonction
 }
 
 const WindowManagerContext = React.createContext<WindowManagerContextType | undefined>(undefined);
@@ -279,6 +280,21 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
       w.id === id ? { ...w, scrollPosition } : w
     ));
   }, []);
+  
+  const resetWindowPosition = useCallback((id: WindowId) => {
+    const defaultOffset = STATIC_WINDOW_OFFSETS[id as keyof typeof STATIC_WINDOW_OFFSETS];
+    if (!defaultOffset) return;
+
+    setWindows(prevWindows => prevWindows.map(w => 
+      w.id === id ? { 
+        ...w, 
+        initialX: defaultOffset.x, 
+        initialY: defaultOffset.y,
+        scrollPosition: 0, // Réinitialiser le scroll aussi
+      } : w
+    ));
+  }, []);
+
 
   const contextValue = useMemo(() => ({
     windows,
@@ -289,7 +305,8 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
     updateWindowPosition,
     updateWindowSize,
     updateWindowScroll,
-  }), [windows, openWindow, closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize, updateWindowScroll]);
+    resetWindowPosition,
+  }), [windows, openWindow, closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize, updateWindowScroll, resetWindowPosition]);
 
   return (
     <WindowManagerContext.Provider value={contextValue as WindowManagerContextType}>
