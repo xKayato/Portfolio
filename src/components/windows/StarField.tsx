@@ -22,7 +22,8 @@ const StarField = () => {
           height: `${size}px`,
           top: `${y}%`,
           left: `${x}%`,
-          opacity: opacity,
+          // L'opacité est maintenant gérée par la variable CSS pour l'animation
+          '--initial-opacity': opacity, 
           '--animation-duration': `${duration}s`,
           '--animation-delay': `${delay}s`,
         } as React.CSSProperties,
@@ -69,6 +70,8 @@ const StarField = () => {
               style={{
                 ...star.style,
                 animationDelay: star.style['--animation-delay'],
+                // Appliquer l'opacité initiale directement pour le rendu initial
+                opacity: star.style['--initial-opacity'] as number, 
               }}
             />
           );

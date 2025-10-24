@@ -96,27 +96,33 @@ export default {
             height: "0",
           },
         },
-        // Définition de l'animation star-drift
+        // Définition de l'animation star-drift (dérive légère + clignotement)
         "star-drift": {
-          "0%, 100%": {
+          "0%": {
             transform: "translate(0, 0)",
+            opacity: "var(--initial-opacity)", // Utiliser l'opacité initiale
           },
           "50%": {
             transform: "translate(4px, 4px)",
+            opacity: "calc(var(--initial-opacity) * 0.7)", // Clignotement subtil
+          },
+          "100%": {
+            transform: "translate(0, 0)",
+            opacity: "var(--initial-opacity)",
           },
         },
-        // Nouvelle animation pour les étoiles filantes
+        // Animation pour les étoiles filantes rapides
         "shooting-star": {
           "0%": {
             transform: "translate(0, 0) rotate(-45deg)",
             opacity: "1",
           },
           "90%": {
-            opacity: "1", // Reste visible jusqu'à la fin
+            opacity: "1",
           },
           "100%": {
             transform: "translate(400px, 400px) rotate(-45deg)", 
-            opacity: "0", // Disparition rapide à la fin
+            opacity: "0",
           },
         },
       },
