@@ -13,7 +13,7 @@ import { ChevronDown } from "lucide-react";
 import { TechButton } from "@/components/TechButton";
 import { useIsWindowsMode } from "@/hooks/use-windows-mode";
 import { cn } from "@/lib/utils";
-import { useWindowManager } from "@/components/windows/useWindowManager";
+import { useWindowsActions } from "@/hooks/use-windows-actions"; // Import mis à jour
 
 type Project = typeof projects[0];
 
@@ -21,8 +21,9 @@ const Portfolio = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const isWindowsMode = useIsWindowsMode();
-  const { openWindow } = useWindowManager();
+  
+  // Utilisation du nouveau hook
+  const { isWindowsMode, openWindow } = useWindowsActions();
 
   const mainCategories = useMemo(() => ["Informatique", "Réseaux", "Cybersécurité", "Télécommunication", "Communication"], []);
 
@@ -63,6 +64,7 @@ const Portfolio = () => {
   const handleOpenProject = (project: Project) => {
     if (isWindowsMode) {
       // Ouvrir comme une fenêtre Windows
+      // Note: openWindow est maintenant géré par useWindowsActions
       openWindow(project.title, project);
     } else {
       // Ouvrir comme une modale classique
