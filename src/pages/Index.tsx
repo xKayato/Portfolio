@@ -7,10 +7,12 @@ import { useDisplayMode } from "@/context/DisplayModeContext";
 import { useIsWindowsMode } from "@/hooks/use-windows-mode";
 import { useWindowsActions } from "@/hooks/use-windows-actions";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile"; // Importation
 
 const Index = () => {
   const { setMode } = useDisplayMode();
   const { isWindowsMode, openWindow, resetWindowPosition } = useWindowsActions();
+  const isMobile = useIsMobile(); // Utilisation du hook
   const fullName = personalInfo.name;
   const typingText = fullName;
 
@@ -60,7 +62,8 @@ const Index = () => {
             </TechButton>
           </Link>
           
-          {!isWindowsMode && (
+          {/* Afficher le bouton de bascule uniquement si ce n'est PAS mobile */}
+          {!isMobile && !isWindowsMode && (
             <TechButton variant="secondary" onClick={() => setMode('windows')}>
               Mode Windows <Monitor className="ml-2 h-4 w-4" />
             </TechButton>
