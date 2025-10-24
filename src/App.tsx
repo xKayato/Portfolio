@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 import { Layout } from "@/components/Layout";
 import Index from "./pages/Index";
@@ -17,12 +18,25 @@ import ScrollToTop from "./components/ScrollToTop";
 import { DisplayModeProvider, useDisplayMode } from "./context/DisplayModeContext";
 import { WindowsLayout } from "./components/windows/WindowsLayout";
 import { WindowManagerProvider } from "./components/windows/useWindowManager";
+import { LoadingScreen } from "./components/LoadingScreen"; // Importation
 
 const queryClient = new QueryClient();
 
 // Composant qui gère le rendu conditionnel
 const AppContent = () => {
   const { mode } = useDisplayMode();
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Déclenche le chargement uniquement au premier rendu si nous sommes en mode windows
+  useEffect(() => {
+    if (mode === 'windows') {
+      // Si le mode est 'windows' (défaut), nous attendons le chargement
+      // Le composant LoadingScreen gère le délai et appelle setIsLoaded(true)
+    } else {
+      // Si le mode est 'classic', on charge immédiatement
+      setIsLoaded(true);
+    }
+  }, [mode]);
 
   // Les routes sont définies une seule fois, mais le Layout change
   const routes = (
@@ -37,6 +51,10 @@ const AppContent = () => {
   );
 
   if (mode === 'windows') {
+    if (!isLoaded) {
+      return <LoadingScreen onLoaded={() => setIsLoaded(true)} delay={3000} />;
+    }
+    
     // En mode Windows, toutes les pages sont gérées par WindowsLayout
     return (
       <WindowManagerProvider>

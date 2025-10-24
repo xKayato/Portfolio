@@ -10,8 +10,8 @@ interface DisplayModeContextType {
 const DisplayModeContext = createContext<DisplayModeContextType | undefined>(undefined);
 
 export const DisplayModeProvider = ({ children }: { children: ReactNode }) => {
-  // Démarrer en mode 'classic'
-  const [mode, setMode] = useState<DisplayMode>('classic');
+  // Démarrer en mode 'windows'
+  const [mode, setMode] = useState<DisplayMode>('windows');
 
   return (
     <DisplayModeContext.Provider value={{ mode, setMode }}>
