@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo, useContext } from 'react';
-import { Home, User, Code, Briefcase, Heart, FileText } from 'lucide-react';
+import { Home, User, Code, Briefcase, Heart, FileText, Github, Linkedin, Mail } from 'lucide-react';
 
-export type WindowId = 'index' | 'about' | 'skills' | 'portfolio' | 'passions' | string; // Ajout de string pour les IDs dynamiques
+export type WindowId = 'index' | 'about' | 'skills' | 'portfolio' | 'passions' | 'github' | 'linkedin' | 'email' | string; // Ajout des IDs sociaux
 
 export interface ProjectData {
   title: string;
@@ -31,8 +31,8 @@ export interface WindowState {
   initialWidth: number;
   initialHeight: number;
   // Propriétés spécifiques aux fenêtres dynamiques
-  type: 'static' | 'dynamic-project';
-  data?: ProjectData;
+  type: 'static' | 'dynamic-project' | 'social-link'; // Ajout du type 'social-link'
+  data?: ProjectData | { url: string, label: string }; // Mise à jour du type de données
   // Nouveau champ pour gérer l'ordre de superposition (z-index)
   zIndexOrder: number; 
   // Nouveau champ pour stocker la position de défilement
@@ -45,6 +45,10 @@ export const WINDOW_CONFIGS: Record<string, Omit<WindowState, 'isMinimized' | 'i
   skills: { id: 'skills', title: 'Mes Compétences', icon: Code, type: 'static' },
   portfolio: { id: 'portfolio', title: 'Mon Portfolio', icon: Briefcase, type: 'static' },
   passions: { id: 'passions', title: 'Mes Passions', icon: Heart, type: 'static' },
+  // Nouvelles configurations sociales
+  github: { id: 'github', title: 'GitHub', icon: Github, type: 'social-link' },
+  linkedin: { id: 'linkedin', title: 'LinkedIn', icon: Linkedin, type: 'social-link' },
+  email: { id: 'email', title: 'Contact Email', icon: Mail, type: 'social-link' },
 };
 
 interface WindowManagerContextType {
@@ -71,11 +75,25 @@ const STATIC_WINDOW_OFFSETS = {
     skills: { x: 200, y: 150, w: 900, h: 700 },
     portfolio: { x: 250, y: 200, w: 900, h: 700 },
     passions: { x: 300, y: 250, w: 800, h: 600 },
+    // Décalages pour les applications sociales
+    github: { x: 50, y: 50, w: 400, h: 300 },
+    linkedin: { x: 100, y: 100, w: 400, h: 300 },
+    email: { x: 150, y: 150, w: 400, h: 300 },
 };
 
 const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(config => {
     const offset = STATIC_WINDOW_OFFSETS[config.id as keyof typeof STATIC_WINDOW_OFFSETS] || { x: 50, y: 50, w: 800, h: 600 };
     
+    // Définir les données pour les liens sociaux statiques
+    let data: WindowState['data'] = undefined;
+    if (config.id === 'github') {
+        data = { url: 'https://github.com/xKayato/', label: 'Ouvrir GitHub' };
+    } else if (config.id === 'linkedin') {
+        data = { url: 'https://www.linkedin.com/in/thomasdeloup/', label: 'Ouvrir LinkedIn' };
+    } else if (config.id === 'email') {
+        data = { url: 'mailto:thomas.deloup@etu.univ-cotedazur.fr', label: 'Envoyer un Email' };
+    }
+
     return {
         ...config,
         isMinimized: false,
@@ -85,7 +103,8 @@ const initialWindowStates: WindowState[] = Object.values(WINDOW_CONFIGS).map(con
         initialY: offset.y,
         initialWidth: offset.w,
         initialHeight: offset.h,
-        type: 'static',
+        type: config.type as WindowState['type'], // Assurer le bon type
+        data: data,
         zIndexOrder: globalZIndexCounter++,
         scrollPosition: 0, // Initialisation à 0
     };
@@ -176,7 +195,7 @@ export const WindowManagerProvider = ({ children }: { children: React.ReactNode 
         return [...updatedWindows, newWindow];
 
       } else {
-        // Fenêtre statique (index, about, etc.)
+        // Fenêtre statique (index, about, skills, socials, etc.)
         const config = WINDOW_CONFIGS[id];
         if (!config) return prevWindows;
 

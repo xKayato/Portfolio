@@ -9,14 +9,13 @@ import { Window } from './Window';
 import { WindowContentRenderer } from './WindowContentRenderer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeveloperSignature } from './DeveloperSignature';
-import { DesktopSocials } from './DesktopSocials'; // Importation du nouveau composant
 
 interface WindowsLayoutProps {
   children: ReactNode;
 }
 
-// Définition des icônes de bureau (uniquement les statiques)
-const staticDesktopIcons: WindowId[] = ['index', 'about', 'skills', 'portfolio', 'passions'];
+// Définition des icônes de bureau (statiques + sociales)
+const staticDesktopIcons: WindowId[] = ['index', 'about', 'skills', 'portfolio', 'passions', 'github', 'linkedin', 'email'];
 
 export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
   const { setMode } = useDisplayMode();
@@ -84,9 +83,6 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
         ))}
       </div>
       
-      {/* Rendu des icônes sociales (Droite) */}
-      <DesktopSocials />
-
       {/* Signature du développeur (Centre) */}
       <DeveloperSignature />
 
@@ -142,7 +138,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
                     minimizeWindow(w.id);
                   } else {
                     // Si minimisé ou non focus, ouvrir/focus
-                    openWindow(w.id, w.type === 'dynamic-project' ? w.data : undefined); 
+                    openWindow(w.id, w.type === 'dynamic-project' ? w.data as any : undefined); 
                   }
                 }}
               >
