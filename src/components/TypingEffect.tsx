@@ -5,12 +5,14 @@ interface TypingEffectProps {
   text: string;
   speed?: number; // Vitesse en ms par caractère
   className?: string;
+  onFinish?: () => void; // Nouveau prop
 }
 
 export const TypingEffect: React.FC<TypingEffectProps> = ({ 
   text, 
   speed = 100, 
-  className 
+  className,
+  onFinish
 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [isFinished, setIsFinished] = useState(false);
@@ -27,8 +29,11 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({
       return () => clearTimeout(timeout);
     } else {
       setIsFinished(true);
+      if (onFinish) {
+        onFinish(); // Appel de la fonction de fin
+      }
     }
-  }, [displayedText, text, speed, isFinished]);
+  }, [displayedText, text, speed, isFinished, onFinish]);
 
   // Curseur clignotant (s'arrête après la frappe)
   useEffect(() => {

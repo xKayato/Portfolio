@@ -9,6 +9,7 @@ import { Window } from './Window';
 import { WindowContentRenderer } from './WindowContentRenderer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeveloperSignature } from './DeveloperSignature';
+import { DesktopSocials } from './DesktopSocials'; // Importation du nouveau composant
 
 interface WindowsLayoutProps {
   children: ReactNode;
@@ -76,14 +77,17 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
 
   return (
     <div className={desktopClasses}>
-      {/* Rendu des icônes de bureau */}
+      {/* Rendu des icônes de bureau (Gauche) */}
       <div className="absolute top-4 left-4 flex flex-col items-start">
         {staticDesktopIcons.map(id => (
           <DesktopIcon key={id} windowId={id} />
         ))}
       </div>
       
-      {/* Signature du développeur */}
+      {/* Rendu des icônes sociales (Droite) */}
+      <DesktopSocials />
+
+      {/* Signature du développeur (Centre) */}
       <DeveloperSignature />
 
       {/* Rendu des fenêtres ouvertes (triées par zIndexOrder) */}
