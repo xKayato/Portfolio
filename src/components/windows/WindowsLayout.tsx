@@ -86,7 +86,11 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
       {isDark && <StarField />}
       
       {/* Rendu des icônes de bureau (Gauche) */}
-      <div className="absolute top-4 left-4 flex flex-col items-start max-h-[calc(100vh-60px)] overflow-y-auto">
+      {/* Utilisation de flex-col et flex-wrap pour créer des colonnes d'icônes qui s'enroulent horizontalement */}
+      <div 
+        className="absolute top-4 left-4 flex flex-col flex-wrap content-start"
+        style={{ maxHeight: 'calc(100vh - 60px)' }} // Limite la hauteur pour forcer l'enroulement horizontal
+      >
         {staticDesktopIcons.map(id => (
           <DesktopIcon key={id} windowId={id} />
         ))}
