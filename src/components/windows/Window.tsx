@@ -20,6 +20,8 @@ interface WindowProps {
 
 const MIN_WIDTH = 300;
 const MIN_HEIGHT = 200;
+const TASKBAR_HEIGHT = 40; // Hauteur de la barre des tâches
+const TITLEBAR_HEIGHT = 32; // Hauteur de la barre de titre (h-8 = 32px)
 
 export const Window = ({ id, title, children, isFocused, initialX, initialY, initialWidth, initialHeight, scrollPosition }: WindowProps) => {
   const { closeWindow, minimizeWindow, focusWindow, updateWindowPosition, updateWindowSize, updateWindowScroll } = useWindowManager();
@@ -92,7 +94,7 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
       setPrevPosition(position);
       setPrevSize(size);
       setPosition({ x: 0, y: 0 });
-      setSize({ width: window.innerWidth, height: window.innerHeight - 40 }); // Subtract taskbar height
+      setSize({ width: window.innerWidth, height: window.innerHeight - TASKBAR_HEIGHT }); // Subtract taskbar height
       setIsMaximized(true);
     }
   };
@@ -105,6 +107,10 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
         
         // Contrainte 1: Ne pas dépasser le haut de l'écran
         newY = Math.max(0, newY); 
+        
+        // Contrainte 2: Ne pas dépasser le bas de l'écran (hauteur de la fenêtre - hauteur de la barre des tâches)
+        const maxBottomY = window.innerHeight - TASKBAR_HEIGHT - TITLEBAR_HEIGHT;
+        newY = Math.min(maxBottomY, newY);
         
         return { x: newX, y: newY };
       });
@@ -152,7 +158,9 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
               newHeight = MIN_HEIGHT;
             }
           } else if (isResizing.includes('bottom')) {
-            newHeight = Math.max(MIN_HEIGHT, prevSize.height + movementY);
+            // Contrainte 3: Ne pas dépasser le bas de l'écran (hauteur de la fenêtre - hauteur de la barre des tâches)
+            const maxBottomHeight = window.innerHeight - TASKBAR_HEIGHT - prevPos.y;
+            newHeight = Math.min(maxBottomHeight, Math.max(MIN_HEIGHT, prevSize.height + movementY));
           }
           
           // Retourner la nouvelle position et la nouvelle taille
@@ -207,7 +215,7 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
     top: 0,
     left: 0,
     width: '100vw',
-    height: 'calc(100vh - 40px)', // Account for taskbar
+    height: `calc(100vh - ${TASKBAR_HEIGHT}px)`, // Account for taskbar
     zIndex: zIndex,
   } : {
     top: position.y,
