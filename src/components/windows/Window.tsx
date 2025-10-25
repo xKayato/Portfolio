@@ -101,7 +101,11 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
     if (isDragging && !isMaximized) {
       setPosition(prev => {
         const newX = prev.x + e.movementX;
-        const newY = prev.y + e.movementY;
+        let newY = prev.y + e.movementY;
+        
+        // Contrainte 1: Ne pas dépasser le haut de l'écran
+        newY = Math.max(0, newY); 
+        
         return { x: newX, y: newY };
       });
     } else if (isResizing && !isMaximized) {
@@ -138,6 +142,10 @@ export const Window = ({ id, title, children, isFocused, initialX, initialY, ini
             if (potentialNewHeight >= MIN_HEIGHT) {
               newHeight = potentialNewHeight;
               newY = prevPos.y + movementY;
+              
+              // Contrainte 2: Ne pas dépasser le haut de l'écran lors du redimensionnement par le haut
+              newY = Math.max(0, newY);
+              
             } else {
               // Si on atteint la taille minimale, on ajuste la position
               newY = prevPos.y + (prevSize.height - MIN_HEIGHT);
