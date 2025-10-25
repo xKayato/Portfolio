@@ -8,7 +8,7 @@ import { DesktopIcon } from './DesktopIcon';
 import { Window } from './Window';
 import { WindowContentRenderer } from './WindowContentRenderer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { DeveloperSignature } from './DeveloperSignature';
+import { DeveloperSignature } from '../windows/DeveloperSignature';
 import { useTheme } from 'next-themes';
 import StarField from './StarField'; // Importation du nouveau composant
 
@@ -129,7 +129,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
         </Button>
 
         {/* Zone des applications ouvertes (utilise l'ordre du tableau 'windows' non trié) */}
-        <div className="flex-grow mx-4 flex gap-2 overflow-x-auto">
+        <div className="flex-grow mx-4 flex gap-2 overflow-x-auto min-w-0">
           {openWindows.map(w => {
             const Icon = w.icon;
             return (
@@ -138,7 +138,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
                 variant={w.isFocused && !w.isMinimized ? "secondary" : "ghost"}
                 size="sm"
                 className={cn(
-                  "h-8 px-3 flex items-center gap-2 text-sm",
+                  "h-8 px-3 flex items-center gap-2 text-sm flex-shrink-0", // Ajout de flex-shrink-0
                   w.isMinimized ? "opacity-70" : "",
                   w.isFocused && !w.isMinimized ? "bg-secondary dark:bg-gray-700" : "hover:bg-gray-300 dark:hover:bg-gray-700"
                 )}
