@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
-const NUM_DRIFTERS = 200; // Nombre d'étoiles de fond
+const NUM_DRIFTERS = 100; // Réduction du nombre d'étoiles de fond à 100
 
 const StarField = () => {
   const stars = useMemo(() => {
@@ -15,13 +15,12 @@ const StarField = () => {
 
       return {
         key: `drift-${i}`,
-        type: 'drifter',
         style: {
           width: `${size}px`,
           height: `${size}px`,
           top: `${y}%`,
           left: `${x}%`,
-          // L'opacité est gérée par la variable CSS pour le clignotement
+          // Variables CSS pour l'animation
           '--initial-opacity': opacity, 
           '--animation-duration': `${duration}s`,
           '--animation-delay': `${delay}s`,
@@ -35,18 +34,18 @@ const StarField = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       {stars.map(star => {
-        // Puisqu'il n'y a plus que des drifters, on peut simplifier le rendu
         return (
           <div
             key={star.key}
             className={cn(
               "absolute bg-white rounded-full",
-              "animate-[star-drift_var(--animation-duration)_ease-in-out_infinite_alternate]" 
+              "animate-star-drift" // Utilisation de la classe d'animation définie dans tailwind.config.ts
             )}
             style={{
               ...star.style,
+              // Application des variables CSS pour l'animation
+              animationDuration: star.style['--animation-duration'],
               animationDelay: star.style['--animation-delay'],
-              // Appliquer l'opacité initiale directement pour le rendu initial
               opacity: star.style['--initial-opacity'] as number, 
             }}
           />
