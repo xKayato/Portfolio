@@ -86,7 +86,7 @@ export const WindowsLayout = ({ children }: WindowsLayoutProps) => {
       {isDark && <StarField />}
       
       {/* Rendu des icônes de bureau (Gauche) */}
-      <div className="absolute top-4 left-4 flex flex-col items-start">
+      <div className="absolute top-4 left-4 flex flex-col items-start max-h-[calc(100vh-60px)] overflow-y-auto">
         {staticDesktopIcons.map(id => (
           <DesktopIcon key={id} windowId={id} />
         ))}
