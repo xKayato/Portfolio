@@ -48,7 +48,7 @@ const Index = () => {
           {personalInfo.title}
         </h2>
         <p className="mt-6 text-lg leading-8 text-muted-foreground">
-          Étudiant en deuxième année d'un BUT en Réseaux et Télécommunications, j'ai 20 ans, je suis fan d'e-sport et de matériel informatique gaming. Je vous invite à consulter mon site personnel pour en apprendre davantage sur mes passions, mes projets et mes compétences. J'ai effectué un stage chez Régie Eau d'Azur du 7 avril au 20 juin 2025. Cette entreprise assure la gestion de l'eau à la métropole de Nice. Durant cette expérience, je me suis familiarisé avec le déploiement d’équipements utilisant la technologie LoRaWAN pour la transmission de données issues de capteurs.
+          Étudiant en troisième année d'un BUT en Réseaux et Télécommunications, j'ai 20 ans, je suis fan d'e-sport et de matériel informatique gaming. Je vous invite à consulter mon site personnel pour en apprendre davantage sur mes passions, mes projets et mes compétences. J'ai effectué un stage chez Régie Eau d'Azur du 7 avril au 20 juin 2025. Cette entreprise assure la gestion de l'eau à la métropole de Nice. Durant cette expérience, je me suis familiarisé avec le déploiement d’équipements utilisant la technologie LoRaWAN pour la transmission de données issues de capteurs.
         </p>
         
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4">
